@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catálogo de Tenis - 40 Modelos</title>
+
+    <!-- Fuentes Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            text-align: center;
+            padding: 20px;
+            font-size: 3rem;
+            color: #FF0000; /* Color amarillo dorado */
+            letter-spacing: 2px;
+        }
+
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .producto {
+            background: #1E1E1E;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .producto:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(255,215,0,0.6);
+            }
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #FFD700; /* Color amarillo dorado */
+        }
+
+        select {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+        }
+
+        .talla-seleccionada {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #FFD700; /* Color amarillo dorado */
+        }
+    </style>
+</head>
+<body>
+    
+
+        <!-- Contenedor para imagen + título -->
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
+        <img src="https://i.postimg.cc/5yGXJ6m0/Imagen-de-Whats-App-2025-08-05-a-las-22-54-57-0750300d.jpg"
+             alt="QR Code"
+             style="width:150px; height:150px; object-fit: contain;" />
+            
+
+        <h1>COULD BLAST </h1>
+    </div>
+
+        <!-- resto del contenido -->
+
+        <div class="catalogo">
+
+            <!-- Producto 1 -->
+            <div class="producto">
+                <img src="https://res.cloudinary.com/dhjqteqrm/image/upload/samples/shoe" alt="Tenis Modelo 1" />
+                <div class="info">
+                    <h2>Modelo 1</h2>
+                    <p>Q450</p>
+                    <select onchange="cambiarTalla(this, 'talla1')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla1">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto">
+                <img src="https://res.cloudinary.com/dhjqteqrm/image/upload/v1754798336/Imagen_de_WhatsApp_2025-08-07_a_las_23.07.57_4d481c7f_uihzc1.jpg" alt="Tenis Modelo 2" />
+                <div class="info">
+                    <h2>Modelo 2</h2>
+                    <p>Q500</p>
+                    <select onchange="cambiarTalla(this, 'talla2')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla2">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="producto">
+                <img src="./imagenes/Zapato.jpg" alt="Tenis Modelo 3" />
+                <div class="info">
+                    <h2>Modelo 3</h2>
+                    <p>Q520</p>
+                    <select onchange="cambiarTalla(this, 'talla3')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla3">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="producto">
+                <img src="./imagenes/Imagen de WhatsApp 2025-08-14 a las 13.36.19_67e3a11f.jpg" alt="Tenis Modelo 4" />
+                <div class="info">
+                    <h2>Modelo 4</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla4')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla4">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+5" alt="Tenis Modelo 5" />
+                <div class="info">
+                    <h2>Modelo 5</h2>
+                    <p>Q470</p>
+                    <select onchange="cambiarTalla(this, 'talla5')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla5">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+6" alt="Tenis Modelo 6" />
+                <div class="info">
+                    <h2>Modelo 6</h2>
+                    <p>Q490</p>
+                    <select onchange="cambiarTalla(this, 'talla6')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla6">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+7" alt="Tenis Modelo 7" />
+                <div class="info">
+                    <h2>Modelo 7</h2>
+                    <p>Q530</p>
+                    <select onchange="cambiarTalla(this, 'talla7')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla7">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+8" alt="Tenis Modelo 8" />
+                <div class="info">
+                    <h2>Modelo 8</h2>
+                    <p>Q460</p>
+                    <select onchange="cambiarTalla(this, 'talla8')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla8">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 9 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+9" alt="Tenis Modelo 9" />
+                <div class="info">
+                    <h2>Modelo 9</h2>
+                    <p>Q510</p>
+                    <select onchange="cambiarTalla(this, 'talla9')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla9">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 10 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+10" alt="Tenis Modelo 10" />
+                <div class="info">
+                    <h2>Modelo 10</h2>
+                    <p>Q495</p>
+                    <select onchange="cambiarTalla(this, 'talla10')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla10">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 11 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+11" alt="Tenis Modelo 11" />
+                <div class="info">
+                    <h2>Modelo 11</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla11')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla11">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 12 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+12" alt="Tenis Modelo 12" />
+                <div class="info">
+                    <h2>Modelo 12</h2>
+                    <p>Q465</p>
+                    <select onchange="cambiarTalla(this, 'talla12')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla12">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 13 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+13" alt="Tenis Modelo 13" />
+                <div class="info">
+                    <h2>Modelo 13</h2>
+                    <p>Q485</p>
+                    <select onchange="cambiarTalla(this, 'talla13')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla13">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 14 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+14" alt="Tenis Modelo 14" />
+                <div class="info">
+                    <h2>Modelo 14</h2>
+                    <p>Q470</p>
+                    <select onchange="cambiarTalla(this, 'talla14')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla14">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 15 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+15" alt="Tenis Modelo 15" />
+                <div class="info">
+                    <h2>Modelo 15</h2>
+                    <p>Q495</p>
+                    <select onchange="cambiarTalla(this, 'talla15')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla15">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 16 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+16" alt="Tenis Modelo 16" />
+                <div class="info">
+                    <h2>Modelo 16</h2>
+                    <p>Q460</p>
+                    <select onchange="cambiarTalla(this, 'talla16')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla16">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 17 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+17" alt="Tenis Modelo 17" />
+                <div class="info">
+                    <h2>Modelo 17</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla17')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla17">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 18 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+18" alt="Tenis Modelo 18" />
+                <div class="info">
+                    <h2>Modelo 18</h2>
+                    <p>Q470</p>
+                    <select onchange="cambiarTalla(this, 'talla18')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla18">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 19 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+19" alt="Tenis Modelo 19" />
+                <div class="info">
+                    <h2>Modelo 19</h2>
+                    <p>Q500</p>
+                    <select onchange="cambiarTalla(this, 'talla19')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla19">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 20 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+20" alt="Tenis Modelo 20" />
+                <div class="info">
+                    <h2>Modelo 20</h2>
+                    <p>Q485</p>
+                    <select onchange="cambiarTalla(this, 'talla20')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla20">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 21 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+21" alt="Tenis Modelo 21" />
+                <div class="info">
+                    <h2>Modelo 21</h2>
+                    <p>Q490</p>
+                    <select onchange="cambiarTalla(this, 'talla21')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla21">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 22 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+22" alt="Tenis Modelo 22" />
+                <div class="info">
+                    <h2>Modelo 22</h2>
+                    <p>Q470</p>
+                    <select onchange="cambiarTalla(this, 'talla22')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla22">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 23 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+23" alt="Tenis Modelo 23" />
+                <div class="info">
+                    <h2>Modelo 23</h2>
+                    <p>Q510</p>
+                    <select onchange="cambiarTalla(this, 'talla23')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla23">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 24 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+24" alt="Tenis Modelo 24" />
+                <div class="info">
+                    <h2>Modelo 24</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla24')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla24">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 25 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+25" alt="Tenis Modelo 25" />
+                <div class="info">
+                    <h2>Modelo 25</h2>
+                    <p>Q460</p>
+                    <select onchange="cambiarTalla(this, 'talla25')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla25">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 26 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+26" alt="Tenis Modelo 26" />
+                <div class="info">
+                    <h2>Modelo 26</h2>
+                    <p>Q495</p>
+                    <select onchange="cambiarTalla(this, 'talla26')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla26">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 27 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+27" alt="Tenis Modelo 27" />
+                <div class="info">
+                    <h2>Modelo 27</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla27')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla27">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 28 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+28" alt="Tenis Modelo 28" />
+                <div class="info">
+                    <h2>Modelo 28</h2>
+                    <p>Q470</p>
+                    <select onchange="cambiarTalla(this, 'talla28')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla28">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 29 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+29" alt="Tenis Modelo 29" />
+                <div class="info">
+                    <h2>Modelo 29</h2>
+                    <p>Q510</p>
+                    <select onchange="cambiarTalla(this, 'talla29')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla29">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 30 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+30" alt="Tenis Modelo 30" />
+                <div class="info">
+                    <h2>Modelo 30</h2>
+                    <p>Q490</p>
+                    <select onchange="cambiarTalla(this, 'talla30')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla30">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 31 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+31" alt="Tenis Modelo 31" />
+                <div class="info">
+                    <h2>Modelo 31</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla31')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla31">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 32 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+32" alt="Tenis Modelo 32" />
+                <div class="info">
+                    <h2>Modelo 32</h2>
+                    <p>Q485</p>
+                    <select onchange="cambiarTalla(this, 'talla32')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla32">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 33 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+33" alt="Tenis Modelo 33" />
+                <div class="info">
+                    <h2>Modelo 33</h2>
+                    <p>Q460</p>
+                    <select onchange="cambiarTalla(this, 'talla33')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla33">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 34 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+34" alt="Tenis Modelo 34" />
+                <div class="info">
+                    <h2>Modelo 34</h2>
+                    <p>Q495</p>
+                    <select onchange="cambiarTalla(this, 'talla34')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla34">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 35 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+35" alt="Tenis Modelo 35" />
+                <div class="info">
+                    <h2>Modelo 35</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla35')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla35">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 36 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+36" alt="Tenis Modelo 36" />
+                <div class="info">
+                    <h2>Modelo 36</h2>
+                    <p>Q470</p>
+                    <select onchange="cambiarTalla(this, 'talla36')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla36">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 37 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+37" alt="Tenis Modelo 37" />
+                <div class="info">
+                    <h2>Modelo 37</h2>
+                    <p>Q490</p>
+                    <select onchange="cambiarTalla(this, 'talla37')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla37">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 38 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+38" alt="Tenis Modelo 38" />
+                <div class="info">
+                    <h2>Modelo 38</h2>
+                    <p>Q520</p>
+                    <select onchange="cambiarTalla(this, 'talla38')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla38">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 39 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+39" alt="Tenis Modelo 39" />
+                <div class="info">
+                    <h2>Modelo 39</h2>
+                    <p>Q510</p>
+                    <select onchange="cambiarTalla(this, 'talla39')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla39">Talla: --</div>
+                </div>
+            </div>
+
+            <!-- Producto 40 -->
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Modelo+40" alt="Tenis Modelo 40" />
+                <div class="info">
+                    <h2>Modelo 40</h2>
+                    <p>Q480</p>
+                    <select onchange="cambiarTalla(this, 'talla40')">
+                        <option value="">Verifica tallas disponibles</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                    </select>
+                    <div class="talla-seleccionada" id="talla40">Talla: --</div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            function cambiarTalla(selectObj, idTalla) {
+                const valor = selectObj.value;
+                const divTalla = document.getElementById(idTalla);
+                if (valor) {
+                    divTalla.textContent = "Talla: " + valor;
+                } else {
+                    divTalla.textContent = "Talla: --";
+                }
+            }
+        </script>
+
+    </body>
+</html>
