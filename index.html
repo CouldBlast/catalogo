@@ -834,8 +834,8 @@
         </div>
 
         
-        <script>
-    // Función para cambiar la talla
+    <script>
+        
     function cambiarTalla(selectObj, idTalla) {
         const valor = selectObj.value;
         const divTalla = document.getElementById(idTalla);
@@ -846,9 +846,23 @@
         }
     }
 
+    // Nombre de la clave para guardar en localStorage
+    const localStorageKey = "countdownEndTime";
+
+    let fechaFinal = new Date();
     
-    const fechaFinal = new Date();
-    fechaFinal.setDate(fechaFinal.getDate() + 1);
+    // Intenta obtener el tiempo final guardado en localStorage
+    const savedEndTime = localStorage.getItem(localStorageKey);
+    
+    if (savedEndTime) {
+        // Si hay un tiempo guardado, úsalo
+        fechaFinal = new Date(savedEndTime);
+    } else {
+        // Si no hay un tiempo guardado, establece el tiempo final 24 horas a partir de ahora
+        fechaFinal.setDate(fechaFinal.getDate() + 1);
+        // Guarda este nuevo tiempo final en localStorage
+        localStorage.setItem(localStorageKey, fechaFinal.toISOString());
+    }
 
     function actualizarContador() {
         const ahora = new Date();
@@ -857,6 +871,8 @@
         if (diferencia <= 0) {
             document.getElementById("contador").innerHTML = "¡Tiempo terminado!";
             clearInterval(intervalo);
+            // Opcional: Elimina el tiempo guardado cuando el contador llega a cero
+            localStorage.removeItem(localStorageKey);
             return;
         }
 
@@ -873,9 +889,9 @@
 
     const intervalo = setInterval(actualizarContador, 1000);
     actualizarContador();
-
-
-        </script>
+</script>
+    
 
     </body>
 </html>
+
