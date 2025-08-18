@@ -1,29 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Catálogo de Tenis - 40 Modelos</title>
 
     <!-- Fuentes Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+
 
     <style>
+ .banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#contador {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Luckiest Guy', cursive; /* estilo explosivo y divertido */
+    font-size: 4rem; /* grande y llamativo */
+    color: #e9d8de; /* rojo tipo alarma */
+    text-shadow: 2px 2px 0 #050101, 4px 4px 5px #000000; /* efecto 3D/impact */
+    text-align: center;
+    background: rgba(140, 146, 145, 0.301); /* ligero fondo semitransparente */
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+
+
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: #121212;
+            background: white;
             color: white;
             margin: 0;
             padding: 0;
         }
 
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            text-align: center;
-            padding: 20px;
-            font-size: 3rem;
-            color: #FF0000; /* Color amarillo dorado */
-            letter-spacing: 2px;
+         
+    
+
+      font-family: 'Playfair Display', serif; /* elegante estilo Vogue */
+    font-size: 4rem; /* tamaño grande para título */
+    text-align: center;
+    color: #000000; /* negro clásico */
+    letter-spacing: 2px; /* espacio elegante entre letras */
+    font-weight: 700; /* más gruesa para destacar */
+    padding: 20px 0;
+    text-transform: uppercase; /* opcional para estilo revista */
         }
 
         .catalogo {
@@ -88,16 +130,22 @@
 </head>
 <body>
     
+    <div class="banner">
+    <img src="./imagenes/ban.png" alt="Banner Could Blast">
+    <div id="contador">
+        <span id="dias">03</span>d :
+        <span id="horas">00</span>h :
+        <span id="minutos">00</span>m :
+        <span id="segundos">00</span>s
+    </div>
+</div>
 
         <!-- Contenedor para imagen + título -->
-    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
-        <img src="https://i.postimg.cc/5yGXJ6m0/Imagen-de-Whats-App-2025-08-05-a-las-22-54-57-0750300d.jpg"
-             alt="QR Code"
-             style="width:150px; height:150px; object-fit: contain;" />
-            
+    
+     
 
-        <h1>COULD BLAST </h1>
-    </div>
+        <h1>LO MAS RECIENTE </h1>
+    
 
         <!-- resto del contenido -->
 
@@ -785,16 +833,48 @@
 
         </div>
 
+        
         <script>
-            function cambiarTalla(selectObj, idTalla) {
-                const valor = selectObj.value;
-                const divTalla = document.getElementById(idTalla);
-                if (valor) {
-                    divTalla.textContent = "Talla: " + valor;
-                } else {
-                    divTalla.textContent = "Talla: --";
-                }
-            }
+    // Función para cambiar la talla
+    function cambiarTalla(selectObj, idTalla) {
+        const valor = selectObj.value;
+        const divTalla = document.getElementById(idTalla);
+        if (valor) {
+            divTalla.textContent = "Talla: " + valor;
+        } else {
+            divTalla.textContent = "Talla: --";
+        }
+    }
+
+    
+    const fechaFinal = new Date();
+    fechaFinal.setDate(fechaFinal.getDate() + 1);
+
+    function actualizarContador() {
+        const ahora = new Date();
+        const diferencia = fechaFinal - ahora;
+
+        if (diferencia <= 0) {
+            document.getElementById("contador").innerHTML = "¡Tiempo terminado!";
+            clearInterval(intervalo);
+            return;
+        }
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+        document.getElementById("dias").textContent = dias.toString().padStart(2,'0');
+        document.getElementById("horas").textContent = horas.toString().padStart(2,'0');
+        document.getElementById("minutos").textContent = minutos.toString().padStart(2,'0');
+        document.getElementById("segundos").textContent = segundos.toString().padStart(2,'0');
+    }
+
+    const intervalo = setInterval(actualizarContador, 1000);
+    actualizarContador();
+
+
         </script>
 
     </body>
