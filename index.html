@@ -15,7 +15,7 @@
 
 
 
-    <style>
+<style>
 
 /* Simulación de banner */
 .banner {
@@ -49,126 +49,125 @@
   100% { text-shadow: 0 0 10px #ff3300, 0 0 25px #ff0000, 0 0 40px #ff6600; }
 }
 
-        
-        .titulo-buscador {
-    color: #FFD700; 
-    font-size: 1.8rem; 
-    font-weight: bold;  
-                    }
+.titulo-buscador {
+  color: #FFD700; 
+  font-size: 1.8rem; 
+  font-weight: bold;  
+}
 
+/* ---------------------- Animaciones ---------------------- */
+.producto { 
+  transition: transform 0.3s, opacity 0.3s; 
+  animation: fadeIn 0.5s ease-in; 
+  opacity:1; 
+  color:#FFD700;
+}
+.producto:hover { 
+  transform: scale(1.05) rotate(-2deg); 
+  box-shadow:0 6px 20px rgba(255,215,0,0.6); 
+}
+@keyframes fadeIn { 
+  from {opacity:0; transform:translateY(20px);} 
+  to {opacity:1; transform:translateY(0);}      
+}
 
-          /* ---------------------- Animaciones ---------------------- */
-    .producto { 
-        /* transición para hover */
-        transition: transform 0.3s, opacity 0.3s; 
-        /* animación al cargar cada producto */
-        animation: fadeIn 0.5s ease-in; 
-        opacity:1; 
-        color:#FFD700;
-    }
-    .producto:hover { 
-        transform: scale(1.05) rotate(-2deg); /* efecto llamativo al pasar el mouse */
-        box-shadow:0 6px 20px rgba(255,215,0,0.6); /* sombra dorada */
-    }
-    @keyframes fadeIn { 
-        from {opacity:0; transform:translateY(20px);} /* inicio de animación: invisible y baja */
-        to {opacity:1; transform:translateY(0);}      /* final de animación: visible y en posición normal */
-    }
- .banner {
-    position: relative;
-    width: 100%;
-    height: auto;
-    display: inline-block;
+.banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: inline-block;
 }
 
 .banner img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  background: white;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: white;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  text-align: center;
+  color: #000000;
+  letter-spacing: 2px;
+  font-weight: 500;
+  padding: 20px 0;
+  text-transform: uppercase;
+}
 
-        h1 {
-         
-      font-family: 'Playfair Display', serif; /* elegante estilo Vogue */
-    font-size: 2rem; /* tamaño grande para título */
-    text-align: center;
-    color: #000000; /* negro clásico */
-    letter-spacing: 2px; /* espacio elegante entre letras */
-    font-weight: 500; /* más gruesa para destacar */
-    padding: 20px 0;
-    text-transform: uppercase; /* opcional para estilo revista */
-        }
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
 
-        .catalogo {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
+.producto {
+  background: #1E1E1E;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-        .producto {
-            background: #1E1E1E;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+.producto:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255,215,0,0.6);
+}
 
-            .producto:hover {
-                transform: scale(1.05);
-                box-shadow: 0 6px 20px rgba(255,215,0,0.6);
-            }
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
-        img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+.info {
+  padding: 15px;
+  text-align: center;
+}
 
-        .info {
-            padding: 15px;
-            text-align: center;
-        }
+h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  margin: 10px 0;
+}
 
-        h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            margin: 10px 0;
-        }
+/* 🔴 Solo los precios en rojo */
+.producto .info p {
+  font-size: 1.2rem;
+  color: rgb(255, 0, 0); /* rojo para el precio */
+}
 
-        p {
-            font-size: 1.2rem;
-            color: #000000;  /* Color amarillo dorado color de redondon*/
-        }
+select {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+}
 
-        select {
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-        }
+.talla-seleccionada {
+  margin-top: 10px;
+  font-weight: bold;
+color: #000000; /* Color black */
+}
 
-        .talla-seleccionada {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #FFD700; /* Color amarillo dorado */
-        }
-    </style>
+</style>
+
 </head>
 <body>
+  
    <div class="banner">
    <img src="./imagenes/ban.png" alt="Banner" />
   <div class="texto-fuego">
@@ -954,6 +953,7 @@ setInterval(cambiarTexto, 2500); // cambia cada 2.5 seg
 
     </body>
 </html>
+
 
 
 
