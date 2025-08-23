@@ -15,6 +15,24 @@
 
 
     <style>
+
+          /* ---------------------- Animaciones ---------------------- */
+    .producto { 
+        /* transición para hover */
+        transition: transform 0.3s, opacity 0.3s; 
+        /* animación al cargar cada producto */
+        animation: fadeIn 0.5s ease-in; 
+        opacity:1; 
+        color:#FFD700;
+    }
+    .producto:hover { 
+        transform: scale(1.05) rotate(-2deg); /* efecto llamativo al pasar el mouse */
+        box-shadow:0 6px 20px rgba(255,215,0,0.6); /* sombra dorada */
+    }
+    @keyframes fadeIn { 
+        from {opacity:0; transform:translateY(20px);} /* inicio de animación: invisible y baja */
+        to {opacity:1; transform:translateY(0);}      /* final de animación: visible y en posición normal */
+    }
  .banner {
     position: relative;
     width: 100%;
@@ -894,5 +912,6 @@
 
     </body>
 </html>
+
 
 
