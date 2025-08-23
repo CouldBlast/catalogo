@@ -862,7 +862,23 @@
 
         
     <script>
-        
+        function cambiarTalla(selectObj,idTalla){
+    const valor = selectObj.value;
+    const divTalla = document.getElementById(idTalla);
+    divTalla.textContent = valor ? "Talla: "+valor : "Talla: --";
+}
+
+/* ---------------------- Código del buscador de tallas ---------------------- */
+document.getElementById("buscador").addEventListener("input", function() {
+    const tallaBuscada = this.value.trim(); // toma la talla ingresada
+    const productos = document.querySelectorAll(".producto");
+
+    productos.forEach(producto => {
+        const tallas = producto.getAttribute("data-tallas"); 
+        // Si el producto tiene la talla buscada, se muestra; si no, se oculta
+        producto.style.display = (tallas.includes(tallaBuscada) || tallaBuscada==="") ? "block" : "none";
+    });
+});
     function cambiarTalla(selectObj, idTalla) {
         const valor = selectObj.value;
         const divTalla = document.getElementById(idTalla);
@@ -921,6 +937,7 @@
 
     </body>
 </html>
+
 
 
 
