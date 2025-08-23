@@ -166,6 +166,7 @@
         placeholder="Ingresa tu talla (ej. 36, 37...)" 
         style="width:350px; height:45px; font-size:18px; padding:5px; text-align:center; border-radius:10px; border:2px solid #FFD700;"
     />
+       <div id="errorTalla" style="color:red; font-weight:bold; margin-top:5px;"></div>
 </div>
 
        
@@ -875,6 +876,38 @@
 
         
     <script>
+
+        //validaciones 
+const buscador = document.getElementById("buscador");
+const errorTalla = document.getElementById("errorTalla");
+const productos = document.querySelectorAll(".producto");
+
+buscador.addEventListener("input", function() {
+    const valor = this.value.trim();
+
+    // Validar solo números
+    if (!/^\d*$/.test(valor)) {
+        errorTalla.textContent = "Solo se permiten números";
+        return;
+    } else {
+        errorTalla.textContent = "";
+    }
+
+    // Filtrar productos según talla
+    productos.forEach(producto => {
+        const tallas = producto.getAttribute("data-tallas");
+        producto.style.display = (tallas.includes(valor) || valor==="") ? "block" : "none";
+    });
+});
+
+
+
+
+
+
+
+
+        
         function cambiarTalla(selectObj,idTalla){
     const valor = selectObj.value;
     const divTalla = document.getElementById(idTalla);
@@ -945,11 +978,15 @@ document.getElementById("buscador").addEventListener("input", function() {
 
     const intervalo = setInterval(actualizarContador, 1000);
     actualizarContador();
+
+
+        
 </script>
     
 
     </body>
 </html>
+
 
 
 
