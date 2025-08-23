@@ -180,14 +180,25 @@
  
     <!-- Buscador de tallas justo debajo del banner -->
 <div style="text-align:center; margin: 20px 0;">
-   <h3 class="titulo-buscador">Puedes buscar acá el par de tu talla</h3>
+    <h3 class="titulo-buscador" style="color:#000000;">Puedes buscar acá el par de tu talla</h3>
     <input 
         type="text" 
         id="buscador" 
         placeholder="Ingresa tu talla (ej. 36...)" 
-        style="width:350px; height:45px; font-size:18px; padding:5px; text-align:center; border-radius:10px; border:2px solid #000000;"
+        style="
+            width:350px; 
+            height:45px; 
+            font-size:18px; 
+            padding:5px; 
+            text-align:center; 
+            border-radius:10px; 
+            border:2px solid #000000; /* borde negro */
+            color: #000000; /* texto negro dentro del input */
+            background-color: #ffffff; /* fondo blanco para que contraste */
+            outline:none; /* quita el borde azul al seleccionar */
+        "
     />
-       <div id="errorTalla" style="color:red; font-weight:bold; margin-top:5px;"></div>
+    <div id="errorTalla" style="color:red; font-weight:bold; margin-top:5px;"></div>
 </div>
 
        
@@ -943,6 +954,7 @@ setInterval(cambiarTexto, 2500); // cambia cada 2.5 seg
 
     </body>
 </html>
+
 
 
 
