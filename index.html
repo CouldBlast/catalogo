@@ -57,15 +57,24 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: 'Luckiest Guy', cursive; /* estilo explosivo y divertido */
-    font-size: 4rem; /* grande y llamativo */
-    color: #e9d8de; /* rojo tipo alarma */
-    text-shadow: 2px 2px 0 #050101, 4px 4px 5px #000000; /* efecto 3D/impact */
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 4rem;
+    color: #e9d8de;
+    text-shadow: 2px 2px 0 #050101, 4px 4px 5px #000000;
     text-align: center;
-    background: rgba(140, 146, 145, 0.301); /* ligero fondo semitransparente */
+    background: rgba(140, 146, 145, 0.3);
     padding: 10px 20px;
     border-radius: 15px;
 }
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    #contador {
+        font-size: 2rem;
+        padding: 5px 10px;
+    }
+}
+
 
 
 
@@ -880,10 +889,8 @@
 
         </div>
 
-        
-    <script>
-
-        //validaciones 
+ <script>
+// ---------------------- Buscador de tallas ----------------------
 const buscador = document.getElementById("buscador");
 const errorTalla = document.getElementById("errorTalla");
 const productos = document.querySelectorAll(".producto");
@@ -906,92 +913,48 @@ buscador.addEventListener("input", function() {
     });
 });
 
-
-
-
-
-
-
-
-        
-        function cambiarTalla(selectObj,idTalla){
+// ---------------------- Cambiar la talla seleccionada ----------------------
+function cambiarTalla(selectObj, idTalla) {
     const valor = selectObj.value;
     const divTalla = document.getElementById(idTalla);
-    divTalla.textContent = valor ? "Talla: "+valor : "Talla: --";
+    divTalla.textContent = valor ? "Talla: " + valor : "Talla: --";
 }
 
-/* ---------------------- Código del buscador de tallas ---------------------- */
-document.getElementById("buscador").addEventListener("input", function() {
-    const tallaBuscada = this.value.trim(); // toma la talla ingresada
-    const productos = document.querySelectorAll(".producto");
+// ---------------------- Contador de 24 horas ----------------------
+const DURACION = 24 * 60 * 60 * 1000; // 24 horas en ms
+const fechaInicio = new Date();
+const fechaFinal = new Date(fechaInicio.getTime() + DURACION);
 
-    productos.forEach(producto => {
-        const tallas = producto.getAttribute("data-tallas"); 
-        // Si el producto tiene la talla buscada, se muestra; si no, se oculta
-        producto.style.display = (tallas.includes(tallaBuscada) || tallaBuscada==="") ? "block" : "none";
-    });
-});
-    function cambiarTalla(selectObj, idTalla) {
-        const valor = selectObj.value;
-        const divTalla = document.getElementById(idTalla);
-        if (valor) {
-            divTalla.textContent = "Talla: " + valor;
-        } else {
-            divTalla.textContent = "Talla: --";
-        }
+function actualizarContador() {
+    const ahora = new Date();
+    const diferencia = fechaFinal - ahora;
+
+    if (diferencia <= 0) {
+        document.getElementById("contador").innerHTML = "¡Tiempo terminado!";
+        clearInterval(intervalo);
+        return;
     }
 
-    // Nombre de la clave para guardar en localStorage
-    const localStorageKey = "countdownEndTime";
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
-    let fechaFinal = new Date();
-    
-    // Intenta obtener el tiempo final guardado en localStorage
-    const savedEndTime = localStorage.getItem(localStorageKey);
-    
-    if (savedEndTime) {
-        // Si hay un tiempo guardado, úsalo
-        fechaFinal = new Date(savedEndTime);
-    } else {
-        // Si no hay un tiempo guardado, establece el tiempo final 24 horas a partir de ahora
-        fechaFinal.setDate(fechaFinal.getDate() + 1);
-        // Guarda este nuevo tiempo final en localStorage
-        localStorage.setItem(localStorageKey, fechaFinal.toISOString());
-    }
+    document.getElementById("dias").textContent = String(dias).padStart(2,'0');
+    document.getElementById("horas").textContent = String(horas).padStart(2,'0');
+    document.getElementById("minutos").textContent = String(minutos).padStart(2,'0');
+    document.getElementById("segundos").textContent = String(segundos).padStart(2,'0');
+}
 
-    function actualizarContador() {
-        const ahora = new Date();
-        const diferencia = fechaFinal - ahora;
-
-        if (diferencia <= 0) {
-            document.getElementById("contador").innerHTML = "¡Tiempo terminado!";
-            clearInterval(intervalo);
-            // Opcional: Elimina el tiempo guardado cuando el contador llega a cero
-            localStorage.removeItem(localStorageKey);
-            return;
-        }
-
-        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-        document.getElementById("dias").textContent = dias.toString().padStart(2,'0');
-        document.getElementById("horas").textContent = horas.toString().padStart(2,'0');
-        document.getElementById("minutos").textContent = minutos.toString().padStart(2,'0');
-        document.getElementById("segundos").textContent = segundos.toString().padStart(2,'0');
-    }
-
-    const intervalo = setInterval(actualizarContador, 1000);
-    actualizarContador();
-
-
-        
+// Ejecutar contador cada segundo
+const intervalo = setInterval(actualizarContador, 1000);
+actualizarContador();
 </script>
-    
+
 
     </body>
 </html>
+
 
 
 
