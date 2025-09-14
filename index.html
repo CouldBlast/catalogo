@@ -6,9 +6,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Could Blast - Catálogo de Tenis Urbanos</title>
-     <meta name="description" content="Descubre 40 modelos de tenis urbanos en Could Blast. Busca tu talla y encuentra tu estilo.">
+     <meta name="description" content="Descubre 100 modelos de tenis urbanos en Could Blast. Busca tu talla y encuentra tu estilo.">
 
     <!-- Fuentes Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
@@ -17,14 +19,21 @@
 
 <style>
     
-    .mensaje-tallas {
+   .mensaje-tallas-con-whatsapp {
+  display: flex;
+  justify-content: center; /* centra todo el bloque */
+  align-items: center;     /* alinea verticalmente cuadro y WhatsApp */
+  gap: 20px;               /* espacio entre cuadro y WhatsApp */
+  margin: 20px auto;
+}
+
+.mensaje-tallas {
   background-color: #f5f5f5;
   padding: 8px;
-  margin: 20px auto;
   border: 2px solid #000;
   border-radius: 10px;
   max-width: 250px;
-  font-size: 14px;
+  font-size: 15px;
   color: #000;
   line-height: 1.6;
 }
@@ -50,6 +59,20 @@
   border-bottom: none;
 }
 
+.whatsapp-contacto a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #25D366; /* verde WhatsApp */
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.whatsapp-contacto img {
+  width: 30px; /* tamaño del icono */
+}
+/*-termina el del cuadro tallas y numero
 
 /* Simulación de banner */
 .banner {
@@ -210,22 +233,34 @@ color: #000000; /* Color black */
   </div>
 </div>
 
-<!-- Mensaje intermedio -->
-<div class="mensaje-tallas">
-  <p><strong>Puedes corroborar tus tallas aquí:</strong></p>
-  <ul>
-    <li>Nacional/ → cm</li>
-    <li>36 → 23.5 cm</li>
-    <li>37 → 23.5 cm</li>
-    <li>38 → 24 cm</li>
-    <li>39 → 24.5 cm</li>
-    <li>40 → 25 cm</li>
-    <li>41 → 26 cm</li>
-    <li>42 → 26.5 cm</li>
-    <li>43 → 27.5 cm</li>
-    <li>44 → 28 cm</li>
-  </ul>
+<!-- Mensaje intermedio con WhatsApp -->
+<div class="mensaje-tallas-con-whatsapp">
+  <!-- Texto de tallas -->
+  <div class="mensaje-tallas">
+    <p><strong>Puedes corroborar tus tallas aquí:</strong></p>
+    <ul>
+      <li>Nacional →   cm</li>
+      <li>    36   → 23.5 cm</li>
+      <li>    37   → 23.5 cm</li>
+      <li>    38   → 24   cm</li>
+      <li>    39   → 24.5 cm</li>
+      <li>    40   → 25   cm</li>
+      <li>    41   → 26   cm</li>
+      <li>    42   → 26.5 cm</li>
+      <li>    43   → 27.5 cm</li>
+      <li>    44   → 28   cm</li>
+    </ul>
+  </div>
+
+  <!-- WhatsApp al lado derecho -->
+  <div class="whatsapp-contacto">
+    <a href="https://wa.me/50212345678" target="_blank">
+      <img src="./imagenes/whatsapp.png" alt="WhatsApp" />
+      <span>+502 1234 5678</span>
+    </a>
+  </div>
 </div>
+
 
  
     <!-- Buscador de tallas justo debajo del banner -->
@@ -1447,7 +1482,7 @@ function cambiarTalla(selectObj, idTalla) {
     divTalla.textContent = valor ? "Talla: " + valor : "Talla: --";
 }
 //frases
-     const frases = ["🔥 Nuevos modelos", "🔥 Edición limitada", "🔥 Estilo urbano"];
+     const frases = ["🔥 Nuevos modelos", "🔥 Edición limitada", "🔥 Estilo urbano","🔥Solo Aqui"];
 let i = 0;
 
 function cambiarTexto() {
@@ -1457,13 +1492,14 @@ function cambiarTexto() {
 }
 
 cambiarTexto(); // inicial
-setInterval(cambiarTexto, 2500); // cambia cada 2.5 seg
+setInterval(cambiarTexto, 2000); // cambia cada 2seg
 
 </script>
 
 
     </body>
 </html>
+
 
 
 
