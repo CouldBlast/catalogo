@@ -18,13 +18,12 @@
 
 
 <style>
-    
-   .mensaje-tallas-con-whatsapp {
+  .tallas-y-whatsapp {
   display: flex;
-  justify-content: center; /* centra todo el bloque */
-  align-items: center;     /* alinea verticalmente cuadro y WhatsApp */
-  gap: 20px;               /* espacio entre cuadro y WhatsApp */
-  margin: 20px auto;
+  justify-content: space-between; /* Separación entre ambos */
+  align-items: center; /* Centrado vertical */
+  max-width: 800px; /* Ajusta según tu página */
+  margin: 20px auto; /* Centrado horizontal */
 }
 
 .mensaje-tallas {
@@ -32,16 +31,8 @@
   padding: 8px;
   border: 2px solid #000;
   border-radius: 10px;
-  max-width: 250px;
-  font-size: 15px;
-  color: #000;
-  line-height: 1.6;
-}
-
-.mensaje-tallas p {
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .mensaje-tallas ul {
@@ -51,7 +42,7 @@
 }
 
 .mensaje-tallas li {
-  padding: 5px 0;
+  padding: 3px 0;
   border-bottom: 1px dashed #ccc;
 }
 
@@ -61,17 +52,12 @@
 
 .whatsapp-contacto a {
   text-decoration: none;
-  color: #000000; /* negro */
+  color: #25D366; /* color verde WhatsApp */
   font-weight: bold;
+  text-align: right;
   font-size: 14px;
-  text-align: center;
 }
-
-
-.whatsapp-contacto img {
-  width: 40px; /* tamaño del icono */
-}
-/*-termina el del cuadro tallas y numero
+/*termina el cuadro de taklas
 
 /* Simulación de banner */
 .banner {
@@ -232,30 +218,30 @@ color: #000000; /* Color black */
   </div>
 </div>
 
-<!-- Mensaje intermedio con WhatsApp -->
-<div class="mensaje-tallas-con-whatsapp">
-  <!-- Texto de tallas -->
+<!-- Contenedor principal -->
+<div class="tallas-y-whatsapp">
+  <!-- Cuadro de tallas -->
   <div class="mensaje-tallas">
     <p><strong>Puedes corroborar tus tallas aquí:</strong></p>
     <ul>
-      <li>Nacional →   cm</li>
-      <li>    36   → 23.5 cm</li>
-      <li>    37   → 23.5 cm</li>
-      <li>    38   → 24   cm</li>
-      <li>    39   → 24.5 cm</li>
-      <li>    40   → 25   cm</li>
-      <li>    41   → 26   cm</li>
-      <li>    42   → 26.5 cm</li>
-      <li>    43   → 27.5 cm</li>
-      <li>    44   → 28   cm</li>
+      <li>36 → 23.5 cm</li>
+      <li>37 → 23.5 cm</li>
+      <li>38 → 24 cm</li>
+      <li>39 → 24.5 cm</li>
+      <li>40 → 25 cm</li>
+      <li>41 → 26 cm</li>
+      <li>42 → 26.5 cm</li>
+      <li>43 → 27.5 cm</li>
+      <li>44 → 28 cm</li>
     </ul>
   </div>
 
-  <!-- WhatsApp al lado derecho -->
-<div class="whatsapp-contacto">
-  <a href="https://wa.me/50238866550" target="_blank">
-    <span>ORDENA AL:<br>Tel 3886 6550</span>
-  </a>
+  <!-- WhatsApp -->
+  <div class="whatsapp-contacto">
+    <a href="https://wa.me/50238866550" target="_blank">
+      ORDENA AL:<br>Tel 3886 6550
+    </a>
+  </div>
 </div>
 
 
@@ -1496,6 +1482,7 @@ setInterval(cambiarTexto, 2000); // cambia cada 2seg
 
     </body>
 </html>
+
 
 
 
