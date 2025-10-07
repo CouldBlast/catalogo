@@ -18,6 +18,23 @@
 
 
 <style>
+
+.musica {
+  text-align: center;
+  padding: 30px 20px;
+  background-color: #FF0000; /* fondo rojo */
+  color: #000000;             /* texto negro */
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.musica h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+    
   .tallas-y-whatsapp {
   display: flex;
   justify-content: space-between; /* Separación entre ambos */
@@ -128,11 +145,12 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: white;
-  color: white;
+  background-color: #FF0000;  /* fondo rojo */
+  color: #000000;              /* texto negro */
   margin: 0;
   padding: 0;
 }
+
 
 h1 {
   font-family: 'Playfair Display', serif;
@@ -211,13 +229,26 @@ color: #000000; /* Color black */
 
 </head>
 <body>
-  
+  <!-- Sección de música -->
+  <section class="musica">
+    <h2>Escucha nuestra música</h2>
+    <audio controls>
+      <source src="./musica/cancion.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  </section>
+
+
+
+    
    <div class="banner">
    <img src="./imagenes/ban.png" alt="Banner" />
   <div class="texto-fuego">
     <span id="texto-rotativo"></span>
   </div>
 </div>
+
+    
 
 <!-- Contenedor principal -->
 <div class="tallas-y-whatsapp">
@@ -2201,6 +2232,7 @@ setInterval(cambiarTexto, 2000); // cambia cada 2seg
 
     </body>
 </html>
+
 
 
 
