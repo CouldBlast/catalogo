@@ -18,21 +18,30 @@
 
 
 <style>
-
 .musica {
   text-align: center;
-  padding: 30px 20px;
+  padding: 20px;
   background-color: #FF0000; /* fondo rojo */
   color: #000000;             /* texto negro */
-  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 10px;
 }
 
-.musica h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 15px;
+/* Ajustar tamaño del audio */
+.musica audio {
+  width: 100%;       /* ocupa todo el ancho del contenedor */
+  max-width: 500px;  /* tamaño máximo para escritorio */
+  height: 40px;      /* altura del reproductor */
 }
+
+/* Ajustes para móviles */
+@media (max-width: 600px) {
+  .musica audio {
+    max-width: 100%; /* ocupa todo el ancho en móviles */
+    height: 35px;    /* un poco más pequeño */
+  }
+}
+
 
     
   .tallas-y-whatsapp {
@@ -44,13 +53,15 @@
 }
 
 .mensaje-tallas {
-  background-color: #000000;
+  background-color: #FFD700; /* fondo amarillo */
+  color: #000000;            /* texto negro */
   padding: 8px;
   border: 2px solid #000;
   border-radius: 10px;
   font-size: 14px;
   line-height: 1.5;
 }
+
 
 .mensaje-tallas ul {
   list-style-type: none;
@@ -229,14 +240,7 @@ color: #000000; /* Color black */
 
 </head>
 <body>
-  <!-- Sección de música -->
-  <section class="musica">
-    <h2>Escucha nuestra música</h2>
-    <audio controls>
-      <source src=".Mi Musica/musica1.mp3" type="audio/mpeg">
-      Tu navegador no soporta el elemento de audio.
-    </audio>
-  </section>
+
 
 
 
@@ -276,7 +280,14 @@ color: #000000; /* Color black */
   </div>
 </div>
 
-
+ <!-- Sección de música -->
+  <section class="musica">
+    <h2>Escucha nuestra música</h2>
+    <audio controls>
+      <source src="./musica/cancion.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  </section>
  
     <!-- Buscador de tallas justo debajo del banner -->
 <div style="text-align:center; margin: 20px 0;">
@@ -2232,6 +2243,7 @@ setInterval(cambiarTexto, 2000); // cambia cada 2seg
 
     </body>
 </html>
+
 
 
 
