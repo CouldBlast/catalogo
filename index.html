@@ -257,6 +257,27 @@ select {
 color: #000000; /* Color black */
 }
 
+/*parte para adaptar el tamaño de letra a dispositivos moviles */
+    @media (max-width: 768px) {
+  .info h2 {
+    font-size: 1rem; /* antes era 1.8rem */
+  }
+
+  .info p {
+    font-size: 0.9rem; /* precio más pequeño */
+  }
+
+  .producto select {
+    font-size: 0.8rem;
+    padding: 6px;
+  }
+
+  .talla-seleccionada {
+    font-size: 0.8rem;
+  }
+}
+
+    
 </style>
 
 </head>
@@ -2264,6 +2285,7 @@ setInterval(cambiarTexto, 2000); // cambia cada 2seg
 
     </body>
 </html>
+
 
 
 
