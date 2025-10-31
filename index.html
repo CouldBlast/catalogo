@@ -212,6 +212,35 @@ h1.section {
   position: relative;
   z-index: 2;
 }
+/* === BANNER FINAL ABAJO === */
+.final-banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+  border-top: 2px solid rgba(255, 215, 0, 0.2);
+  border-bottom: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.final-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Centra el texto de fuego también */
+.final-banner .texto-fuego {
+  position: absolute;
+  bottom: 12%;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
 
 </style>
 
@@ -1828,13 +1857,18 @@ h1.section {
 </div>
 
 
-<!-- ======= FOOTER ======= -->
 <footer>
-<div class="footer-inner">
-<div class="copy">© 2025 Could Blast – Programado por Could Blast</div>
-<div class="frase">“El éxito nunca llega solo.”</div>
-</div>
+  <div class="footer-inner">
+    <div class="copy">© 2025 Could Blast – Programado por Could Blast</div>
+    <div class="frase">“El éxito nunca llega solo.”</div>
+  </div>
 </footer>
+
+<!-- 🔥 BANNER FINAL ABAJO 🔥 -->
+<div class="banner final-banner">
+  <img src="./imagenes/ban.png" alt="Banner Could Blast Final" />
+  <div class="texto-fuego"><span id="texto-rotativo"></span></div>
+</div>
 
 
 <script>
@@ -1887,6 +1921,7 @@ document.querySelectorAll('.producto').forEach(card=> io.observe(card));
 </script>
 </body>
 </html>
+
 
 
 
