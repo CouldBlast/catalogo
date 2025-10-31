@@ -194,6 +194,25 @@ footer {
   .wa-float { width: 50px; height: 50px; font-size: 22px; }
   footer { font-size: 0.8rem; }
 }
+  .info h2:hover {
+  color: #ffd700;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffcc33, 0 0 40px #ffaa00;
+  transition: all 0.3s ease;
+}
+/* === CENTRAR TÍTULOS DE SECCIONES === */
+h1.section {
+  width: 100%;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--dorado);
+  letter-spacing: 1px;
+  margin: 50px auto 25px auto;
+  font-size: clamp(26px, 3vw, 38px);
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
 </style>
 
 
@@ -1868,6 +1887,7 @@ document.querySelectorAll('.producto').forEach(card=> io.observe(card));
 </script>
 </body>
 </html>
+
 
 
 
