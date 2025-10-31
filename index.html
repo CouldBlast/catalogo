@@ -211,7 +211,35 @@ h1.section {
   }
 }
 
+/* ======= DISTRIBUCIÓN DE PRODUCTOS ======= */
 
+/* 🖥️ En pantallas grandes (PC): 4 productos por fila */
+@media (min-width: 1024px) {
+  .wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+}
+
+/* 📱 En pantallas medianas y móviles: 2 productos por fila */
+@media (max-width: 1023px) and (min-width: 600px) {
+  .wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+/* 📱 En pantallas muy pequeñas: 1 producto por fila */
+@media (max-width: 599px) {
+  .wrap {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+}
 
   
 </style>
@@ -1914,6 +1942,7 @@ document.querySelectorAll('.producto').forEach(card=> io.observe(card));
 </script>
 </body>
 </html>
+
 
 
 
