@@ -12,166 +12,92 @@
 <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
 
 <style>
-:root{
-  --rojo:#ff0000;
-  --negro:#0b0b0b;
-  --dorado:#ffd700;
-  --blanco:#ffffff;
-  --gris:#111318;
-  --radius:16px;
-  --shadow:0 10px 25px rgba(0,0,0,.35);
+:root {
+  --rojo: #ff0000;
+  --negro: #0b0b0b;
+  --dorado: #ffd700;
+  --blanco: #ffffff;
+  --gris: #111318;
+  --radius: 16px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Poppins',sans-serif;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
   background: radial-gradient(1200px 800px at 20% 10%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
-  color:var(--blanco);
-  overflow-x:hidden;
+  color: var(--blanco);
+  overflow-x: hidden;
 }
 
 /* ======= BANNER ======= */
-.banner{
-  position:relative;
-  width:100%;
-  height:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  border-bottom:2px solid rgba(255,215,0,.2);
-}
-.banner img{
-  width:100%;
-  height:auto;
-  object-fit:cover;
-  display:block;
-}
-.texto-fuego{
-  position:absolute;
-  bottom:14%;
-  left:0;
-  right:0;
-  text-align:center;
-  z-index:2;
-}
-.texto-fuego span{
-  font-family:'Luckiest Guy',cursive;
-  font-size:clamp(20px,6vw,48px);
-  color:#ff4500;
-  text-shadow:0 0 6px #ff6600,0 0 12px #ff3300,0 0 24px #ff0000,0 0 48px #ff6600;
-  animation:fuego 1.5s infinite alternate;
-}
-@keyframes fuego{
-  0%{text-shadow:0 0 6px #ff6600,0 0 12px #ff3300,0 0 24px #ff0000}
-  50%{text-shadow:0 0 12px #ff9933,0 0 28px #ff6600,0 0 42px #ff3300}
-  100%{text-shadow:0 0 9px #ff3300,0 0 22px #ff0000,0 0 36px #ff6600}
+.banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.2);
 }
 
-/* ======= PRODUCTOS ======= */
-.wrap{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-  padding:20px;
-  justify-items:center;
-}
-.producto{
-  background:rgba(20,20,20,.85);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  width:100%;
-  max-width:320px;
-  padding:15px;
-  transition:transform .3s,box-shadow .3s;
-  text-align:center;
-}
-.producto:hover{
-  transform:translateY(-6px);
-  box-shadow:0 8px 25px rgba(255,215,0,.3);
-}
-.producto img{
-  width:100%;
-  height:auto;
-  border-radius:12px;
-  object-fit:cover;
-}
-.info h2{
-  font-family:'Bebas Neue',sans-serif;
-  letter-spacing:1px;
-  margin:10px 0 4px;
-  color:var(--dorado);
-}
-.talla-seleccionada{font-size:.9rem;color:#bbb;margin-top:4px}
-
-/* ======= SECCIONES ======= */
-.mensaje-tallas,.musica,.buscador-box{text-align:center;padding:15px;}
-.mensaje-tallas ul{list-style:none;padding:0;margin:10px 0;}
-.mensaje-tallas li{margin:4px 0;}
-.buscador-box input{
-  margin-top:8px;
-  padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  outline:none;
-  width:80%;
-  max-width:300px;
+.banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
 }
 
-/* ======= WHATSAPP FLOAT ======= */
-.wa-float{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:#fff;
-  font-size:26px;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 0 12px rgba(0,0,0,.5);
-  transition:transform .3s;
-  z-index:1000;
-}
-.wa-float:hover{transform:scale(1.1);}
-
-/* ======= FOOTER ======= */
-footer{
-  background:#0a0a0a;
-  text-align:center;
-  padding:20px;
-  border-top:1px solid rgba(255,215,0,.3);
-  font-size:.9rem;
-  color:#ccc;
-}
-.frase{font-style:italic;color:var(--dorado);margin-top:8px;}
-
-/* ======= RESPONSIVO ======= */
-@media (max-width:768px){
-  .banner{min-height:160px;}
-  .texto-fuego{bottom:10%;}
-  .wa-float{width:50px;height:50px;font-size:22px;}
-  footer{font-size:.8rem;}
-}
-/* ===== Ajuste visual final Could Blast ===== */
-
-/* Separación después del banner */
-.wrap {
-  margin-top: 25px;
+.texto-fuego {
+  position: absolute;
+  bottom: 14%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
 }
 
-/* Secciones superiores organizadas */
+.texto-fuego span {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(20px, 6vw, 48px);
+  color: #ff4500;
+  text-shadow: 0 0 6px #ff6600, 0 0 12px #ff3300, 0 0 24px #ff0000, 0 0 48px #ff6600;
+  animation: fuego 1.5s infinite alternate;
+}
+
+@keyframes fuego {
+  0% { text-shadow: 0 0 6px #ff6600, 0 0 12px #ff3300, 0 0 24px #ff0000; }
+  50% { text-shadow: 0 0 12px #ff9933, 0 0 28px #ff6600, 0 0 42px #ff3300; }
+  100% { text-shadow: 0 0 9px #ff3300, 0 0 22px #ff0000, 0 0 36px #ff6600; }
+}
+
+/* ======= SECCIONES (tallas, música, buscador) ======= */
 .mensaje-tallas, .musica, .buscador-box {
   background: rgba(15, 15, 15, 0.8);
   border-radius: 14px;
   padding: 15px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
-/* Título general de secciones (como Gorras Urbanas) */
+.mensaje-tallas ul { list-style: none; margin: 10px 0; padding: 0; }
+.mensaje-tallas li { margin: 4px 0; }
+
+.buscador-box input {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  width: 80%;
+  max-width: 300px;
+}
+
+/* ======= TÍTULOS ======= */
 h1.section {
   grid-column: 1 / -1;
   text-align: center;
@@ -182,67 +108,137 @@ h1.section {
   font-size: clamp(26px, 3vw, 38px);
 }
 
-/* Mejor distribución del grid de productos */
+/* ======= PRODUCTOS ======= */
 .wrap {
+  max-width: 1300px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  gap: 22px;
+  padding: 25px 15px;
   justify-items: center;
   align-items: start;
 }
 
-/* Espaciado interno de productos */
-.producto {
-  margin-bottom: 15px;
-}
-
-/* Móviles: todo en columna limpia */
-@media (max-width: 768px) {
-  .mensaje-tallas, .musica, .buscador-box {
-    margin: 8px 0;
-    width: 95%;
-  }
-  .wrap {
-    gap: 18px;
-  }
-  .producto {
-    max-width: 95%;
-  }
-}
-
-/* ======= DISTRIBUCIÓN DE PRODUCTOS ======= */
-
-/* 🖥️ En pantallas grandes (PC): 4 productos por fila */
+/* 🖥️ PC: 4 productos */
 @media (min-width: 1024px) {
-  .wrap {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    justify-items: center;
-  }
+  .wrap { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* 📱 En pantallas medianas y móviles: 2 productos por fila */
-@media (max-width: 1023px) and (min-width: 600px) {
-  .wrap {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
+/* 💻 Tablet grande: 3 productos */
+@media (max-width: 1023px) and (min-width: 800px) {
+  .wrap { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* 📱 En pantallas muy pequeñas: 1 producto por fila */
-@media (max-width: 599px) {
-  .wrap {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 15px;
-  }
+/* 📱 Tablet vertical: 2 productos */
+@media (max-width: 799px) and (min-width: 500px) {
+  .wrap { grid-template-columns: repeat(2, 1fr); }
 }
 
-  
+/* 📱 Celular: 1 producto */
+@media (max-width: 499px) {
+  .wrap { grid-template-columns: 1fr; }
+}
+
+/* Tarjetas */
+.producto {
+  background: rgba(20, 20, 20, 0.85);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.producto:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+  background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(30,30,30,0.95));
+}
+
+.producto img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.info h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--dorado);
+  letter-spacing: 1px;
+  margin: 10px 0 4px;
+}
+
+.talla-seleccionada {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-top: 4px;
+}
+
+/* Animación al aparecer */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.producto:nth-child(1) { animation-delay: 0.1s; }
+.producto:nth-child(2) { animation-delay: 0.2s; }
+.producto:nth-child(3) { animation-delay: 0.3s; }
+.producto:nth-child(4) { animation-delay: 0.4s; }
+.producto:nth-child(5) { animation-delay: 0.5s; }
+
+/* ======= WHATSAPP FLOAT ======= */
+.wa-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: #fff;
+  font-size: 26px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
+  z-index: 1000;
+}
+
+.wa-float:hover { transform: scale(1.1); }
+
+/* ======= FOOTER ======= */
+footer {
+  background: #0a0a0a;
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.frase {
+  font-style: italic;
+  color: var(--dorado);
+  margin-top: 8px;
+}
+
+/* ======= MOBILE AJUSTES ======= */
+@media (max-width: 768px) {
+  .mensaje-tallas, .musica, .buscador-box { margin: 8px 0; width: 95%; }
+  .wrap { gap: 18px; }
+  .producto { max-width: 95%; }
+  .banner { min-height: 160px; }
+  .texto-fuego { bottom: 10%; }
+  .wa-float { width: 50px; height: 50px; font-size: 22px; }
+  footer { font-size: 0.8rem; }
+}
 </style>
+
 </head>
 
 <body>
@@ -1926,6 +1922,7 @@ document.querySelectorAll('.producto').forEach(card=> io.observe(card));
 </script>
 </body>
 </html>
+
 
 
 
