@@ -1,710 +1,273 @@
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Could Blast - Catálogo de Tenis Urbanos</title>
-     <meta name="description" content="Descubre 100 modelos de tenis urbanos en Could Blast. Busca tu talla y encuentra tu estilo.">
-
-    <!-- Fuentes Google Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Could Blast - Catálogo de Tenis Urbanos</title>
+<meta name="description" content="Descubre modelos de tenis urbanos en Could Blast. Busca tu talla y encuentra tu estilo.">
 
 
+<!-- Iconos / Fuentes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
 <style>
-.musica {
-  text-align: center;
-  padding: 20px;
-  background-color: #FF0000; /* fondo rojo */
-  color: #000000;             /* texto negro */
-  margin-bottom: 20px;
-  border-radius: 10px;
-}
-
-/* Ajustar tamaño del audio */
-.musica audio {
-  width: 100%;       /* ocupa todo el ancho del contenedor */
-  max-width: 500px;  /* tamaño máximo para escritorio */
-  height: 40px;      /* altura del reproductor */
-}
-
-/* Ajustes para móviles */
-@media (max-width: 600px) {
-  .musica audio {
-    max-width: 100%; /* ocupa todo el ancho en móviles */
-    height: 35px;    /* un poco más pequeño */
-  }
+:root{
+--rojo:#ff0000;
+--negro:#0b0b0b;
+--dorado:#ffd700;
+--blanco:#ffffff;
+--gris:#111318;
+--radius:16px;
+--shadow:0 10px 25px rgba(0,0,0,.35);
 }
 
 
-    
-  .tallas-y-whatsapp {
-  display: flex;
-  justify-content: space-between; /* Separación entre ambos */
-  align-items: center; /* Centrado vertical */
-  max-width: 800px; /* Ajusta según tu página */
-  margin: 20px auto; /* Centrado horizontal */
-}
-
-.mensaje-tallas {
-  background-color: #000000; /* fondo negro */
-  color: #FFFFFF;            /* texto blanco */
-  padding: 8px;
-  border: 2px solid #000;
-  border-radius: 10px;
-  font-size: 14px;
-  line-height: 1.5;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+margin:0;
+font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+color:var(--blanco);
+background: radial-gradient(1200px 800px at 20% 10%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
 }
 
 
-.mensaje-tallas ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+/* ======= BANNER ======= */
+.banner{
+position:relative;
+width:100%;
+min-height:240px;
+display:flex;align-items:center;justify-content:center;
+overflow:hidden;
+border-bottom:2px solid rgba(255,215,0,.2);
+}
+.banner img{width:100%;height:auto;display:block;filter:contrast(1.05) saturate(1.02)}
+.banner::after{ /* degradado para legibilidad */
+content:"";position:absolute;inset:0;
+background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55) 40%,rgba(0,0,0,.75));
+pointer-events:none;
+}
+.texto-fuego{position:absolute;inset:auto 0 14%;text-align:center;z-index:2}
+.texto-fuego span{
+font-family:'Luckiest Guy',cursive;letter-spacing:1px;
+font-size:clamp(28px,4vw,64px);color:#ff4500;
+text-shadow:0 0 6px #ff6600,0 0 12px #ff3300,0 0 24px #ff0000,0 0 48px #ff6600;
+animation:fuego 1.5s infinite alternate;
+}
+@keyframes fuego{
+0%{text-shadow:0 0 6px #ff6600,0 0 12px #ff3300,0 0 24px #ff0000}
+50%{text-shadow:0 0 12px #ff9933,0 0 28px #ff6600,0 0 42px #ff3300}
+100%{text-shadow:0 0 9px #ff3300,0 0 22px #ff0000,0 0 36px #ff6600}
 }
 
-.mensaje-tallas li {
-  padding: 3px 0;
-  border-bottom: 1px dashed #ccc;
-}
-
-.mensaje-tallas li:last-child {
-  border-bottom: none;
-}
-
-.whatsapp-contacto a {
-  text-decoration: none;
-  color: #000000; /* color verde WhatsApp */
-  font-weight: bold;
-  text-align: right;
-  font-size: 14px;
-}
-/*termina el cuadro de taklas
-
-/* Simulación de banner */
-.banner {
-  position: relative;
-  width: 100%;
-  height: 300px; /* ajusta según tu banner */
-  background: url('tu-imagen-banner.jpg') no-repeat center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Texto rotativo con efecto fuego */
-.texto-fuego {
-  font-family: 'Luckiest Guy', cursive;
-  font-size: 3rem;
-  color: #ff4500;
-  text-align: center;
-  text-shadow: 
-    0 0 5px #ff6600,
-    0 0 10px #ff3300,
-    0 0 20px #ff0000,
-    0 0 40px #ff6600;
-  animation: fuego 1.5s infinite alternate;
-}
-
-/* Animación fuego parpadeante */
-@keyframes fuego {
-  0% { text-shadow: 0 0 5px #ff6600, 0 0 10px #ff3300, 0 0 20px #ff0000; }
-  50% { text-shadow: 0 0 15px #ff9933, 0 0 30px #ff6600, 0 0 50px #ff3300; }
-  100% { text-shadow: 0 0 10px #ff3300, 0 0 25px #ff0000, 0 0 40px #ff6600; }
-}
-
-.titulo-buscador {
-  color: #FFD700; 
-  font-size: 1.8rem; 
-  font-weight: bold;  
-}
-
-/* ---------------------- Animaciones ---------------------- */
-.producto { 
-  transition: transform 0.3s, opacity 0.3s; 
-  animation: fadeIn 0.5s ease-in; 
-  opacity:1; 
-  color:#FFD700;
-}
-.producto:hover { 
-  transform: scale(1.05) rotate(-2deg); 
-  box-shadow:0 6px 20px rgba(255,215,0,0.6); 
-}
-@keyframes fadeIn { 
-  from {opacity:0; transform:translateY(20px);} 
-  to {opacity:1; transform:translateY(0);}      
-}
-
-.banner {
-  position: relative;
-  width: 100%;
-  height: auto;
-  display: inline-block;
-}
-
-.banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #FF0000;  /* fondo rojo */
-  color: #000000;              /* texto negro */
-  margin: 0;
-  padding: 0;
-}
-
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  text-align: center;
-  color: #000000;
-  letter-spacing: 2px;
-  font-weight: 500;
-  padding: 20px 0;
-  text-transform: uppercase;
-}
-
-.catalogo {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Distribuye dinámico */
-  gap: 15px;
-  padding: 15px;
-  max-width: 1200px;
-  margin: auto;
-}
-    
-/* Para pantallas grandes: hasta 4 productos por fila */
-@media (min-width: 1024px) {
-  .catalogo {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* 📱 Para pantallas medianas (tablets): 3 por fila */
-@media (max-width: 1023px) and (min-width: 600px) {
-  .catalogo {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* 📲 Para pantallas pequeñas (celulares): 3 por fila igual */
-@media (max-width: 599px) {
-  .catalogo {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.producto {
-  background: white; /* fondo blanco */
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* sombra más clara sobre fondo blanco */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-
-.producto:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(255,215,0,0.6);
-}
-
-img {
-  width: 100%;
-  min-height: 250px; /* mínimo de altura */
-  height: auto;
-  object-fit: contain;
-}
-
-.info {
-  padding: 15px;
-  text-align: center;
-}
-
-h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  margin: 10px 0;
-}
-
-/* 🔴 Solo los precios en rojo */
-.producto .info p {
-  font-size: 1.2rem;
-  color: rgb(255, 0, 0); /* rojo para el precio */
-}
-
-select {
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 10px;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
-}
-
-.talla-seleccionada {
-  margin-top: 10px;
-  font-weight: bold;
-color: #000000; /* Color black */
-}
-
-/*parte para adaptar el tamaño de letra a dispositivos moviles */
-    @media (max-width: 768px) {
-  .info h2 {
-    font-size: 1rem; /* antes era 1.8rem */
-  }
-
-  .info p {
-    font-size: 0.9rem; /* precio más pequeño */
-  }
-
-  .producto select {
-    font-size: 0.8rem;
-    padding: 6px;
-  }
-
-  .talla-seleccionada {
-    font-size: 0.8rem;
-  }
-}
-
-    
-</style>
-
-</head>
-<body>
-
-
-
-
-    
-   <div class="banner">
-   <img src="./imagenes/ban.png" alt="Banner" />
-  <div class="texto-fuego">
-    <span id="texto-rotativo"></span>
-  </div>
+    /* ======= CONTENEDOR GENERAL ======= */
+<div class="texto-fuego"><span id="texto-rotativo"></span></div>
 </div>
 
-    
 
-<!-- Contenedor principal -->
+<div class="wrap">
+<!-- ======= TALLAS + CONTACTO ======= -->
 <div class="tallas-y-whatsapp">
-  <!-- Cuadro de tallas -->
-  <div class="mensaje-tallas">
-    <p><strong>Puedes corroborar tus tallas aquí:</strong></p>
-    <ul>
-      <li>36 → 23.5 cm</li>
-      <li>37 → 23.5 cm</li>
-      <li>38 → 24 cm</li>
-      <li>39 → 24.5 cm</li>
-      <li>40 → 25 cm</li>
-      <li>41 → 26 cm</li>
-      <li>42 → 26.5 cm</li>
-      <li>43 → 27.5 cm</li>
-      <li>44 → 28 cm</li>
-    </ul>
-  </div>
-
-  <!-- WhatsApp -->
-  <div class="whatsapp-contacto">
-    <a href="https://wa.me/50238866550" target="_blank">
-      ORDENA AL:<br>Tel 3886 6550
-    </a>
-  </div>
+<div class="mensaje-tallas">
+<p><strong>Puedes corroborar tus tallas aquí:</strong></p>
+<ul>
+<li>36 → 23.5 cm</li>
+<li>37 → 23.5 cm</li>
+<li>38 → 24 cm</li>
+<li>39 → 24.5 cm</li>
+<li>40 → 25 cm</li>
+<li>41 → 26 cm</li>
+<li>42 → 26.5 cm</li>
+<li>43 → 27.5 cm</li>
+<li>44 → 28 cm</li>
+</ul>
+</div>
+<div class="whatsapp-contacto">
+<a href="https://wa.me/50238866550" target="_blank" rel="noopener">
+<span>ORDENA AL:</span>
+<span class="sub">Tel 3886 6550</span>
+</a>
+</div>
 </div>
 
- <!-- Sección de música -->
-  <section class="musica">
-    <h2>Escucha nuestra música</h2>
-    <audio controls>
-      <source src="./Mi Musica/musica1.mp3" type="audio/mpeg">
-      Tu navegador no soporta el elemento de audio.
-    </audio>
-  </section>
- 
-    <!-- Buscador de tallas justo debajo del banner -->
-<div style="text-align:center; margin: 20px 0;">
-    <h3 class="titulo-buscador" style="color:#000000;">Puedes buscar acá el par de tu talla</h3>
-    <input 
-        type="text" 
-        id="buscador" 
-        placeholder="Ingresa tu talla (ej. 36...)" 
-        style="
-            width:350px; 
-            height:45px; 
-            font-size:18px; 
-            padding:5px; 
-            text-align:center; 
-            border-radius:10px; 
-            border:2px solid #000000; /* borde negro */
-            color: #000000; /* texto negro dentro del input */
-            background-color: #ffffff; /* fondo blanco para que contraste */
-            outline:none; /* quita el borde azul al seleccionar */
-        "
-    />
-    <div id="errorTalla" style="color:red; font-weight:bold; margin-top:5px;"></div>
+
+<!-- ======= MÚSICA ======= -->
+<section class="musica">
+<h2>Escucha nuestra música</h2>
+<audio controls>
+<source src="./Mi Musica/musica1.mp3" type="audio/mpeg">
+Tu navegador no soporta el elemento de audio.
+</audio>
+</section>
+
+
+<!-- ======= BUSCADOR ======= -->
+<div class="buscador-box">
+<h3 class="titulo-buscador">Puedes buscar acá el par de tu talla</h3>
+<input type="text" id="buscador" placeholder="Ingresa tu talla (ej. 36...)" />
+<div id="errorTalla"></div>
 </div>
 
-       <!-- 🔥 Nueva sección de Gorras -->
-<h1> Gorras Urbanas </h1>
-<div class="catalogo">
-    
-    <!-- Producto Gorra 1 -->
+
+<!-- ======= GORRAS (CARRUSEL HORIZONTAL) ======= -->
+<h1 class="section">Gorras Urbanas</h1>
+<div class="carrusel">
+<div class="carrusel-track">
+<!-- ========== Manteniendo exactamente tus gorras y rutas ========== -->
+<div class="producto" data-tallas="unitalla,7">
+<img src="./imagenes/b1.jpg" alt="Gorra Negra" />
+<div class="info">
+<h2>Ajustable Barbas Hats</h2>
+<p>Q550</p>
+<select onchange="cambiarTalla(this, 'tallaG1')">
+<option value="">Verifica disponibilidad</option>
+<option value="unitalla">Unitalla</option>
+</select>
+<div class="talla-seleccionada" id="tallaG1">Talla: --</div>
+</div>
+</div>
+
     <div class="producto" data-tallas="unitalla,7">
-        <img src="./imagenes/b1.jpg" alt="Gorra Negra" />
-        <div class="info">
-            <h2>Ajustable Barbas Hats</h2>
-            <p>Q550</p>
-            <select onchange="cambiarTalla(this, 'tallaG1')">
-                <option value="">Verifica disponibilidad</option>
-                <option value="unitalla">Unitalla</option>
-            </select>
-            <div class="talla-seleccionada" id="tallaG1">Talla: --</div>
-        </div>
-    </div>
-
-    <!-- Producto Gorra 2 -->
-    <div class="producto" data-tallas="unitalla,7">
-        <img src="./imagenes/Agotado (2).png" alt="Gorra Roja" />
-        <div class="info">
-            <h2>Ajustable Barbas Hats</h2>
-            <p>Q600</p>
-            <select onchange="cambiarTalla(this, 'tallaG2')">
-                <option value="">Verifica disponibilidad</option>
-                <option value="unitalla">Unitalla</option>
-            </select>
-            <div class="talla-seleccionada" id="tallaG2">Talla: --</div>
-        </div>
-    </div>
-    
-    <!-- Producto Gorra 3 -->
-    <div class="producto" data-tallas="unitalla,7">
-        <img src="./imagenes/Agotado (2).png" alt" alt="Gorra Roja" />
-        <div class="info">
-            <h2>Ajustable Barbas Hats</h2>
-            <p>Q0</p>
-            <select onchange="cambiarTalla(this, 'tallaG3')">
-                <option value="">Verifica disponibilidad</option>
-                <option value="unitalla">Unitalla</option>
-            </select>
-            <div class="talla-seleccionada" id="tallaG3">Talla: --</div>
-        </div>
-    </div>
-
-   <!-- Producto Gorra 4 -->
-    <div class="producto" data-tallas="unitalla,7">
-        <img src="./imagenes/newy.jpg" alt="Gorra Azul" />
-        <div class="info">
-            <h2>Thirty One Original</h2>
-            <p>Q750</p>
-            <select onchange="cambiarTalla(this, 'tallaG4')">
-                <option value="">Verifica disponibilidad</option>
-                <option value="unitalla">Unitalla</option>
-            </select>
-            <div class="talla-seleccionada" id="tallaG4">Talla: --</div>
-        </div>
-    </div>
-
-   <!-- Producto Gorra 5 -->
-    <div class="producto" data-tallas="unitalla,7">
-        <img src="./imagenes/john.jpg" alt="Gorra Blanca" />
-        <div class="info">
-            <h2>John Stan</h2>
-            <p>Q450</p>
-            <select onchange="cambiarTalla(this, 'tallaG5')">
-                <option value="">Verifica disponibilidad</option>
-                <option value="7 1/8">7 1/8</option>
-            </select>
-            <div class="talla-seleccionada" id="tallaG5">Talla: --</div>
-        </div>
-    </div>
-
-   <!-- Producto Gorra 6 -->
-    <div class="producto" data-tallas="unitalla,7">
-        <img src="./imagenes/john.jpg" alt="Gorra Blanca" />
-        <div class="info">
-            <h2>John Stan</h2>
-            <p>Q450</p>
-            <select onchange="cambiarTalla(this, 'tallaG6')">
-                <option value="">Verifica disponibilidad</option>
-                <option value="7 1/8">7 1/8</option>
-            </select>
-            <div class="talla-seleccionada" id="tallaG6">Talla: --</div>
-        </div>
-    </div>
-<!-- Producto Gorra 7 -->
-<div class="producto" data-tallas="unitalla,7">
-    <img src="./imagenes/caps1.jpg" alt="Gorra Dandy Hats" />
-    <div class="info">
-        <h2>Dandy Hats</h2>
-        <p>Q570</p>
-        <select onchange="cambiarTalla(this, 'tallaG7')">
-            <option value="">Verifica disponibilidad</option>
-            <option value="Unitalla">Unitalla</option>
-        </select>
-        <div class="talla-seleccionada" id="tallaG7">Talla: --</div>
-    </div>
+</select>
+<div class="talla-seleccionada" id="tallaG9">Talla: --</div>
 </div>
-<!-- Producto Gorra 8 -->
-<div class="producto" data-tallas="unitalla,7">
-    <img src="./imagenes/caps2.jpg" alt="Gorra Thirty One" />
-    <div class="info">
-        <h2>Thirty One</h2>
-        <p>Q550</p>
-        <select onchange="cambiarTalla(this, 'tallaG8')">
-            <option value="">Verifica disponibilidad</option>
-            <option value="Unitalla">Unitalla</option>
-        </select>
-        <div class="talla-seleccionada" id="tallaG8">Talla: --</div>
-    </div>
-</div>
-<!-- Producto Gorra 9 -->
-<div class="producto" data-tallas="unitalla,7">
-    <img src="./imagenes/caps3.jpg" alt="Gorra El Mago 31 Hats" />
-    <div class="info">
-        <h2>El Mago 31 Hats</h2>
-        <p>Q600</p>
-        <select onchange="cambiarTalla(this, 'tallaG9')">
-            <option value="">Verifica disponibilidad</option>
-            <option value="Unitalla">Unitalla</option>
-        </select>
-        <div class="talla-seleccionada" id="tallaG9">Talla: --</div>
-    </div>
-</div>
-<!-- Producto Gorra 10 -->
-<div class="producto" data-tallas="unitalla,7">
-    <img src="./imagenes/caps4.jpg" alt="Gorra El Mago 31 Hats" />
-    <div class="info">
-        <h2>El Mago 31 Hats</h2>
-        <p>Q600</p>
-        <select onchange="cambiarTalla(this, 'tallaG10')">
-            <option value="">Verifica disponibilidad</option>
-            <option value="Unitalla">Unitalla</option>
-        </select>
-        <div class="talla-seleccionada" id="tallaG10">Talla: --</div>
-    </div>
-</div>
-<!-- Producto Gorra 11 -->
-<div class="producto" data-tallas="unitalla,7">
-    <img src="./imagenes/caps5.jpg" alt="Gorra Fino x Tito Double P" />
-    <div class="info">
-        <h2>Fino x Tito Double P</h2>
-        <p>Q580</p>
-        <select onchange="cambiarTalla(this, 'tallaG11')">
-            <option value="">Verifica disponibilidad</option>
-            <option value="Unitalla">Unitalla</option>
-        </select>
-        <div class="talla-seleccionada" id="tallaG11">Talla: --</div>
-    </div>
-</div>
-<!-- Producto Gorra 12 -->
-<div class="producto" data-tallas="unitalla,7">
-    <img src="./imagenes/caps6.jpg" alt="Gorra Fino x Tito Double P" />
-    <div class="info">
-        <h2>Fino x Tito Double P</h2>
-        <p>Q580</p>
-        <select onchange="cambiarTalla(this, 'tallaG12')">
-            <option value="">Verifica disponibilidad</option>
-            <option value="Unitalla">Unitalla</option>
-        </select>
-        <div class="talla-seleccionada" id="tallaG12">Talla: --</div>
-    </div>
-</div>
-<!-- Producto Gorra 13 -->
-<div class="producto" data-tallas="unitalla,7">
-    <img src="./imagenes/caps7.jpg" alt="Gorra MuraTravis" />
-    <div class="info">
-        <h2>MuraTravis</h2>
-        <p>Q580</p>
-        <select onchange="cambiarTalla(this, 'tallaG13')">
-            <option value="">Verifica disponibilidad</option>
-            <option value="Unitalla">Unitalla</option>
-        </select>
-        <div class="talla-seleccionada" id="tallaG13">Talla: --</div>
-    </div>
 </div>
 
+
+<div class="producto" data-tallas="unitalla,7">
+<img src="./imagenes/caps4.jpg" alt="Gorra El Mago 31 Hats" />
+<div class="info">
+<h2>El Mago 31 Hats</h2>
+<p>Q600</p>
+<select onchange="cambiarTalla(this, 'tallaG10')">
+<option value="">Verifica disponibilidad</option>
+<option value="Unitalla">Unitalla</option>
+</select>
+<div class="talla-seleccionada" id="tallaG10">Talla: --</div>
+</div>
+</div>
+
+
+<div class="producto" data-tallas="unitalla,7">
+<img src="./imagenes/caps5.jpg" alt="Gorra Fino x Tito Double P" />
+<div class="info">
+<h2>Fino x Tito Double P</h2>
+<p>Q580</p>
+<select onchange="cambiarTalla(this, 'tallaG11')">
+<option value="">Verifica disponibilidad</option>
+<option value="Unitalla">Unitalla</option>
+</select>
+<div class="talla-seleccionada" id="tallaG11">Talla: --</div>
+</div>
+</div>
+
+
+<div class="producto" data-tallas="unitalla,7">
+<img src="./imagenes/caps6.jpg" alt="Gorra Fino x Tito Double P" />
+<div class="info">
+<h2>Fino x Tito Double P</h2>
+<p>Q580</p>
+<select onchange="cambiarTalla(this, 'tallaG12')">
+<option value="">Verifica disponibilidad</option>
+<option value="Unitalla">Unitalla</option>
+</select>
+<div class="talla-seleccionada" id="tallaG12">Talla: --</div>
+</div>
+</div>
+
+
+<div class="producto" data-tallas="unitalla,7">
+<img src="./imagenes/caps7.jpg" alt="Gorra MuraTravis" />
+<div class="info">
+<h2>MuraTravis</h2>
+<p>Q580</p>
+<select onchange="cambiarTalla(this, 'tallaG13')">
+<option value="">Verifica disponibilidad</option>
+<option value="Unitalla">Unitalla</option>
+</select>
+<div class="talla-seleccionada" id="tallaG13">Talla: --</div>
+</div>
+</div>
+</div>
+</div>
 
     
+
 </div>
-<!-- 🔥 Fin sección Gorras -->
+</div>
 
-    
-     
-        <h1> Los Mejores Estilos Aqui </h1>
-    
 
-        <!-- resto del contenido -->
+<!-- Producto 3 -->
+<div class="producto" data-tallas="40,41,42,43">
+<img src="./imagenes/puma.jpg" alt="Tenis Modelo 3" />
+<div class="info">
+<h2>Puma suede Xl x Ghostbusters </h2>
+<p>Q650</p>
+<select onchange="cambiarTalla(this, 'talla3')">
+<option value="">Verifica tallas disponibles</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+</select>
+<div class="talla-seleccionada" id="talla3">Talla: --</div>
+</div>
+</div>
 
-        <div class="catalogo">
-          <!-- Producto  - 4 -->
-    <div class="producto" data-tallas="39,40,41">
-        <img src="./imagenes/-4.jpg" alt="Tenis Modelo -4" />
-        <div class="info">
-            <h2>Retro 4 Reimagined Bred</h2>
-            <p>Q600</p>
-            <select onchange="cambiarTalla(this, 'talla-4')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="39">39</option>
-                 <option value="40">40</option>
-                  <option value="41">41</option>
-            </select>
-            <div class="talla-seleccionada" id="talla-4">Talla: --</div>
-        </div>
-    </div>
-             <!-- Producto  - 3 -->
-    <div class="producto" data-tallas="38,39,40,41,42">
-        <img src="./imagenes/-3.jpg" alt="Tenis Modelo -3" />
-        <div class="info">
-            <h2> Travis Scott Black Phantom</h2>
-            <p>Q620</p>
-            <select onchange="cambiarTalla(this, 'talla-3')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
-                 <option value="40">40</option>
-                  <option value="41">41</option>
-                 <option value="42">42</option>
-            </select>
-            <div class="talla-seleccionada" id="talla-3">Talla: --</div>
-        </div>
-    </div>
- <!-- Producto  - 2 -->
-    <div class="producto" data-tallas="40,41,42">
-        <img src="./imagenes/-2.jpg" alt="Tenis Modelo -2" />
-        <div class="info">
-            <h2> Lv Trainer black</h2>
-            <p>Q680</p>
-            <select onchange="cambiarTalla(this, 'talla-2')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                 <option value="42">42</option>
-            </select>
-            <div class="talla-seleccionada" id="talla-2">Talla: --</div>
-        </div>
-    </div>
-  <!-- Producto  - 1 negrooo maqueen-->
-    <div class="producto" data-tallas="41">
-        <img src="./imagenes/-1.jpg" alt="Tenis Modelo -1" />
-        <div class="info">
-            <h2> Alexander Maqueen black</h2>
-            <p>Q620</p>
-            <select onchange="cambiarTalla(this, 'talla-1')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="41">41</option>
-            </select>
-            <div class="talla-seleccionada" id="talla-1">Talla: --</div>
-        </div>
-    </div>
+
+<!-- Producto 4 -->
+<div class="producto" data-tallas="40,41,42">
+<img src="./imagenes/balen.jpg" alt="Tenis Modelo 4" />
+<div class="info">
+<h2>Balenciaga</h2>
+<p>Q600</p>
+<select onchange="cambiarTalla(this, 'talla4')">
+<option value="">Verifica tallas disponibles</option>
+<option value="41">41</option>
+<option value="42">42</option>
+</select>
+<div class="talla-seleccionada" id="talla4">Talla: --</div>
+</div>
+</div>
+
+
+<!-- Producto 5 -->
+<div class="producto" data-tallas="41,43">
+<img src="./imagenes/retro31.jpg" alt="Tenis Modelo 5" />
+<div class="info">
+<h2>Jordan Retro 3</h2>
+<p>Q580</p>
+<select onchange="cambiarTalla(this, 'talla5')">
+<option value="">Verifica tallas disponibles</option>
+<option value="41">41</option>
+<option value="43">43</option>
+</select>
+<div class="talla-seleccionada" id="talla5">Talla: --</div>
+</div>
+</div>
+
+
+<!-- Producto 6 -->
+<div class="producto" data-tallas="38">
+<img src="./imagenes/lowblack.jpg" alt="Tenis Modelo 6" />
+<div class="info">
+<h2>Jordan 1 low black</h2>
+<p>Q600</p>
+<select onchange="cambiarTalla(this, 'talla6')">
+<option value="">Verifica tallas disponibles</option>
+<option value="38">38</option>
+</select>
+<div class="talla-seleccionada" id="talla6">Talla: --</div>
+</div>
+</div>
 
 
 
 
-
-            
-           <!-- Producto 1 -->
-    <div class="producto" data-tallas="40,41,42,43,44">
-        <img src="./imagenes/melo.jpg" alt="Tenis Modelo 1" />
-        <div class="info">
-            <h2> Puma Melo Basketball</h2>
-            <p>Q750</p>
-            <select onchange="cambiarTalla(this, 'talla1')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-            </select>
-            <div class="talla-seleccionada" id="talla1">Talla: --</div>
-        </div>
-    </div>
-
-    <!-- Producto 2 -->
-    <div class="producto" data-tallas="41,42">
-        <img src="./imagenes/lv.jpg" alt="Tenis Modelo 2" />
-        <div class="info">
-            <h2>LV SKATE</h2>
-            <p>Q680</p>
-            <select onchange="cambiarTalla(this, 'talla2')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-            </select>
-            <div class="talla-seleccionada" id="talla2">Talla: --</div>
-        </div>
-    </div>
-
-    <!-- Producto 3 -->
-    <div class="producto" data-tallas="40,41,42,43">
-        <img src="./imagenes/puma.jpg" alt="Tenis Modelo 3" />
-        <div class="info">
-            <h2>Puma suede Xl x Ghostbusters </h2>
-            <p>Q650</p>
-            <select onchange="cambiarTalla(this, 'talla3')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-                <option value="43">43</option>
-            </select>
-            <div class="talla-seleccionada" id="talla3">Talla: --</div>
-        </div>
-    </div>
-
-    <!-- Producto 4 -->
-    <div class="producto" data-tallas="40,41,42">
-        <img src="./imagenes/balen.jpg" alt="Tenis Modelo 4" />
-        <div class="info">
-            <h2>Balenciaga</h2>
-            <p>Q600</p>
-            <select onchange="cambiarTalla(this, 'talla4')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-            </select>
-            <div class="talla-seleccionada" id="talla4">Talla: --</div>
-        </div>
-    </div>
-
-    <!-- Producto 5 -->
-    <div class="producto" data-tallas="41,43">
-        <img src="./imagenes/retro31.jpg" alt="Tenis Modelo 5" />
-        <div class="info">
-            <h2>Jordan Retro 3</h2>
-            <p>Q580</p>
-            <select onchange="cambiarTalla(this, 'talla5')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="41">41</option>
-                <option value="43">43</option>
-            </select>
-            <div class="talla-seleccionada" id="talla5">Talla: --</div>
-        </div>
-    </div>
-
-    <!-- Producto 6 -->
-    <div class="producto" data-tallas="38">
-        <img src="./imagenes/lowblack.jpg" alt="Tenis Modelo 6" />
-        <div class="info">
-            <h2>Jordan 1 low black</h2>
-            <p>Q600</p>
-            <select onchange="cambiarTalla(this, 'talla6')">
-                <option value="">Verifica tallas disponibles</option>
-                <option value="38">38</option>
-            </select>
-            <div class="talla-seleccionada" id="talla6">Talla: --</div>
-        </div>
-    </div>
 
     <!-- Producto 7 -->
     <div class="producto" data-tallas="40,41,42">
@@ -2133,165 +1696,78 @@ color: #000000; /* Color black */
         <div class="talla-seleccionada" id="talla96">Talla: --</div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+    
         </div>
 
- <script>
-// ---------------------- Buscador de tallas ----------------------
+ 
+
+<!-- ======= BOTÓN WHATSAPP FLOTANTE ======= -->
+<div class="wa-float">
+<a href="https://wa.me/50238866550" target="_blank" rel="noopener" aria-label="WhatsApp Could Blast">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+</div>
+
+
+<!-- ======= FOOTER ======= -->
+<footer>
+<div class="footer-inner">
+<div class="copy">© 2025 Could Blast – Programado por Could Blast</div>
+<div class="frase">“El éxito nunca llega solo.”</div>
+</div>
+</footer>
+
+
+<script>
+// ===== Texto rotativo del banner =====
+const frases = ["🔥 Nuevos modelos", "🔥 Edición limitada", "🔥 Estilo urbano","🔥 Solo aquí"];
+let i = 0;
+function cambiarTexto(){
+const t = document.getElementById("texto-rotativo");
+if(!t) return;
+t.textContent = frases[i];
+i = (i + 1) % frases.length;
+}
+cambiarTexto();
+setInterval(cambiarTexto, 2000);
+
+
+// ===== Buscador por talla (NO modifica rutas ni estructura) =====
 const buscador = document.getElementById("buscador");
 const errorTalla = document.getElementById("errorTalla");
 const productos = document.querySelectorAll(".producto");
 
-buscador.addEventListener("input", function() {
-    const valor = this.value.trim();
 
-    // Validar solo números
-    if (!/^\d*$/.test(valor)) {
-        errorTalla.textContent = "Solo se permiten números";
-        return;
-    } else {
-        errorTalla.textContent = "";
-    }
-
-    // Filtrar productos según talla
-    productos.forEach(producto => {
-        const tallas = producto.getAttribute("data-tallas");
-        producto.style.display = (tallas.includes(valor) || valor==="") ? "block" : "none";
-    });
+if(buscador){
+buscador.addEventListener("input", function(){
+const valor = this.value.trim();
+if (!/^\d*$/.test(valor)) { errorTalla.textContent = "Solo se permiten números"; return; }
+errorTalla.textContent = "";
+productos.forEach(p => {
+const tallas = p.getAttribute("data-tallas") || "";
+p.style.display = (valor === "" || tallas.includes(valor)) ? "block" : "none";
 });
+});
+}
 
-// ---------------------- Cambiar la talla seleccionada ----------------------
+
+// ===== Mostrar talla elegida (respeta tus IDs y selects) =====
 function cambiarTalla(selectObj, idTalla) {
-    const valor = selectObj.value;
-    const divTalla = document.getElementById(idTalla);
-    divTalla.textContent = valor ? "Talla: " + valor : "Talla: --";
+const valor = selectObj.value;
+const divTalla = document.getElementById(idTalla);
+if(divTalla) divTalla.textContent = valor ? "Talla: " + valor : "Talla: --";
 }
-//frases
-     const frases = ["🔥 Nuevos modelos", "🔥 Edición limitada", "🔥 Estilo urbano","🔥Solo Aqui"];
-let i = 0;
+window.cambiarTalla = cambiarTalla; // expone para los onChange inline
 
-function cambiarTexto() {
-  const texto = document.getElementById("texto-rotativo");
-  texto.textContent = frases[i];
-  i = (i + 1) % frases.length;
-}
 
-cambiarTexto(); // inicial
-setInterval(cambiarTexto, 2000); // cambia cada 2seg
-
+//===== Animación aparición al hacer scroll (IntersectionObserver)=====
+const io = new IntersectionObserver((entries)=>{
+entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.2});
+document.querySelectorAll('.producto').forEach(card=> io.observe(card));
 </script>
-
-
-    </body>
+</body>
 </html>
-
-
-
-
-
-
-
 
 
 
