@@ -389,19 +389,25 @@ setInterval(cambiarTexto, 2000);
 // ===== Buscador por talla (NO modifica rutas ni estructura) =====
 const buscador = document.getElementById("buscador");
 const errorTalla = document.getElementById("errorTalla");
-const productos = document.querySelectorAll(".producto");
-
 
 if(buscador){
-buscador.addEventListener("input", function(){
-const valor = this.value.trim();
-if (!/^\d*$/.test(valor)) { errorTalla.textContent = "Solo se permiten números"; return; }
-errorTalla.textContent = "";
-productos.forEach(p => {
-const tallas = p.getAttribute("data-tallas") || "";
-p.style.display = (valor === "" || tallas.includes(valor)) ? "block" : "none";
-});
-});
+  buscador.addEventListener("input", function(){
+    const valor = this.value.trim();
+
+    if (!/^\d*$/.test(valor)) {
+      errorTalla.textContent = "Solo se permiten números";
+      return;
+    }
+
+    errorTalla.textContent = "";
+
+    document.querySelectorAll(".producto").forEach(p => {
+      const tallas = p.getAttribute("data-tallas") || "";
+      p.style.display = (valor === "" || tallas.includes(valor))
+        ? "block"
+        : "none";
+    });
+  });
 }
 
 
@@ -425,6 +431,7 @@ document.querySelectorAll('.producto').forEach(card=> io.observe(card));
     
 </body>
 </html>
+
 
 
 
