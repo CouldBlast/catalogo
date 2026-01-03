@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Nike TN Total Black",
+    "precio": 680,
+    "imagen": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+    "tallas": [40,41,42]
+  },
+  {
+    "nombre": "Jordan 1 Travis",
+    "precio": 580,
+    "imagen": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+    "tallas": [40,41]
+  },
+  {
+    "nombre": "Adidas Samba",
+    "precio": 600,
+    "imagen": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+    "tallas": [38]
+  }
+]
