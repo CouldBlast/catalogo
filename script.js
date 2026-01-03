@@ -19,4 +19,8 @@ fetch('productos.json')
         </div>
       `;
     });
+
+    // 👉 ESTO ES LO NUEVO (animación después de crear productos)
+    document.querySelectorAll('.producto').forEach(card => io.observe(card));
   });
+
