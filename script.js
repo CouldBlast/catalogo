@@ -5,7 +5,10 @@ fetch('productos.json')
 
     productos.forEach((p, i) => {
       contenedor.innerHTML += `
-        <div class="producto" data-tallas="${p.tallas.join(',')}">
+      
+        <div class="producto" 
+     data-tallas="${p.tallas.join(',')}" 
+     data-categoria="${p.categoria}">
           <img src="${p.imagen}" alt="${p.nombre}">
           <div class="info">
             <h2>${p.nombre}</h2>
