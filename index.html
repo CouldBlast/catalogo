@@ -312,62 +312,60 @@ footer {
 }
 
 /* ===============================
-   BORDE ANIMADO ROJO INTENSO (PRODUCTOS)
+   FUEGO ROJO INTENSO – SIEMPRE VISIBLE
 =============================== */
 .producto {
   position: relative;
   overflow: hidden;
 }
 
-/* Aura / fuego rojizo */
+/* FUEGO BASE (SIEMPRE ACTIVO) */
 .producto::before {
   content: "";
   position: absolute;
-  inset: -8px;
-  padding: 8px;
+  inset: -12px;              /* qué tan lejos sale el fuego */
   border-radius: var(--radius);
   pointer-events: none;
 
-  /* 🔥 GRADIENTE FULL ROJO (sin amarillo) */
   background: linear-gradient(
     120deg,
-    rgb(180, 0, 0),   /* rojo oscuro */
-    rgb(255, 0, 0),   /* rojo puro */
-    rgb(255, 40, 40), /* rojo vivo */
+    rgb(120, 0, 0),
     rgb(255, 0, 0),
-    rgb(180, 0, 0)
+    rgb(255, 40, 40),
+    rgb(255, 0, 0),
+    rgb(120, 0, 0)
   );
 
-  background-size: 300% 300%;
+  background-size: 400% 400%;
 
-  /* 🔥 BRILLO ROJO INTENSO */
+  /* 🔥 BRILLO BASE (VISIBLE SIN HOVER) */
   box-shadow:
-    0 0 12px rgba(255, 0, 0, 0.9),
-    0 0 28px rgba(255, 0, 0, 0.6),
-    0 0 55px rgba(180, 0, 0, 0.5);
+    0 0 15px rgba(255, 0, 0, 0.8),
+    0 0 35px rgba(255, 0, 0, 0.6),
+    0 0 70px rgba(180, 0, 0, 0.6);
 
-  filter: blur(8px);
+  filter: blur(10px);
 
-  /* 🔥 ANIMACIÓN TIPO FUEGO / LATIDO */
-  animation: fuegoBorde 1.2s ease-in-out infinite;
+  animation: fuegoBorde 1.4s linear infinite;
 
-  /* Mantiene solo el borde */
+  /* deja solo el borde */
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
-
-  /* Opcional: aparece solo al hover (más pro) */
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
+/* 🔥 BOOST AL HOVER (EXPLOTA MÁS) */
 .producto:hover::before {
-  opacity: 1;
+  filter: blur(14px);
+  box-shadow:
+    0 0 25px rgba(255, 0, 0, 1),
+    0 0 60px rgba(255, 0, 0, 0.9),
+    0 0 120px rgba(255, 60, 60, 0.9);
 }
 
 /* ===============================
-   ANIMACIÓN DEL FUEGO
+   ANIMACIÓN FUEGO
 =============================== */
 @keyframes fuegoBorde {
   0%   { background-position: 0% 50%; }
@@ -497,6 +495,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
