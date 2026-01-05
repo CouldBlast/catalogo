@@ -12,6 +12,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
 
 <style>
+
+
+  /* ===== BARRA DE FILTROS ===== */
+.filtros-barra {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 25px auto;
+}
+
+.filtro-btn {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.filtro-btn.active,
+.filtro-btn:hover {
+  background: red;
+  border-color: red;
+}
+
+/* ===== BARRA UTILIDADES ===== */
+.barra-utilidades {
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.tallas-mini {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.barra-utilidades input {
+  max-width: 220px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+/* MÓVIL */
+@media (max-width: 600px) {
+  .barra-utilidades {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 :root {
   --rojo: #ff0000;
   --negro: #0b0b0b;
@@ -285,39 +342,23 @@ h1.section {
     <img src="./imagenes/bannerdeinicio.png" alt="Banner Could Blast" />
     <div class="texto-fuego"><span id="texto-rotativo"></span></div>
   </div>
-<!-- ======= FILTROSSS ======= -->
-  <div class="wrap">
-<div class="filtros">
+<!-- FILTROS (fila completa) -->
+<div class="filtros filtros-barra">
   <button class="filtro-btn active" data-filter="todos">Todos</button>
-  <button class="filtro-btn" data-filter="gorras">Gorras</button>
   <button class="filtro-btn" data-filter="nike-bajos">Nike Bajos</button>
   <button class="filtro-btn" data-filter="nike-altos">Nike Altos</button>
-  <button class="filtro-btn" data-filter="otras">otras </button>
+  <button class="filtro-btn" data-filter="gorras">Gorras</button>
+  <button class="filtro-btn" data-filter="otras">Otras</button>
 </div>
-    <!-- ======= TALLAS + CONTACTO ======= -->
-    <div class="mensaje-tallas">
-      <p><strong>Puedes corroborar tus tallas aquí:</strong></p>
-      <ul>
-        <li>36 → 23.5 cm</li>
-        <li>37 → 23.5 cm</li>
-        <li>38 → 24 cm</li>
-        <li>39 → 24.5 cm</li>
-        <li>40 → 25 cm</li>
-        <li>41 → 26 cm</li>
-        <li>42 → 26.5 cm</li>
-        <li>43 → 27.5 cm</li>
-        <li>44 → 28 cm</li>
-      </ul>
-      <a href="https://wa.me/50238866550" target="_blank" rel="noopener">
-        <strong>ORDENA AL:</strong> Tel 3886 6550
-      </a>
-    </div>
-    <!-- ======= BUSCADOR ======= -->
-    <div class="buscador-box">
-      <h3 class="titulo-buscador">Puedes buscar acá el par de tu talla</h3>
-      <input type="text" id="buscador" placeholder="Ingresa tu talla (ej. 36...)" />
-      <div id="errorTalla"></div>
-    </div>
+
+<!-- TALLAS + BUSCADOR (una sola fila) -->
+<div class="barra-utilidades">
+  <div class="tallas-mini">
+    <strong>Tallas:</strong> 36→22.5 | 37→23.5 | 38→24 | 39→24.5 | 40→25 | 41→26| 42→26.5| 43→27.5
+  </div>
+
+  <input type="text" id="buscador" placeholder="Buscar por talla (ej. 40)">
+</div>
 
  <!-- ======= GORRAS ======= -->
 <h1 class="section">Gorras Urbanas</h1>
@@ -486,6 +527,7 @@ document.querySelectorAll('.producto').forEach(card=> io.observe(card));
     
 </body>
 </html>
+
 
 
 
