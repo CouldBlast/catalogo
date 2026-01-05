@@ -321,19 +321,23 @@ footer {
 
 /* Capa animada */
 .producto::before {
-  content: "";
+ filter: blur(2px);
+   content: "";
   position: absolute;
-  inset: 0;
+  inset: -2px;
   border-radius: var(--radius);
   padding: 2px;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,0,0,.9),
-    transparent
-  );
+   
+ 
+   background: linear-gradient(
+  120deg,
+  rgb(255,0,0),      /* rojo intenso */
+  rgb(255,80,0),     /* naranja */
+  rgb(255,150,0),    /* naranja claro */
+  rgb(255,0,0)       /* vuelve al rojo */
+);
   background-size: 300% 300%;
-  animation: bordeRojo 3s linear infinite;
+  animation: fuegoBorde 3s linear infinite;
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -342,11 +346,11 @@ footer {
 }
 
 /* Animación */
-@keyframes bordeRojo {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
+@keyframes fuegoBorde {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-
    
 </style>
 
@@ -470,6 +474,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
