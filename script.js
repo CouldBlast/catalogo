@@ -1,56 +1,108 @@
-// ===== CARGA DE TENIS DESDE JSON =====
-fetch('productos.json')
-  .then(res => res.json())
-  .then(productos => {
-    const contenedor = document.getElementById('catalogo-tenis');
+// ===============================
+// TEXTO ROTATIVO DEL BANNER
+// ===============================
+const frases = ["🔥 Nuevos modelos", "🔥 Edición limitada", "🔥 Estilo urbano", "🔥 Solo aquí"];
+let indice = 0;
 
-    productos.forEach((p, i) => {
-      contenedor.innerHTML += `
-        <div class="producto"
-             data-tallas="${p.tallas.join(',')}"
-             data-categoria="${p.categoria}">
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <div class="info">
-            <h2>${p.nombre}</h2>
-            <p>Q${p.precio}</p>
-            <select onchange="cambiarTalla(this, 'talla${i}')">
-              <option value="">Verifica tallas disponibles</option>
-              ${p.tallas.map(t => `<option value="${t}">${t}</option>`).join("")}
-            </select>
-            <div class="talla-seleccionada" id="talla${i}">Talla: --</div>
-          </div>
-        </div>
-      `;
-    });
+function cambiarTexto() {
+  const texto = document.getElementById("texto-rotativo");
+  if (!texto) return;
+  texto.textContent = frases[indice];
+  indice = (indice + 1) % frases.length;
+}
 
-    document.querySelectorAll('.producto').forEach(card => io.observe(card));
+cambiarTexto();
+setInterval(cambiarTexto, 2000);
 
-    // 👇 ACTIVAR FILTROS DESPUÉS DE CREAR LOS TENIS
-    activarFiltros();
+// ===============================
+// FILTROS POR CATEGORÍA + SCROLL
+// ===============================
+const botonesFiltro = document.querySelectorAll(".filtro-btn");
+
+function filtrarProductos(categoria) {
+  const productos = document.querySelectorAll(".producto");
+
+  productos.forEach(prod => {
+    const cat = prod.dataset.categoria;
+
+    if (categoria === "todos" || cat === categoria) {
+      prod.style.display = "block";
+      prod.classList.remove("visible");
+      setTimeout(() => prod.classList.add("visible"), 50);
+    } else {
+      prod.style.display = "none";
+    }
   });
+}
 
+botonesFiltro.forEach(btn => {
+  btn.addEventListener("click", () => {
+    botonesFiltro.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
 
-// ===== FUNCIÓN DE FILTROS (GLOBAL) =====
-function activarFiltros() {
-  const botones = document.querySelectorAll(".filtro-btn");
+    const categoria = btn.dataset.filter;
+    filtrarProductos(categoria);
 
-  botones.forEach(btn => {
-    btn.addEventListener("click", () => {
+    // Scroll automático
+    const destino =
+      categoria === "gorras"
+        ? document.querySelector(".catalogo-gorras")
+        : document.getElementById("catalogo-tenis");
 
-      botones.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+    destino?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
 
-      const filtro = btn.dataset.filter;
+// ===============================
+// BUSCADOR POR TALLA
+// ===============================
+const buscador = document.getElementById("buscador");
+const errorTalla = document.getElementById("errorTalla");
 
-      document.querySelectorAll(".producto").forEach(prod => {
-        const categoria = prod.dataset.categoria;
+if (buscador) {
+  buscador.addEventListener("input", function () {
+    const valor = this.value.trim();
 
-        if (filtro === "todos" || categoria === filtro) {
-          prod.style.display = "block";
-        } else {
-          prod.style.display = "none";
-        }
-      });
+    if (!/^\d*$/.test(valor)) {
+      errorTalla.textContent = "Solo se permiten números";
+      return;
+    }
+
+    errorTalla.textContent = "";
+
+    document.querySelectorAll(".producto").forEach(p => {
+      const tallas = p.dataset.tallas || "";
+      p.style.display =
+        valor === "" || tallas.includes(valor)
+          ? "block"
+          : "none";
     });
   });
 }
+
+// ===============================
+// MOSTRAR TALLA SELECCIONADA
+// ===============================
+function cambiarTalla(select, id) {
+  const div = document.getElementById(id);
+  if (div) {
+    div.textContent = select.value
+      ? "Talla: " + select.value
+      : "Talla: --";
+  }
+}
+window.cambiarTalla = cambiarTalla;
+
+// ===============================
+// ANIMACIÓN AL APARECER
+// ===============================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll(".producto").forEach(card => observer.observe(card));
+
