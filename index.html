@@ -312,64 +312,50 @@ footer {
 }
 
 /* ===============================
-   FUEGO ROJO INTENSO – SIEMPRE VISIBLE
+   FUEGO ROJO INTENSO – PRODUCTOS
 =============================== */
 .producto {
   position: relative;
-  overflow: hidden;
+  background: rgba(20,20,20,.95);
+  border-radius: var(--radius);
+  overflow: visible;
 }
 
-/* FUEGO BASE (SIEMPRE ACTIVO) */
-.producto::before {
+/* Aura de fuego */
+.producto::after {
   content: "";
   position: absolute;
-  inset: -12px;              /* qué tan lejos sale el fuego */
-  border-radius: var(--radius);
-  pointer-events: none;
+  inset: -14px;
+  border-radius: inherit;
+  z-index: -1;
 
   background: linear-gradient(
     120deg,
-    rgb(120, 0, 0),
+    rgb(160, 0, 0),
     rgb(255, 0, 0),
-    rgb(255, 40, 40),
+    rgb(255, 60, 0),
     rgb(255, 0, 0),
-    rgb(120, 0, 0)
+    rgb(160, 0, 0)
   );
 
   background-size: 400% 400%;
+  animation: fuegoRojo 2.5s linear infinite;
 
-  /* 🔥 BRILLO BASE (VISIBLE SIN HOVER) */
-  box-shadow:
-    0 0 15px rgba(255, 0, 0, 0.8),
-    0 0 35px rgba(255, 0, 0, 0.6),
-    0 0 70px rgba(180, 0, 0, 0.6);
-
-  filter: blur(10px);
-
-  animation: fuegoBorde 1.4s linear infinite;
-
-  /* deja solo el borde */
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
+  filter: blur(12px);
+  opacity: 0.9;
 }
 
-/* 🔥 BOOST AL HOVER (EXPLOTA MÁS) */
-.producto:hover::before {
-  filter: blur(14px);
-  box-shadow:
-    0 0 25px rgba(255, 0, 0, 1),
-    0 0 60px rgba(255, 0, 0, 0.9),
-    0 0 120px rgba(255, 60, 60, 0.9);
+/* 🔥 Intensifica al pasar mouse / tocar */
+.producto:hover::after {
+  filter: blur(20px);
+  opacity: 1;
+  animation-duration: 1.2s;
 }
 
-/* ===============================
-   ANIMACIÓN FUEGO
-=============================== */
-@keyframes fuegoBorde {
+/* Animación fuego */
+@keyframes fuegoRojo {
   0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 60%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
    
@@ -495,6 +481,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
