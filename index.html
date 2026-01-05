@@ -71,13 +71,22 @@ body {
 .texto-fuego span {
   font-family: 'Luckiest Guy', cursive;
   font-size: clamp(20px, 6vw, 48px);
-  color:  #1e90ff;
+  color: #00bfff;
   text-shadow:
-    0 0 6px #ff6600,
-    0 0 12px #ff3300,
-    0 0 24px #ff0000,
-    0 0 48px #ff6600;
-  animation: fuego 1.5s infinite alternate;
+    0 0 6px #00bfff,
+    0 0 12px #1ec8ff,
+    0 0 24px #3fdcff,
+    0 0 40px #00bfff;
+  animation: fuegoAzul 1.5s infinite alternate;
+}
+
+@keyframes fuegoAzul {
+  0% {
+    text-shadow: 0 0 6px #00bfff, 0 0 12px #1ec8ff;
+  }
+  100% {
+    text-shadow: 0 0 10px #3fdcff, 0 0 30px #00bfff;
+  }
 }
 
 @keyframes fuego {
@@ -423,6 +432,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
