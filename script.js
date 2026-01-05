@@ -20,7 +20,7 @@ if (textoBanner) {
 }
 
 /* ======================================================
-   OBSERVER (se usa luego del fetch)
+   OBSERVER (animación aparición)
 ====================================================== */
 const observer = new IntersectionObserver(
   entries => {
@@ -34,7 +34,7 @@ const observer = new IntersectionObserver(
 );
 
 /* ======================================================
-   CARGA DE TENIS DESDE JSON
+   CARGA DE PRODUCTOS DESDE JSON
 ====================================================== */
 fetch("productos.json")
   .then(res => res.json())
@@ -48,7 +48,7 @@ fetch("productos.json")
       contenedor.innerHTML += `
         <div class="producto"
              data-categoria="${p.categoria}"
-             data-tallas="${p.tallas?.join(",") || ""}">
+             data-tallas="${p.tallas ? p.tallas.join(",") : ""}">
           
           <img src="${p.imagen}" alt="${p.nombre}">
           
@@ -58,9 +58,11 @@ fetch("productos.json")
 
             <select onchange="cambiarTalla(this, 'talla${i}')">
               <option value="">Verifica disponibilidad</option>
-              ${p.tallas
-                ? p.tallas.map(t => `<option value="${t}">${t}</option>`).join("")
-                : `<option value="Unitalla">Unitalla</option>`}
+              ${
+                p.tallas
+                  ? p.tallas.map(t => `<option value="${t}">${t}</option>`).join("")
+                  : `<option value="Unitalla">Unitalla</option>`
+              }
             </select>
 
             <div class="talla-seleccionada" id="talla${i}">Talla: --</div>
@@ -69,7 +71,6 @@ fetch("productos.json")
       `;
     });
 
-    // 👇 OBSERVAR PRODUCTOS DESPUÉS DE CREARLOS
     document.querySelectorAll(".producto").forEach(p => observer.observe(p));
   });
 
@@ -90,42 +91,33 @@ window.cambiarTalla = cambiarTalla;
 /* ======================================================
    FILTRO POR CATEGORÍA + SCROLL
 ====================================================== */
-const botonesFiltro = document.querySelectorAll(".filtro-btn");
-
-botonesFiltro.forEach(btn => {
+document.querySelectorAll(".filtro-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    botonesFiltro.forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
     const filtro = btn.dataset.filter;
-    const productos = document.querySelectorAll(".producto");
 
-    productos.forEach(prod => {
+    document.querySelectorAll(".producto").forEach(prod => {
       const categoria = prod.dataset.categoria;
       prod.style.display =
-        filtro === "todos" || categoria === filtro
-          ? "block"
-          : "none";
+        filtro === "todos" || categoria === filtro ? "block" : "none";
     });
 
-    // Scroll automático
+    // Scroll inteligente
     if (filtro === "gorras") {
-      document
-        .querySelector(".catalogo-gorras")
-        ?.scrollIntoView({ behavior: "smooth" });
+      document.querySelector(".catalogo-gorras")?.scrollIntoView({ behavior: "smooth" });
     } else {
-      document
-        .getElementById("catalogo-tenis")
-        ?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("catalogo-tenis")?.scrollIntoView({ behavior: "smooth" });
     }
   });
 });
 
 /* ======================================================
-   BUSCADOR POR TALLA (VALIDADO + SIN SCROLL PREMATURO)
+   BUSCADOR POR TALLA (100% CONTROLADO)
 ====================================================== */
 const inputBuscador = document.getElementById("buscador");
-const mensajeError = document.getElementById("errorTalla"); // crea este div en HTML
+const errorTalla = document.getElementById("errorTalla");
 
 if (inputBuscador) {
   inputBuscador.addEventListener("input", () => {
@@ -133,25 +125,24 @@ if (inputBuscador) {
     const productos = document.querySelectorAll(".producto");
     let hayResultados = false;
 
-    // 🔴 No permitir letras
+    // ❌ Bloquear letras
     if (!/^\d*$/.test(valor)) {
       inputBuscador.value = valor.replace(/\D/g, "");
+      if (errorTalla) errorTalla.textContent = "❌ Solo se permiten números";
       return;
     }
 
-    // Limpiar mensaje
-    if (mensajeError) mensajeError.textContent = "";
+    if (errorTalla) errorTalla.textContent = "";
 
     productos.forEach(prod => {
       const tallas = prod.dataset.tallas;
 
-      // Gorras no participan
+      // Gorras fuera del buscador
       if (!tallas) {
         prod.style.display = "none";
         return;
       }
 
-      // Mostrar todo si input vacío
       if (valor === "") {
         prod.style.display = "block";
         return;
@@ -165,20 +156,30 @@ if (inputBuscador) {
       }
     });
 
-    // ❌ NO SCROLL si solo hay 1 dígito
+    // ❌ No scroll si no hay 2 dígitos
     if (valor.length < 2) return;
 
-    // ❌ NO SCROLL si no hay resultados
+    // ❌ No scroll si no hay resultados
     if (!hayResultados) {
-      if (mensajeError) {
-        mensajeError.textContent = "❌ No hay resultados para esa talla";
-      }
+      if (errorTalla) errorTalla.textContent = "❌ No hay resultados para esa talla";
       return;
     }
 
-    // ✅ SCROLL SOLO CUANDO TODO ES CORRECTO
+    // ✅ Scroll solo cuando TODO es válido
     document
       .getElementById("catalogo-tenis")
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
+
+/* ======================================================
+   ANIMACIÓN EXTRA (hover + click)
+====================================================== */
+document.addEventListener("click", e => {
+  const card = e.target.closest(".producto");
+  if (!card) return;
+
+  card.classList.add("pulse");
+  setTimeout(() => card.classList.remove("pulse"), 300);
+});
+
