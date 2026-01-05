@@ -122,40 +122,63 @@ botonesFiltro.forEach(btn => {
 });
 
 /* ======================================================
-   BUSCADOR POR TALLA (2 DÍGITOS + SCROLL)
+   BUSCADOR POR TALLA (VALIDADO + SIN SCROLL PREMATURO)
 ====================================================== */
 const inputBuscador = document.getElementById("buscador");
+const mensajeError = document.getElementById("errorTalla"); // crea este div en HTML
 
 if (inputBuscador) {
   inputBuscador.addEventListener("input", () => {
-    const valor = inputBuscador.value.trim();
+    let valor = inputBuscador.value.trim();
     const productos = document.querySelectorAll(".producto");
     let hayResultados = false;
+
+    // 🔴 No permitir letras
+    if (!/^\d*$/.test(valor)) {
+      inputBuscador.value = valor.replace(/\D/g, "");
+      return;
+    }
+
+    // Limpiar mensaje
+    if (mensajeError) mensajeError.textContent = "";
 
     productos.forEach(prod => {
       const tallas = prod.dataset.tallas;
 
-      // Gorras: solo se ocultan cuando hay búsqueda
+      // Gorras no participan
       if (!tallas) {
-        prod.style.display = valor ? "none" : "block";
+        prod.style.display = "none";
         return;
       }
 
-      if (!valor) {
+      // Mostrar todo si input vacío
+      if (valor === "") {
         prod.style.display = "block";
         return;
       }
 
-      const visible = tallas.includes(valor);
-      prod.style.display = visible ? "block" : "none";
-      if (visible) hayResultados = true;
+      if (tallas.split(",").includes(valor)) {
+        prod.style.display = "block";
+        hayResultados = true;
+      } else {
+        prod.style.display = "none";
+      }
     });
 
-    // Scroll SOLO si hay 2 dígitos y resultados
-    if (valor.length === 2 && hayResultados) {
-      document
-        .getElementById("catalogo-tenis")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // ❌ NO SCROLL si solo hay 1 dígito
+    if (valor.length < 2) return;
+
+    // ❌ NO SCROLL si no hay resultados
+    if (!hayResultados) {
+      if (mensajeError) {
+        mensajeError.textContent = "❌ No hay resultados para esa talla";
+      }
+      return;
     }
+
+    // ✅ SCROLL SOLO CUANDO TODO ES CORRECTO
+    document
+      .getElementById("catalogo-tenis")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
