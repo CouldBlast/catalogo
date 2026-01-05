@@ -75,7 +75,9 @@ body {
   align-items: flex-start;
   text-align: center;
 }
-.mensaje-tallas, .musica, .buscador-box {
+
+  
+.mensaje-tallas, .buscador-box {
   flex: 1 1 300px;
   background: rgba(15, 15, 15, 0.8);
   border-radius: 14px;
@@ -83,6 +85,8 @@ body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   min-width: 280px;
 }
+
+  
 .mensaje-tallas ul { list-style: none; padding: 0; margin: 10px 0; }
 .mensaje-tallas li { margin: 4px 0; }
 .buscador-box input {
@@ -308,16 +312,6 @@ h1.section {
         <strong>ORDENA AL:</strong> Tel 3886 6550
       </a>
     </div>
-
-    <!-- ======= MÚSICA ======= -->
-    <section class="musica">
-      <h2>Escucha nuestra música</h2>
-      <audio controls>
-        <source src="./Mi Musica/musica1.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-      </audio>
-    </section>
-
     <!-- ======= BUSCADOR ======= -->
     <div class="buscador-box">
       <h3 class="titulo-buscador">Puedes buscar acá el par de tu talla</h3>
@@ -492,6 +486,7 @@ document.querySelectorAll('.producto').forEach(card=> io.observe(card));
     
 </body>
 </html>
+
 
 
 
