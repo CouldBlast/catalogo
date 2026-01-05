@@ -321,7 +321,11 @@ footer {
 
 /* Capa animada */
 .producto::before {
- filter: blur(2px);
+   box-shadow:
+  0 0 10px rgba(255, 0, 0, 0.6),
+  0 0 20px rgba(255, 120, 0, 0.5),
+  0 0 35px rgba(255, 180, 0, 0.4);
+ filter: blur(8px);
    content: "";
   position: absolute;
   inset: -8px;
@@ -474,6 +478,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
