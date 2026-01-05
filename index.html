@@ -298,7 +298,52 @@ footer {
   margin-right: auto;
   display: block;
 }
-   
+   /* ===== BARRA UTILIDADES ===== */
+.barra-utilidades {
+  max-width: 1200px;
+  margin: 0 auto 25px;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Guía de tallas */
+.tallas-mini {
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+/* Buscador */
+.buscador-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buscador-titulo {
+  font-size: 0.8rem;
+  color: #cccccc;
+  margin-bottom: 6px;
+}
+
+.buscador-wrap input {
+  max-width: 220px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #111;
+  color: #ffffff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .barra-utilidades {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 </style>
 
 
@@ -421,6 +466,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
