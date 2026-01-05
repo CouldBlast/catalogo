@@ -403,91 +403,13 @@ footer {
 
 
 
-<script>
-// ===== FILTRO POR CATEGORÍA =====
-const botones = document.querySelectorAll(".filtro-btn");
-const productos = document.querySelectorAll(".producto");
 
-botones.forEach(btn => {
-  btn.addEventListener("click", () => {
-
-    botones.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const filtro = btn.dataset.filter;
-
-    productos.forEach(prod => {
-      const categoria = prod.dataset.categoria;
-
-      if (filtro === "todos" || categoria === filtro) {
-        prod.style.display = "block";
-      } else {
-        prod.style.display = "none";
-      }
-    });
-  });
-});
-
-
-  
-// ===== Texto rotativo del banner =====
-const frases = ["🔥 Nuevos modelos", "🔥 Edición limitada", "🔥 Estilo urbano","🔥 Solo aquí"];
-let i = 0;
-function cambiarTexto(){
-const t = document.getElementById("texto-rotativo");
-if(!t) return;
-t.textContent = frases[i];
-i = (i + 1) % frases.length;
-}
-cambiarTexto();
-setInterval(cambiarTexto, 2000);
-
-
-// ===== Buscador por talla (NO modifica rutas ni estructura) =====
-const buscador = document.getElementById("buscador");
-const errorTalla = document.getElementById("errorTalla");
-
-if(buscador){
-  buscador.addEventListener("input", function(){
-    const valor = this.value.trim();
-
-    if (!/^\d*$/.test(valor)) {
-      errorTalla.textContent = "Solo se permiten números";
-      return;
-    }
-
-    errorTalla.textContent = "";
-
-    document.querySelectorAll(".producto").forEach(p => {
-      const tallas = p.getAttribute("data-tallas") || "";
-      p.style.display = (valor === "" || tallas.includes(valor))
-        ? "block"
-        : "none";
-    });
-  });
-}
-
-
-// ===== Mostrar talla elegida (respeta tus IDs y selects) =====
-function cambiarTalla(selectObj, idTalla) {
-const valor = selectObj.value;
-const divTalla = document.getElementById(idTalla);
-if(divTalla) divTalla.textContent = valor ? "Talla: " + valor : "Talla: --";
-}
-window.cambiarTalla = cambiarTalla; // expone para los onChange inline
-
-
-//===== Animación aparición al hacer scroll (IntersectionObserver)=====
-const io = new IntersectionObserver((entries)=>{
-entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:.2});
-document.querySelectorAll('.producto').forEach(card=> io.observe(card));
-</script>
 
 <script src="script.js"></script>
     
 </body>
 </html>
+
 
 
 
