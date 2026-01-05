@@ -1,4 +1,6 @@
-// ================= TEXTO ROTATIVO DEL BANNER =================
+/* ======================================================
+   TEXTO ROTATIVO DEL BANNER
+====================================================== */
 const frases = [
   "🔥 Nuevos modelos",
   "🔥 Edición limitada",
@@ -6,107 +8,150 @@ const frases = [
   "🔥 Solo aquí"
 ];
 
-let i = 0;
-const texto = document.getElementById("texto-rotativo");
+let indiceTexto = 0;
+const textoBanner = document.getElementById("texto-rotativo");
 
-if (texto) {
-  texto.textContent = frases[0];
+if (textoBanner) {
+  textoBanner.textContent = frases[indiceTexto];
   setInterval(() => {
-    i = (i + 1) % frases.length;
-    texto.textContent = frases[i];
+    indiceTexto = (indiceTexto + 1) % frases.length;
+    textoBanner.textContent = frases[indiceTexto];
   }, 2000);
 }
 
-// ================= CARGA DE PRODUCTOS (TENIS) =================
-fetch('productos.json')
+/* ======================================================
+   CARGA DE TENIS DESDE JSON
+====================================================== */
+fetch("productos.json")
   .then(res => res.json())
-  .then(data => {
+  .then(productos => {
     const contenedor = document.getElementById("catalogo-tenis");
     if (!contenedor) return;
 
     contenedor.innerHTML = "";
 
-    data.forEach((p, i) => {
+    productos.forEach((p, i) => {
       contenedor.innerHTML += `
-        <div class="producto"
+        <div class="producto visible"
              data-categoria="${p.categoria}"
              data-tallas="${p.tallas.join(',')}">
+          
           <img src="${p.imagen}" alt="${p.nombre}">
+          
           <div class="info">
             <h2>${p.nombre}</h2>
             <p>Q${p.precio}</p>
-            <select onchange="cambiarTalla(this,'talla${i}')">
+
+            <select onchange="cambiarTalla(this, 'talla${i}')">
               <option value="">Verifica disponibilidad</option>
               ${p.tallas.map(t => `<option value="${t}">${t}</option>`).join("")}
             </select>
+
             <div class="talla-seleccionada" id="talla${i}">Talla: --</div>
           </div>
         </div>
       `;
     });
-
-    activarFiltros();
-    activarObserver();
   });
 
-// ================= FILTROS POR CATEGORÍA =================
-function activarFiltros() {
-  const botones = document.querySelectorAll(".filtro-btn");
+/* ======================================================
+   FUNCIÓN MOSTRAR TALLA SELECCIONADA
+====================================================== */
+function cambiarTalla(select, idTalla) {
+  const div = document.getElementById(idTalla);
+  if (!div) return;
 
-  botones.forEach(btn => {
-    btn.addEventListener("click", () => {
-      botones.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const filtro = btn.dataset.filter;
-
-      document.querySelectorAll(".producto").forEach(prod => {
-        const cat = prod.dataset.categoria;
-        prod.style.display =
-          filtro === "todos" || cat === filtro ? "block" : "none";
-      });
-    });
-  });
+  div.textContent = select.value
+    ? `Talla: ${select.value}`
+    : "Talla: --";
 }
 
-// ================= BUSCADOR POR TALLA =================
-const buscador = document.getElementById("buscador");
-const errorTalla = document.getElementById("errorTalla");
-
-if (buscador) {
-  buscador.addEventListener("input", () => {
-    const valor = buscador.value.trim();
-
-    if (!/^\d*$/.test(valor)) {
-      errorTalla.textContent = "Solo números";
-      return;
-    }
-
-    errorTalla.textContent = "";
-
-    document.querySelectorAll(".producto").forEach(p => {
-      const tallas = p.dataset.tallas || "";
-      p.style.display =
-        valor === "" || tallas.includes(valor) ? "block" : "none";
-    });
-  });
-}
-
-// ================= MOSTRAR TALLA =================
-function cambiarTalla(select, id) {
-  const div = document.getElementById(id);
-  if (div) div.textContent = select.value ? "Talla: " + select.value : "Talla: --";
-}
 window.cambiarTalla = cambiarTalla;
 
-// ================= ANIMACIÓN AL SCROLL =================
-function activarObserver() {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add("visible");
-    });
-  }, { threshold: 0.2 });
+/* ======================================================
+   FILTRO POR CATEGORÍA + SCROLL
+====================================================== */
+const botonesFiltro = document.querySelectorAll(".filtro-btn");
 
-  document.querySelectorAll(".producto").forEach(p => io.observe(p));
+botonesFiltro.forEach(btn => {
+  btn.addEventListener("click", () => {
+    botonesFiltro.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const filtro = btn.dataset.filter;
+    const productos = document.querySelectorAll(".producto");
+
+    productos.forEach(prod => {
+      const categoria = prod.dataset.categoria;
+      prod.style.display =
+        filtro === "todos" || categoria === filtro
+          ? "block"
+          : "none";
+    });
+
+    // Scroll automático según filtro
+    if (filtro === "gorras") {
+      document
+        .querySelector(".catalogo-gorras")
+        ?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      document
+        .getElementById("catalogo-tenis")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+});
+
+/* ======================================================
+   BUSCADOR POR TALLA (SOLO TENIS)
+====================================================== */
+const inputBuscador = document.getElementById("buscador");
+
+if (inputBuscador) {
+  inputBuscador.addEventListener("input", () => {
+    const valor = inputBuscador.value.trim();
+
+    const productos = document.querySelectorAll(".producto");
+
+    productos.forEach(prod => {
+      const tallas = prod.dataset.tallas;
+
+      // Si NO tiene tallas (gorras), se oculta
+      if (!tallas) {
+        prod.style.display = "none";
+        return;
+      }
+
+      // Si input vacío, mostrar todos los tenis
+      if (valor === "") {
+        prod.style.display = "block";
+        return;
+      }
+
+      prod.style.display = tallas.includes(valor)
+        ? "block"
+        : "none";
+    });
+
+    // Scroll automático al catálogo
+    document
+      .getElementById("catalogo-tenis")
+      ?.scrollIntoView({ behavior: "smooth" });
+  });
 }
 
+/* ======================================================
+   ANIMACIÓN AL APARECER (Intersection Observer)
+====================================================== */
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+document.querySelectorAll(".producto").forEach(p => observer.observe(p));
