@@ -310,6 +310,44 @@ footer {
     font-size: 22px;
   }
 }
+
+/* ===============================
+   BORDE ANIMADO ROJO (PRODUCTOS)
+=============================== */
+.producto {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa animada */
+.producto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,0,0,.9),
+    transparent
+  );
+  background-size: 300% 300%;
+  animation: bordeRojo 3s linear infinite;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Animación */
+@keyframes bordeRojo {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+   
 </style>
 
 </head>
@@ -432,6 +470,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
