@@ -298,21 +298,24 @@ footer {
   margin-right: auto;
   display: block;
 }
-   /* ===== BARRA UTILIDADES ===== */
+  /* ===== BARRA DE UTILIDADES (CENTRADA) ===== */
 .barra-utilidades {
   max-width: 1200px;
-  margin: 0 auto 25px;
+  margin: 20px auto 40px;
   padding: 10px 15px;
+
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  flex-direction: column;   /* 👈 vertical */
+  align-items: center;      /* 👈 centrado real */
+  text-align: center;
+  gap: 12px;
 }
 
 /* Guía de tallas */
 .tallas-mini {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #ffffff;
+  line-height: 1.5;
 }
 
 /* Buscador */
@@ -323,13 +326,13 @@ footer {
 }
 
 .buscador-titulo {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #cccccc;
   margin-bottom: 6px;
 }
 
 .buscador-wrap input {
-  max-width: 220px;
+  width: 220px;
   padding: 7px 12px;
   border-radius: 8px;
   border: 1px solid #444;
@@ -337,12 +340,8 @@ footer {
   color: #ffffff;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .barra-utilidades {
-    flex-direction: column;
-    text-align: center;
-  }
+.buscador-wrap input::placeholder {
+  color: #aaa;
 }
 </style>
 
@@ -366,13 +365,12 @@ footer {
 
 <!-- TALLAS + BUSCADOR (una sola fila) -->
 <div class="barra-utilidades">
-   
+  
   <div class="tallas-mini">
-     <strong>Guía de tallas:</strong>
+    <strong>Guía de tallas</strong><br>
     36→22.5 | 37→23.5 | 38→24 | 39→24.5 | 40→25 | 41→26 | 42→26.5 | 43→27.5
   </div>
 
- <!-- Buscador con título -->
   <div class="buscador-wrap">
     <span class="buscador-titulo">Aquí puedes buscar tu talla</span>
     <input type="text" id="buscador" placeholder="Ej. 38">
@@ -466,6 +464,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
