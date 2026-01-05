@@ -285,7 +285,19 @@ footer {
   }
 }
 
+/* === CENTRAR BUSCADOR REAL === */
+.buscador-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.buscador-box input {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
    
 </style>
 
@@ -309,12 +321,17 @@ footer {
 
 <!-- TALLAS + BUSCADOR (una sola fila) -->
 <div class="barra-utilidades">
+   
   <div class="tallas-mini">
-    <strong>Tallas:</strong> 36→22.5 | 37→23.5 | 38→24 | 39→24.5 | 40→25 | 41→ | 42→26.5 | 43→27.5
+     <strong>Guía de tallas:</strong>
+    36→22.5 | 37→23.5 | 38→24 | 39→24.5 | 40→25 | 41→26 | 42→26.5 | 43→27.5
   </div>
 
-  <input type="text" id="buscador" placeholder="Buscar por talla (ej. 40)">
-</div>
+ <!-- Buscador con título -->
+  <div class="buscador-wrap">
+    <span class="buscador-titulo">Aquí puedes buscar tu talla</span>
+    <input type="text" id="buscador" placeholder="Ej. 38">
+  </div>
 
  <!-- ======= GORRAS ======= -->
 <h1 class="section">Gorras Urbanas</h1>
@@ -404,6 +421,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
