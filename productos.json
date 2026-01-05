@@ -1,20 +1,24 @@
 [
   {
-    "nombre": "NIKE TRAVIS SCOOT PHANTOM",
+    "nombre": "NIKE TRAVIS SCOTT PHANTOM",
     "precio": 650,
     "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767404587/-3_z5itzh.jpg",
-    "tallas": [37,38,42]
+    "tallas": [37, 38, 42],
+    "categoria": "nike-bajos"
   },
   {
     "nombre": "Jordan 1 Travis",
     "precio": 580,
     "imagen": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
-    "tallas": [40,41]
+    "tallas": [40, 41],
+    "categoria": "nike-bajos"
   },
   {
     "nombre": "Adidas Samba",
     "precio": 600,
     "imagen": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
-    "tallas": [38]
+    "tallas": [38],
+    "categoria": "otras"
   }
 ]
+
