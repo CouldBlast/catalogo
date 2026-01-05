@@ -20,7 +20,7 @@ if (textoBanner) {
 }
 
 /* ======================================================
-   OBSERVER (animación aparición)
+   INTERSECTION OBSERVER (ANIMACIÓN DE PRODUCTOS)
 ====================================================== */
 const observer = new IntersectionObserver(
   entries => {
@@ -34,7 +34,7 @@ const observer = new IntersectionObserver(
 );
 
 /* ======================================================
-   CARGA DE PRODUCTOS DESDE JSON
+   CARGA DE TENIS DESDE JSON
 ====================================================== */
 fetch("productos.json")
   .then(res => res.json())
@@ -71,6 +71,7 @@ fetch("productos.json")
       `;
     });
 
+    // Activar animación
     document.querySelectorAll(".producto").forEach(p => observer.observe(p));
   });
 
@@ -91,33 +92,42 @@ window.cambiarTalla = cambiarTalla;
 /* ======================================================
    FILTRO POR CATEGORÍA + SCROLL
 ====================================================== */
-document.querySelectorAll(".filtro-btn").forEach(btn => {
+const botonesFiltro = document.querySelectorAll(".filtro-btn");
+
+botonesFiltro.forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
+    botonesFiltro.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
     const filtro = btn.dataset.filter;
+    const productos = document.querySelectorAll(".producto");
 
-    document.querySelectorAll(".producto").forEach(prod => {
+    productos.forEach(prod => {
       const categoria = prod.dataset.categoria;
       prod.style.display =
-        filtro === "todos" || categoria === filtro ? "block" : "none";
+        filtro === "todos" || categoria === filtro
+          ? "block"
+          : "none";
     });
 
-    // Scroll inteligente
+    // Scroll automático
     if (filtro === "gorras") {
-      document.querySelector(".catalogo-gorras")?.scrollIntoView({ behavior: "smooth" });
+      document
+        .querySelector(".catalogo-gorras")
+        ?.scrollIntoView({ behavior: "smooth" });
     } else {
-      document.getElementById("catalogo-tenis")?.scrollIntoView({ behavior: "smooth" });
+      document
+        .getElementById("catalogo-tenis")
+        ?.scrollIntoView({ behavior: "smooth" });
     }
   });
 });
 
 /* ======================================================
-   BUSCADOR POR TALLA (100% CONTROLADO)
+   BUSCADOR POR TALLA (FIX COMPLETO)
 ====================================================== */
 const inputBuscador = document.getElementById("buscador");
-const errorTalla = document.getElementById("errorTalla");
+const mensajeError = document.getElementById("errorTalla");
 
 if (inputBuscador) {
   inputBuscador.addEventListener("input", () => {
@@ -125,26 +135,30 @@ if (inputBuscador) {
     const productos = document.querySelectorAll(".producto");
     let hayResultados = false;
 
-    // ❌ Bloquear letras
+    // ❌ No permitir letras
     if (!/^\d*$/.test(valor)) {
       inputBuscador.value = valor.replace(/\D/g, "");
-      if (errorTalla) errorTalla.textContent = "❌ Solo se permiten números";
       return;
     }
 
-    if (errorTalla) errorTalla.textContent = "";
+    // Limpiar mensaje
+    if (mensajeError) mensajeError.textContent = "";
 
+    // 🔁 INPUT VACÍO → MOSTRAR TODO (TENIS + GORRAS)
+    if (valor === "") {
+      productos.forEach(prod => {
+        prod.style.display = "block";
+      });
+      return; // ⛔ sin scroll
+    }
+
+    // 🔍 BUSCAR SOLO TENIS
     productos.forEach(prod => {
       const tallas = prod.dataset.tallas;
 
-      // Gorras fuera del buscador
+      // Gorras fuera cuando se busca talla
       if (!tallas) {
         prod.style.display = "none";
-        return;
-      }
-
-      if (valor === "") {
-        prod.style.display = "block";
         return;
       }
 
@@ -156,30 +170,20 @@ if (inputBuscador) {
       }
     });
 
-    // ❌ No scroll si no hay 2 dígitos
+    // ❌ No scroll si solo 1 dígito
     if (valor.length < 2) return;
 
-    // ❌ No scroll si no hay resultados
+    // ❌ No hay resultados
     if (!hayResultados) {
-      if (errorTalla) errorTalla.textContent = "❌ No hay resultados para esa talla";
+      if (mensajeError) {
+        mensajeError.textContent = "❌ No hay resultados para esa talla";
+      }
       return;
     }
 
-    // ✅ Scroll solo cuando TODO es válido
+    // ✅ Scroll correcto
     document
       .getElementById("catalogo-tenis")
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
-
-/* ======================================================
-   ANIMACIÓN EXTRA (hover + click)
-====================================================== */
-document.addEventListener("click", e => {
-  const card = e.target.closest(".producto");
-  if (!card) return;
-
-  card.classList.add("pulse");
-  setTimeout(() => card.classList.remove("pulse"), 300);
-});
-
