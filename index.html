@@ -35,7 +35,12 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: radial-gradient(1200px 800px at 20% 10%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
+  background: radial-gradient(
+    1200px 800px at 20% 10%,
+    #1a1a1a 0%,
+    #0a0a0a 60%,
+    #000 100%
+  );
   color: var(--blanco);
   overflow-x: hidden;
 }
@@ -96,7 +101,7 @@ body {
   border-radius: 30px;
   cursor: pointer;
   font-weight: 600;
-  transition: .3s;
+  transition: all .3s ease;
 }
 
 .filtro-btn:hover,
@@ -107,55 +112,47 @@ body {
 }
 
 /* ===============================
-   TALLAS + BUSCADOR
+   BARRA UTILIDADES (GUÍA + BUSCADOR)
 =============================== */
-.wrap {
+.barra-utilidades {
   max-width: 1200px;
-  margin: 0 auto 40px;
+  margin: 20px auto 40px;
+  padding: 10px 15px;
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.mensaje-tallas,
-.buscador-box {
-  background: rgba(15,15,15,.9);
-  padding: 15px;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-  flex: 1 1 300px;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  gap: 12px;
 }
 
-.mensaje-tallas p,
-.mensaje-tallas li,
-.mensaje-tallas a {
-  color: #fff;
+.tallas-mini {
   font-size: .9rem;
-}
-
-.mensaje-tallas ul {
-  list-style: none;
-  margin-top: 8px;
-}
-
-.buscador-box h3 {
   color: #fff;
-  margin-bottom: 8px;
+  line-height: 1.5;
 }
 
-.buscador-box input {
-  width: 100%;
-  max-width: 260px;
-  padding: 8px 12px;
+.buscador-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buscador-titulo {
+  font-size: .85rem;
+  color: #ccc;
+  margin-bottom: 6px;
+}
+
+.buscador-wrap input {
+  width: 220px;
+  padding: 7px 12px;
   border-radius: 8px;
   border: 1px solid #444;
   background: #111;
   color: #fff;
 }
 
-.buscador-box input::placeholder {
+.buscador-wrap input::placeholder {
   color: #aaa;
 }
 
@@ -194,340 +191,8 @@ h1.section {
   box-shadow: var(--shadow);
   opacity: 0;
   transform: translateY(20px);
-  transition: .4s;
-}
-
-.producto.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.producto img {
-  width: 100%;
-  border-radius: 12px;
-}
-
-.info h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  color: #fff;
-  margin-top: 10px;
-}
-
-.producto p {
-  color: var(--dorado);
-  font-weight: 600;
-}
-
-.talla-seleccionada {
-  color: #fff;
-  font-size: .85rem;
-  margin-top: 6px;
-}
-
-/* SELECT */
-select {
-  background: #111;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 6px;
-}
-
-select option {
-  background: #111;
-  color: #fff;
-}
-
-/* ===============================
-   WHATSAPP
-=============================== */
-.wa-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background: #25D366;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  z-index: 1000;
-}
-
-/* ===============================
-   FOOTER
-=============================== */
-footer {
-  background: #0a0a0a;
-  padding: 20px;
-  text-align: center;
-  color: #ccc;
-  font-size: .9rem;
-}
-
-/* ===============================
-   RESPONSIVE
-=============================== */
-@media (max-width: 768px) {
-  .catalogo-gorras,
-  .catalogo-tenis {
-    grid-template-columns: repeat(2,1fr);
-  }
-}
-
-@media (max-width: 500px) {
-  .catalogo-gorras,
-  .catalogo-tenis {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* === CENTRAR BUSCADOR REAL === */
-.buscador-box {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buscador-box input {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-  /* ===== BARRA DE UTILIDADES (CENTRADA) ===== */
-.barra-utilidades {
-  max-width: 1200px;
-  margin: 20px auto 40px;
-  padding: 10px 15px;
-
-  display: flex;
-  flex-direction: column;   /* 👈 vertical */
-  align-items: center;      /* 👈 centrado real */
-  text-align: center;
-  gap: 12px;
-}
-
-/* Guía de tallas */
-.tallas-mini {
-  font-size: 0.9rem;
-  color: #ffffff;
-  line-height: 1.5;
-}
-
-/* Buscador */
-.buscador-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buscador-titulo {
-  font-size: 0.85rem;
-  color: #cccccc;
-  margin-bottom: 6px;
-}
-
-.buscador-wrap input {
-  width: 220px;
-  padding: 7px 12px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #111;
-  color: #ffffff;
-}
-
-.buscador-wrap input::placeholder {
-  color: #aaa;
-}
-
-   <style>
-/* ===============================
-   VARIABLES
-=============================== */
-:root {
-  --rojo: #ff0000;
-  --azul-fuego: #00bfff;
-  --azul-fuego-2: #3fdcff;
-  --negro: #0b0b0b;
-  --dorado: #ffd700;
-  --blanco: #ffffff;
-  --gris: #111318;
-  --radius: 16px;
-  --shadow: 0 10px 25px rgba(0,0,0,.35);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(1200px 800px at 20% 10%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
-  color: var(--blanco);
-  overflow-x: hidden;
-}
-
-/* ===============================
-   BANNER
-=============================== */
-.banner {
-  position: relative;
-  width: 100%;
-  border-bottom: 2px solid rgba(255,215,0,.2);
-}
-
-.banner img {
-  width: 100%;
-  display: block;
-}
-
-.texto-fuego {
-  position: absolute;
-  bottom: 14%;
-  width: 100%;
-  text-align: center;
-}
-
-.texto-fuego span {
-  font-family: 'Luckiest Guy', cursive;
-  font-size: clamp(22px, 6vw, 48px);
-  color: var(--azul-fuego);
-  text-shadow:
-    0 0 6px var(--azul-fuego),
-    0 0 16px var(--azul-fuego-2),
-    0 0 36px var(--azul-fuego);
-  animation: glowBlue 1.5s infinite alternate;
-}
-
-@keyframes glowBlue {
-  from { text-shadow: 0 0 6px var(--azul-fuego); }
-  to   { text-shadow: 0 0 28px var(--azul-fuego-2); }
-}
-
-/* ===============================
-   FILTROS
-=============================== */
-.filtros {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 30px auto;
-}
-
-.filtro-btn {
-  background: #111;
-  color: #fff;
-  border: 2px solid #333;
-  padding: 10px 18px;
-  border-radius: 30px;
+  transition: all .35s ease;
   cursor: pointer;
-  font-weight: 600;
-  transition: .3s;
-}
-
-.filtro-btn:hover,
-.filtro-btn.active {
-  background: var(--rojo);
-  border-color: var(--rojo);
-  box-shadow: 0 0 12px rgba(255,0,0,.6);
-}
-
-/* ===============================
-   TALLAS + BUSCADOR
-=============================== */
-.wrap {
-  max-width: 1200px;
-  margin: 0 auto 40px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.mensaje-tallas,
-.buscador-box {
-  background: rgba(15,15,15,.9);
-  padding: 15px;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-  flex: 1 1 300px;
-  text-align: center;
-}
-
-.mensaje-tallas p,
-.mensaje-tallas li,
-.mensaje-tallas a {
-  color: #fff;
-  font-size: .9rem;
-}
-
-.mensaje-tallas ul {
-  list-style: none;
-  margin-top: 8px;
-}
-
-.buscador-box h3 {
-  color: #fff;
-  margin-bottom: 8px;
-}
-
-.buscador-box input {
-  width: 100%;
-  max-width: 260px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #111;
-  color: #fff;
-}
-
-.buscador-box input::placeholder {
-  color: #aaa;
-}
-
-/* ===============================
-   TÍTULOS
-=============================== */
-h1.section {
-  text-align: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(26px, 3vw, 38px);
-  margin: 50px auto 25px;
-  color: var(--azul-fuego);
-  text-shadow: 0 0 18px rgba(0,191,255,.8);
-}
-
-/* ===============================
-   CATÁLOGOS
-=============================== */
-.catalogo-gorras,
-.catalogo-tenis {
-  max-width: 1200px;
-  margin: 0 auto 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap: 25px;
-}
-
-/* ===============================
-   PRODUCTOS
-=============================== */
-.producto {
-  background: rgba(20,20,20,.95);
-  border-radius: var(--radius);
-  padding: 15px;
-  text-align: center;
-  box-shadow: var(--shadow);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: .4s;
 }
 
 .producto.visible {
@@ -535,9 +200,18 @@ h1.section {
   transform: translateY(0);
 }
 
+.producto:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
 .producto img {
   width: 100%;
   border-radius: 12px;
+  transition: transform .35s ease;
+}
+
+.producto:hover img {
+  transform: scale(1.04);
 }
 
 .info h2 {
@@ -571,6 +245,14 @@ select option {
   color: #fff;
 }
 
+/* Focus accesible */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--azul-fuego);
+  box-shadow: 0 0 8px rgba(0,191,255,.6);
+}
+
 /* ===============================
    WHATSAPP
 =============================== */
@@ -588,6 +270,11 @@ select option {
   justify-content: center;
   font-size: 26px;
   z-index: 1000;
+  transition: transform .3s ease;
+}
+
+.wa-float:hover {
+  transform: scale(1.1);
 }
 
 /* ===============================
@@ -616,70 +303,14 @@ footer {
   .catalogo-tenis {
     grid-template-columns: 1fr;
   }
-}
 
-/* === CENTRAR BUSCADOR REAL === */
-.buscador-box {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buscador-box input {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-  /* ===== BARRA DE UTILIDADES (CENTRADA) ===== */
-.barra-utilidades {
-  max-width: 1200px;
-  margin: 20px auto 40px;
-  padding: 10px 15px;
-
-  display: flex;
-  flex-direction: column;   /* 👈 vertical */
-  align-items: center;      /* 👈 centrado real */
-  text-align: center;
-  gap: 12px;
-}
-
-/* Guía de tallas */
-.tallas-mini {
-  font-size: 0.9rem;
-  color: #ffffff;
-  line-height: 1.5;
-}
-
-/* Buscador */
-.buscador-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buscador-titulo {
-  font-size: 0.85rem;
-  color: #cccccc;
-  margin-bottom: 6px;
-}
-
-.buscador-wrap input {
-  width: 220px;
-  padding: 7px 12px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: #111;
-  color: #ffffff;
-}
-
-.buscador-wrap input::placeholder {
-  color: #aaa;
+  .wa-float {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
 }
 </style>
-
-</style>
-
 
 </head>
 
@@ -801,6 +432,7 @@ footer {
     
 </body>
 </html>
+
 
 
 
