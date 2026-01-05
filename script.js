@@ -20,6 +20,20 @@ if (textoBanner) {
 }
 
 /* ======================================================
+   OBSERVER (se usa luego del fetch)
+====================================================== */
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+/* ======================================================
    CARGA DE TENIS DESDE JSON
 ====================================================== */
 fetch("productos.json")
@@ -32,9 +46,9 @@ fetch("productos.json")
 
     productos.forEach((p, i) => {
       contenedor.innerHTML += `
-        <div class="producto visible"
+        <div class="producto"
              data-categoria="${p.categoria}"
-             data-tallas="${p.tallas.join(',')}">
+             data-tallas="${p.tallas?.join(",") || ""}">
           
           <img src="${p.imagen}" alt="${p.nombre}">
           
@@ -44,7 +58,9 @@ fetch("productos.json")
 
             <select onchange="cambiarTalla(this, 'talla${i}')">
               <option value="">Verifica disponibilidad</option>
-              ${p.tallas.map(t => `<option value="${t}">${t}</option>`).join("")}
+              ${p.tallas
+                ? p.tallas.map(t => `<option value="${t}">${t}</option>`).join("")
+                : `<option value="Unitalla">Unitalla</option>`}
             </select>
 
             <div class="talla-seleccionada" id="talla${i}">Talla: --</div>
@@ -52,10 +68,13 @@ fetch("productos.json")
         </div>
       `;
     });
+
+    // 👇 OBSERVAR PRODUCTOS DESPUÉS DE CREARLOS
+    document.querySelectorAll(".producto").forEach(p => observer.observe(p));
   });
 
 /* ======================================================
-   FUNCIÓN MOSTRAR TALLA SELECCIONADA
+   MOSTRAR TALLA SELECCIONADA
 ====================================================== */
 function cambiarTalla(select, idTalla) {
   const div = document.getElementById(idTalla);
@@ -89,7 +108,7 @@ botonesFiltro.forEach(btn => {
           : "none";
     });
 
-    // Scroll automático según filtro
+    // Scroll automático
     if (filtro === "gorras") {
       document
         .querySelector(".catalogo-gorras")
@@ -103,55 +122,40 @@ botonesFiltro.forEach(btn => {
 });
 
 /* ======================================================
-   BUSCADOR POR TALLA (SOLO TENIS)
+   BUSCADOR POR TALLA (2 DÍGITOS + SCROLL)
 ====================================================== */
 const inputBuscador = document.getElementById("buscador");
 
 if (inputBuscador) {
   inputBuscador.addEventListener("input", () => {
     const valor = inputBuscador.value.trim();
-
     const productos = document.querySelectorAll(".producto");
+    let hayResultados = false;
 
     productos.forEach(prod => {
       const tallas = prod.dataset.tallas;
 
-      // Si NO tiene tallas (gorras), se oculta
+      // Gorras: solo se ocultan cuando hay búsqueda
       if (!tallas) {
-        prod.style.display = "none";
+        prod.style.display = valor ? "none" : "block";
         return;
       }
 
-      // Si input vacío, mostrar todos los tenis
-      if (valor === "") {
+      if (!valor) {
         prod.style.display = "block";
         return;
       }
 
-      prod.style.display = tallas.includes(valor)
-        ? "block"
-        : "none";
+      const visible = tallas.includes(valor);
+      prod.style.display = visible ? "block" : "none";
+      if (visible) hayResultados = true;
     });
 
-    // Scroll automático al catálogo
-    document
-      .getElementById("catalogo-tenis")
-      ?.scrollIntoView({ behavior: "smooth" });
+    // Scroll SOLO si hay 2 dígitos y resultados
+    if (valor.length === 2 && hayResultados) {
+      document
+        .getElementById("catalogo-tenis")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 }
-
-/* ======================================================
-   ANIMACIÓN AL APARECER (Intersection Observer)
-====================================================== */
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-
-document.querySelectorAll(".producto").forEach(p => observer.observe(p));
