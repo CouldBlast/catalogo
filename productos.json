@@ -16,7 +16,21 @@
   {
     "nombre": "AIR JORDAN LOW VOODO",
     "precio": 600,
-    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767727066/sdsd_v4vrf6.webp",
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767727906/v_pzffx3.webp",
+    "tallas": [39],
+    "categoria": "nike-bajos"
+  },
+  {
+    "nombre": "NIKE SB JARRITOS",
+    "precio": 600,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767728022/85_dt2brz.jpg",
+    "tallas": [35,36],
+    "categoria": "nike-bajo"
+  },
+  {
+    "nombre": "AIR JORDAN LOW VOODO",
+    "precio": 600,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767727906/v_pzffx3.webp",
     "tallas": [39],
     "categoria": "nike-bajos"
   },
