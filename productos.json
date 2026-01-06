@@ -16,17 +16,26 @@
   {
     "nombre": "AIR JORDAN LOW VOODO",
     "precio": 600,
-    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767726587/77_dlxvsk.jpg",
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767727066/sdsd_v4vrf6.webp",
     "tallas": [39],
-    "categoria": "otras"
+    "categoria": "nike-bajos"
   },
+
+
+
+
+
+
+
+
+  
 {
     "nombre": "AIR JORDAN LOW VOODO",
     "precio": 600,
     "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767726587/77_dlxvsk.jpg",
     "tallas": [39],
-    "categoria": "nike-bajos"
-  },
+    "categoria": "otras"
+  }
 
 
 
