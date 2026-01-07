@@ -84,31 +84,31 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
+    "nombre": "NIKE SB APRIL",
+    "precio": 450,
     "imagen": "",
-    "tallas": [],
+    "tallas": [43],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": "NIKE SB RAYSA LEAL",
+    "precio": 650,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755916/LEAL_t8ssxv.webp",
+    "tallas": [42],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": "NIKE PARRA",
+    "precio": 650,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755968/71_vex5v4.jpg",
+    "tallas": [41],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": "NIKE SB ALBINO",
+    "precio": 650,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756066/ALBINO_hlxs55.jpg",
+    "tallas": [42],
     "categoria": "nike-bajos"
   },
   {
