@@ -89,6 +89,13 @@
     "imagen": "",
     "tallas": [43],
     "categoria": "nike-bajos"
+  }, 
+  {
+    "nombre": "NIKE TRAVIS SCOOT",
+    "precio": 600,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756642/BESH_dycvzk.jpg",
+    "tallas": [40,41,42],
+    "categoria": "nike-bajos"
   },
   {
     "nombre": "NIKE SB RAYSA LEAL",
@@ -112,17 +119,10 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
+    "nombre": "Nike SB Dunk Low de There Skateboards",
     "precio": 600,
-    "imagen": "",
-    "tallas": [],
-    "categoria": "nike-bajos"
-  },
-  {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756462/THERE_smqk9s.jpg",
+    "tallas": [41,42],
     "categoria": "nike-bajos"
   },
   {
