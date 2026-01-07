@@ -70,17 +70,17 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": "NIKE SB CIVILIST",
+    "precio": 399,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767754271/86_ws6jbh.jpg",
+    "tallas": [37],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": "NIKE DUNK NY VS NY",
+    "precio": 399,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767754884/NY_k4fzfh.jpg",
+    "tallas": [42,43,44],
     "categoria": "nike-bajos"
   },
   {
