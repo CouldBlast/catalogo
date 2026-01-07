@@ -86,7 +86,7 @@
   {
     "nombre": "NIKE SB APRIL",
     "precio": 450,
-    "imagen": "",
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755781/APRILL_yco7ua.jpg",
     "tallas": [43],
     "categoria": "nike-bajos"
   }, 
@@ -133,10 +133,10 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": "NIKE SB X TRAVIS",
+    "precio": 650,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755860/lazo_u1y6ik.jpg",
+    "tallas": [44],
     "categoria": "nike-bajos"
   },
   {
