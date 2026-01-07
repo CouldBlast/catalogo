@@ -126,10 +126,10 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
+    "nombre": "NIKE SIEMPRE FAMILIA ",
     "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756827/SIEMPRE_ogf53g.jpg",
+    "tallas": [41,42],
     "categoria": "nike-bajos"
   },
   {
