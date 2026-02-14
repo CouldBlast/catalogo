@@ -24,7 +24,7 @@
     "nombre": "NIKE SB JARRITOS",
     "precio": 650,
     "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767728022/85_dt2brz.jpg",
-    "tallas": [35,36],
+    "tallas": [35,36,39,40,41],
     "categoria": "nike-bajos"
   },
   {
@@ -63,10 +63,10 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": "AIR JORDAN LOW BLACK",
-    "precio": 650,
-    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767754171/black_t6rmrg.jpg",
-    "tallas": [38],
+    "nombre": "DOLCE & GABBANA",
+    "precio": 750,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771039848/dolce_aahsqk.jpg",
+    "tallas": [40,41,42,44],
     "categoria": "nike-bajos"
   },
   {
@@ -94,7 +94,7 @@
     "nombre": "NIKE TRAVIS SCOOT",
     "precio": 600,
     "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756642/BESH_dycvzk.jpg",
-    "tallas": [40,41,42],
+    "tallas": [41,42],
     "categoria": "nike-bajos"
   },
   {
@@ -140,10 +140,10 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
+    "nombre": "NIKE TRAVIS MOCA ",
     "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040107/DC_yks85o.jpg",
+    "tallas": [42],
     "categoria": "nike-bajos"
   },
   {
