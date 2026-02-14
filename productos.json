@@ -189,17 +189,17 @@
     "categoria": "nike-altos"
   },
   {
-    "nombre": " ",
+    "nombre": "JORDAN 1 VOODO",
     "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771043314/vodoj_itrgoy.jpg",
+    "tallas": [41,42,43],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": " JORDAN 1 CHAROL AZUL",
+    "precio": 550,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771044026/80_esgro8.jpg",
+    "tallas": [38],
     "categoria": "nike-bajos"
   },
   {
