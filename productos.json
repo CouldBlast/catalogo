@@ -168,25 +168,25 @@
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
+    "nombre": "NIKE TRAVIS LOW FRAGMENT ",
     "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771041548/TRAVISBLUE_jjyqal.jpg",
+    "tallas": [42],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
-    "categoria": "nike-bajos"
+    "nombre": " JORDAN 1 PALOMINO",
+    "precio": 550,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771041894/54_vfjy3t.jpg",
+    "tallas": [36],
+    "categoria": "nike-altos"
   },
   {
-    "nombre": " ",
+    "nombre": " Jordan 1 Retro High  A Ma Maniére",
     "precio": 600,
-    "imagen": "",
-    "tallas": [],
-    "categoria": "nike-bajos"
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771041055/jamam_udj0no.jpg",
+    "tallas": [42],
+    "categoria": "nike-altos"
   },
   {
     "nombre": " ",
