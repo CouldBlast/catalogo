@@ -142,29 +142,29 @@
   {
     "nombre": "NIKE TRAVIS MOCA ",
     "precio": 600,
-    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040107/DC_yks85o.jpg",
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040082/travislow_zi6l5b.jpg",
     "tallas": [42],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": "NIKE SB DAY SANPATRICIO",
+    "precio": 450,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040121/57_nicwtc.jpg",
+    "tallas": [40],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": " NIKE DUNK STUSSY",
+    "precio": 550,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040970/34_ha2rlz.jpg",
+    "tallas": [41,42],
     "categoria": "nike-bajos"
   },
   {
-    "nombre": " ",
-    "precio": 600,
-    "imagen": "",
-    "tallas": [],
+    "nombre": " NIKE DUNK ",
+    "precio": 450,
+    "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040999/OS_dbj00l.jpg",
+    "tallas": [40],
     "categoria": "nike-bajos"
   },
   {
