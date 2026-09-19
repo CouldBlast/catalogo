@@ -121,6 +121,13 @@
     background:#0e1a26; color:var(--azul); border:1px solid #1c3a52; border-radius:8px;
     padding:8px 12px; cursor:pointer; font-size:.8rem;
   }
+  .orden-botones{ display:flex; flex-direction:column; gap:6px; }
+  .orden-flechas{ display:flex; gap:6px; }
+  .btn-orden{
+    background:#1a1400; color:var(--dorado); border:1px solid #4a3c00; border-radius:8px;
+    padding:6px 10px; cursor:pointer; font-size:.78rem; font-weight:600; flex:1;
+  }
+  .btn-orden:hover{ background:#332800; }
   input[type=file]{ display:none; }
 
   #vacio{ text-align:center; color:#888; padding:30px; }
@@ -264,9 +271,12 @@ async function guardarProducto(){
 
   try{
     const url = await subirFotoACloudinary(archivo);
+    const ordenMaximo = todosLosProductos.reduce((max, p) => Math.max(max, p.orden ?? 0), 0);
+
     await db.collection('productos').add({
       nombre, precio, categoria, tallas,
       imagen: url,
+      orden: ordenMaximo + 1,
       creado: firebase.firestore.FieldValue.serverTimestamp()
     });
 
@@ -320,11 +330,63 @@ function renderizarLista(){
           <div class="chips">${chips}</div>
         </div>
         <div class="acciones-card">
+          <div class="orden-botones">
+            <button class="btn-orden" onclick="moverAlInicio('${p.id}')" title="Mandar al inicio del catálogo">⏫ Al inicio</button>
+            <div class="orden-flechas">
+              <button class="btn-orden" onclick="moverArriba('${p.id}')" title="Subir un lugar">▲</button>
+              <button class="btn-orden" onclick="moverAbajo('${p.id}')" title="Bajar un lugar">▼</button>
+            </div>
+          </div>
           <button class="btn-cambiar-foto" onclick="document.getElementById('cambiarFoto-${p.id}').click()">Cambiar foto</button>
           <button class="btn-eliminar" onclick="eliminarProducto('${p.id}','${p.nombre.replace(/'/g,"\\'")}')">Eliminar</button>
         </div>
       </div>`;
   }).join('');
+}
+
+/* ---------- Orden manual del catálogo ---------- */
+function moverArriba(id){
+  const i = todosLosProductos.findIndex(p => p.id === id);
+  if (i <= 0) return; // ya está de primero
+  intercambiarOrden(todosLosProductos[i], todosLosProductos[i - 1]);
+}
+
+function moverAbajo(id){
+  const i = todosLosProductos.findIndex(p => p.id === id);
+  if (i === -1 || i >= todosLosProductos.length - 1) return; // ya está de último
+  intercambiarOrden(todosLosProductos[i], todosLosProductos[i + 1]);
+}
+
+function intercambiarOrden(a, b){
+  const ordenA = a.orden ?? 0;
+  const ordenB = b.orden ?? 0;
+  const batch = db.batch();
+  batch.update(db.collection('productos').doc(a.id), { orden: ordenB });
+  batch.update(db.collection('productos').doc(b.id), { orden: ordenA });
+  batch.commit();
+}
+
+function moverAlInicio(id){
+  const minimo = todosLosProductos.reduce((min, p) => Math.min(min, p.orden ?? 0), 0);
+  db.collection('productos').doc(id).update({ orden: minimo - 1 });
+}
+
+/* Los productos que se importaron antes de tener esta función no traen
+   el campo "orden" — la primera vez que se abre el panel, se les asigna
+   uno automáticamente (según el orden en que ya aparecían) para que no
+   desaparezcan del catálogo ni queden fuera de lugar. */
+async function sanarOrdenSiHaceFalta(productos){
+  const sinOrden = productos.filter(p => p.orden === undefined);
+  if (sinOrden.length === 0) return false;
+
+  let siguiente = productos.reduce((max, p) => Math.max(max, p.orden ?? 0), 0) + 1;
+  const batch = db.batch();
+  sinOrden.forEach(p => {
+    batch.update(db.collection('productos').doc(p.id), { orden: siguiente });
+    siguiente++;
+  });
+  await batch.commit();
+  return true;
 }
 
 function actualizarCampo(id, campo, valor){
@@ -355,9 +417,20 @@ function eliminarProducto(id, nombre){
 }
 
 /* ---------- Escuchar cambios en tiempo real ---------- */
+let sanandoOrden = false;
+
 function escucharProductos(){
-  db.collection('productos').orderBy('nombre').onSnapshot(snapshot => {
-    todosLosProductos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+  db.collection('productos').onSnapshot(async snapshot => {
+    const productos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    if (!sanandoOrden){
+      sanandoOrden = true;
+      const seArreglaron = await sanarOrdenSiHaceFalta(productos);
+      sanandoOrden = false;
+      if (seArreglaron) return; // el propio snapshot se va a volver a disparar con el orden ya puesto
+    }
+
+    todosLosProductos = productos.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0));
     renderizarLista();
   }, err => {
     document.getElementById('lista-productos').innerHTML =
