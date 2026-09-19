@@ -34,46 +34,63 @@ const observer = new IntersectionObserver(
 );
 
 /* ======================================================
-   CARGA DE TENIS DESDE JSON
+   CARGA DEL CATÁLOGO DESDE FIREBASE (antes era productos.json)
+   Se actualiza solo, en tiempo real, cuando editas algo
+   desde admin.html — sin recargar la página y sin GitHub.
 ====================================================== */
-fetch("productos.json")
-  .then(res => res.json())
-  .then(productos => {
-    const contenedor = document.getElementById("catalogo-tenis");
-    if (!contenedor) return;
+function renderizarProducto(p) {
+  const esGorra = p.categoria === "gorras";
+  const tallas = p.tallas || [];
 
-    contenedor.innerHTML = "";
+  const opciones = esGorra
+    ? `<option value="">Verifica disponibilidad</option><option value="Unitalla">Unitalla</option>`
+    : (tallas.length
+        ? `<option value="">Verifica disponibilidad</option>` +
+          tallas.map(t => `<option value="${t}">${t}</option>`).join("")
+        : `<option value="Agotado">Agotado</option>`);
 
-    productos.forEach((p, i) => {
-      contenedor.innerHTML += `
-        <div class="producto"
-             data-categoria="${p.categoria}"
-             data-tallas="${p.tallas ? p.tallas.join(",") : ""}">
-          
-          <img src="${p.imagen}" alt="${p.nombre}">
-          
-          <div class="info">
-            <h2>${p.nombre}</h2>
-            <p>Q${p.precio}</p>
+  return `
+    <div class="producto"
+         data-categoria="${p.categoria}"
+         ${esGorra ? "" : `data-tallas="${tallas.join(",")}"`}>
 
-            <select onchange="cambiarTalla(this, 'talla${i}')">
-              <option value="">Verifica disponibilidad</option>
-              ${
-                p.tallas
-                  ? p.tallas.map(t => `<option value="${t}">${t}</option>`).join("")
-                  : `<option value="Unitalla">Unitalla</option>`
-              }
-            </select>
+      <img src="${p.imagen}" alt="${p.nombre}">
 
-            <div class="talla-seleccionada" id="talla${i}">Talla: --</div>
-          </div>
-        </div>
-      `;
-    });
+      <div class="info">
+        <h2>${p.nombre}</h2>
+        <p>Q${p.precio}</p>
 
-    // Activar animación
+        <select onchange="cambiarTalla(this, 'talla-${p.id}')">
+          ${opciones}
+        </select>
+
+        <div class="talla-seleccionada" id="talla-${p.id}">Talla: --</div>
+      </div>
+    </div>
+  `;
+}
+
+function cargarCatalogoDesdeFirebase() {
+  const contTenis = document.getElementById("catalogo-tenis");
+  const contGorras = document.getElementById("catalogo-gorras");
+  if (!contTenis && !contGorras) return;
+
+  db.collection("productos").orderBy("nombre").onSnapshot(snapshot => {
+    const productos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    const gorras = productos.filter(p => p.categoria === "gorras");
+    const tenis = productos.filter(p => p.categoria !== "gorras");
+
+    if (contGorras) contGorras.innerHTML = gorras.map(renderizarProducto).join("");
+    if (contTenis) contTenis.innerHTML = tenis.map(renderizarProducto).join("");
+
     document.querySelectorAll(".producto").forEach(p => observer.observe(p));
+  }, err => {
+    console.error("No se pudo cargar el catálogo:", err);
   });
+}
+
+cargarCatalogoDesdeFirebase();
 
 /* ======================================================
    MOSTRAR TALLA SELECCIONADA
@@ -99,7 +116,8 @@ botonesFiltro.forEach(btn => {
     botonesFiltro.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
-    const filtro = btn.dataset.filter;
+    // (antes decía "btn.dataset.filter" y por eso los filtros no funcionaban)
+    const filtro = btn.dataset.filtro;
     const productos = document.querySelectorAll(".producto");
 
     productos.forEach(prod => {

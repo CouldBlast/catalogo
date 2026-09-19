@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Importar catálogo (usar UNA sola vez) — Could Blast</title>
+<meta name="robots" content="noindex, nofollow">
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+
+<style>
+  body{
+    font-family: Arial, sans-serif; background:#0a0a0a; color:#fff;
+    max-width:640px; margin:60px auto; padding:0 20px; line-height:1.5;
+  }
+  h1{ color:#00bfff; }
+  button{
+    background:#ff0000; color:#fff; border:none; padding:14px 22px; border-radius:10px;
+    font-weight:700; font-size:1rem; cursor:pointer; margin:16px 0;
+  }
+  button:disabled{ opacity:.5; cursor:not-allowed; }
+  #login-box input{
+    display:block; width:100%; padding:9px; margin-bottom:10px; border-radius:8px;
+    border:1px solid #444; background:#111; color:#fff;
+  }
+  #log{
+    background:#111; border-radius:10px; padding:14px; font-size:.85rem;
+    max-height:300px; overflow:auto; white-space:pre-wrap;
+  }
+  .aviso{ background:#2a1a00; border:1px solid #6a4a00; padding:14px; border-radius:10px; color:#ffd27a; }
+</style>
+</head>
+<body>
+
+<h1>Importar tu catálogo actual a Firebase</h1>
+<p>Esta página se usa <strong>UNA sola vez</strong>: sube tus 29 tenis y 4 gorras actuales
+a la nueva base de datos. Después de usarla, bórrala de tu repositorio (ver INSTRUCCIONES.md).</p>
+
+<div class="aviso">⚠️ No le des clic dos veces al botón, o los productos quedarán duplicados.
+Si ya la usaste antes, no la vuelvas a correr.</div>
+
+<div id="login-box">
+  <p style="margin-top:20px">Primero inicia sesión con tu cuenta de administrador:</p>
+  <input type="text" id="email" placeholder="Correo">
+  <input type="password" id="pass" placeholder="Contraseña">
+  <button onclick="login()">Iniciar sesión</button>
+  <div id="login-error" style="color:#ff8b8b"></div>
+</div>
+
+<div id="import-box" style="display:none">
+  <button id="btnImportar" onclick="importarTodo()">Importar catálogo ahora</button>
+  <div id="log"></div>
+</div>
+
+<script>
+const GORRAS = [
+  { nombre:"Ajustable Barbas Hats", precio:550, imagen:"imagenes/b1.jpg", tallas:["Unitalla"], categoria:"gorras" },
+  { nombre:"El Mago 31 Hats", precio:600, imagen:"imagenes/caps4.jpg", tallas:["Unitalla"], categoria:"gorras" },
+  { nombre:"Fino x Tito Double P", precio:580, imagen:"imagenes/caps5.jpg", tallas:["Unitalla"], categoria:"gorras" },
+  { nombre:"MuraTravis", precio:580, imagen:"imagenes/caps7.jpg", tallas:["Unitalla"], categoria:"gorras" }
+];
+
+const TENIS = [{"nombre": "NIKE TRAVIS SCOTT PHANTOM", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767404587/-3_z5itzh.jpg", "tallas": [37, 38, 42], "categoria": "nike-bajos"}, {"nombre": "Nike sb power puff", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767726192/PUFF_eacils.webp", "tallas": [36, 37, 38], "categoria": "nike-bajos"}, {"nombre": "AIR JORDAN LOW VOODO", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767727906/v_pzffx3.webp", "tallas": [39], "categoria": "nike-bajos"}, {"nombre": "NIKE SB JARRITOS", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767728022/85_dt2brz.jpg", "tallas": [35, 36, 39, 40, 41], "categoria": "nike-bajos"}, {"nombre": "NIKE SB FACE", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767728258/face_gy7djv.webp", "tallas": [44], "categoria": "nike-bajos"}, {"nombre": "NIKE SB POWER PUFF ", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767734885/azul_vtmkv0.jpg", "tallas": [40, 42], "categoria": "nike-bajos"}, {"nombre": "AIR JORDAN LOW RED", "precio": 399, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767753197/air_wwympa.jpg", "tallas": [36, 39], "categoria": "nike-bajos"}, {"nombre": "NIKE DUNK HALLOWEN ", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767753399/63_ieg246.jpg", "tallas": [38], "categoria": "nike-bajos"}, {"nombre": "NIKE SB FUTURA", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767753701/49_bpy7ez.jpg", "tallas": [41], "categoria": "nike-bajos"}, {"nombre": "DOLCE & GABBANA", "precio": 750, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771039848/dolce_aahsqk.jpg", "tallas": [40, 41, 42, 44], "categoria": "nike-bajos"}, {"nombre": "NIKE SB CIVILIST", "precio": 399, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767754271/86_ws6jbh.jpg", "tallas": [37], "categoria": "nike-bajos"}, {"nombre": "NIKE DUNK NY VS NY", "precio": 399, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767754884/NY_k4fzfh.jpg", "tallas": [42, 43, 44], "categoria": "nike-bajos"}, {"nombre": "NIKE SB APRIL", "precio": 450, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755781/APRILL_yco7ua.jpg", "tallas": [43], "categoria": "nike-bajos"}, {"nombre": "NIKE TRAVIS SCOOT", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756642/BESH_dycvzk.jpg", "tallas": [41, 42], "categoria": "nike-bajos"}, {"nombre": "NIKE SB RAYSA LEAL", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755916/LEAL_t8ssxv.webp", "tallas": [42], "categoria": "nike-bajos"}, {"nombre": "NIKE PARRA", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755968/71_vex5v4.jpg", "tallas": [41], "categoria": "nike-bajos"}, {"nombre": "NIKE SB ALBINO", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756066/ALBINO_hlxs55.jpg", "tallas": [42], "categoria": "nike-bajos"}, {"nombre": "Nike SB Dunk Low de There Skateboards", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756462/THERE_smqk9s.jpg", "tallas": [41, 42], "categoria": "nike-bajos"}, {"nombre": "NIKE SIEMPRE FAMILIA ", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767756827/SIEMPRE_ogf53g.jpg", "tallas": [41, 42], "categoria": "nike-bajos"}, {"nombre": "NIKE SB X TRAVIS", "precio": 650, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1767755860/lazo_u1y6ik.jpg", "tallas": [44], "categoria": "nike-bajos"}, {"nombre": "NIKE TRAVIS MOCA ", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040082/travislow_zi6l5b.jpg", "tallas": [42], "categoria": "nike-bajos"}, {"nombre": "NIKE SB DAY SANPATRICIO", "precio": 450, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040121/57_nicwtc.jpg", "tallas": [40], "categoria": "nike-bajos"}, {"nombre": " NIKE DUNK STUSSY", "precio": 550, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040970/34_ha2rlz.jpg", "tallas": [41, 42], "categoria": "nike-bajos"}, {"nombre": " NIKE DUNK ", "precio": 450, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771040999/OS_dbj00l.jpg", "tallas": [40], "categoria": "nike-bajos"}, {"nombre": "NIKE TRAVIS LOW FRAGMENT ", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771041548/TRAVISBLUE_jjyqal.jpg", "tallas": [42], "categoria": "nike-bajos"}, {"nombre": " JORDAN 1 PALOMINO", "precio": 550, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771041894/54_vfjy3t.jpg", "tallas": [36], "categoria": "nike-altos"}, {"nombre": " Jordan 1 Retro High  A Ma Maniére", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771041055/jamam_udj0no.jpg", "tallas": [42], "categoria": "nike-altos"}, {"nombre": "JORDAN 1 VOODO", "precio": 600, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771043314/vodoj_itrgoy.jpg", "tallas": [41, 42, 43], "categoria": "nike-bajos"}, {"nombre": " JORDAN 1 CHAROL AZUL", "precio": 550, "imagen": "https://res.cloudinary.com/dwqfpyw27/image/upload/v1771044026/80_esgro8.jpg", "tallas": [38], "categoria": "nike-bajos"}];
+
+function login(){
+  const email = document.getElementById('email').value.trim();
+  const pass = document.getElementById('pass').value;
+  auth.signInWithEmailAndPassword(email, pass).catch(e => {
+    document.getElementById('login-error').textContent = 'Correo o contraseña incorrectos.';
+  });
+}
+
+auth.onAuthStateChanged(user => {
+  document.getElementById('login-box').style.display = user ? 'none' : 'block';
+  document.getElementById('import-box').style.display = user ? 'block' : 'none';
+});
+
+async function importarTodo(){
+  const btn = document.getElementById('btnImportar');
+  const log = document.getElementById('log');
+  btn.disabled = true;
+  log.textContent = 'Verificando si ya existen productos...\n';
+
+  const existentes = await db.collection('productos').limit(1).get();
+  if(!existentes.empty){
+    if(!confirm('Ya hay productos en tu catálogo. ¿Seguro que quieres importar de nuevo? Esto puede duplicar productos.')){
+      log.textContent += 'Cancelado.\n';
+      btn.disabled = false;
+      return;
+    }
+  }
+
+  const todos = [...GORRAS, ...TENIS];
+  let ok = 0, error = 0;
+
+  for(const p of todos){
+    try{
+      await db.collection('productos').add({
+        ...p,
+        creado: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      ok++;
+      log.textContent += `✅ ${p.nombre}\n`;
+    }catch(e){
+      error++;
+      log.textContent += `❌ ${p.nombre}: ${e.message}\n`;
+    }
+    log.scrollTop = log.scrollHeight;
+  }
+
+  log.textContent += `\nListo. ${ok} productos importados, ${error} con error.\n`;
+  log.textContent += `Ahora puedes borrar migrar.html de tu repositorio.`;
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>

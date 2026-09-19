@@ -390,68 +390,15 @@ footer {
   <div class="buscador-wrap">
     <span class="buscador-titulo">Aquí puedes buscar tu talla</span>
     <input type="text" id="buscador" placeholder="Ej. 38">
-      <div id="errorTalla"
-       style="color:#ff4d4d; font-size:0.85rem; margin-top:6px;">
-  </div>
-
- <!-- ======= GORRAS ======= -->
-<h1 class="section">Las mejores caps</h1>
-<div class="catalogo-gorras">
-   
- <div class="producto" data-categoria="gorras"> 
-    <img src="./imagenes/b1.jpg" alt="Gorra Negra">
-    <div class="info">
-      <h2>Ajustable Barbas Hats</h2>
-      <p>Q550</p>
-      <select onchange="cambiarTalla(this, 'tallaG1')">
-        <option value="">Verifica disponibilidad</option>
-        <option value="unitalla">Unitalla</option>
-      </select>
-      <div class="talla-seleccionada" id="tallaG1">Talla: --</div>
-    </div>
-  </div>
-
-  <div class="producto" data-categoria="gorras"> 
-    <img src="./imagenes/caps4.jpg" alt="El Mago 31 Hats">
-    <div class="info">
-      <h2>El Mago 31 Hats</h2>
-      <p>Q600</p>
-      <select onchange="cambiarTalla(this, 'tallaG2')">
-        <option value="">Verifica disponibilidad</option>
-        <option value="unitalla">Unitalla</option>
-      </select>
-      <div class="talla-seleccionada" id="tallaG2">Talla: --</div>
-    </div>
-  </div>
-
-   <div class="producto" data-categoria="gorras"> 
-    <img src="./imagenes/caps5.jpg" alt="Fino x Tito Double P">
-    <div class="info">
-      <h2>Fino x Tito Double P</h2>
-      <p>Q580</p>
-      <select onchange="cambiarTalla(this, 'tallaG3')">
-        <option value="">Verifica disponibilidad</option>
-        <option value="unitalla">Unitalla</option>
-      </select>
-      <div class="talla-seleccionada" id="tallaG3">Talla: --</div>
-    </div>
-  </div>
-
-  <div class="producto" data-categoria="gorras"> 
-    <img src="./imagenes/caps7.jpg" alt="MuraTravis">
-    <div class="info">
-      <h2>MuraTravis</h2>
-      <p>Q580</p>
-      <select onchange="cambiarTalla(this, 'tallaG4')">
-        <option value="">Verifica disponibilidad</option>
-        <option value="unitalla">Unitalla</option>
-      </select>
-      <div class="talla-seleccionada" id="tallaG4">Talla: --</div>
-    </div>
+    <div id="errorTalla" style="color:#ff4d4d; font-size:0.85rem; margin-top:6px;"></div>
   </div>
 </div>
 
-    <!-- ===== FILTROS DE TENIS ===== -->
+ <!-- ======= GORRAS (se cargan solas desde el panel de administración) ======= -->
+<h1 class="section">Las mejores caps</h1>
+<div class="catalogo-gorras" id="catalogo-gorras"></div>
+
+    <!-- ===== TENIS (se cargan solos desde el panel de administración) ===== -->
 
 <h1 class="section">Los mejores Sneackers</h1>
 <div class="catalogo-tenis" id="catalogo-tenis"></div>
@@ -479,6 +426,10 @@ footer {
 
 
 
+<!-- Firebase: aquí vive tu catálogo (ya no en productos.json) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script src="script.js"></script>
     
 </body>

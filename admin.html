@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Panel de Administración — Could Blast</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+<!-- Firebase (compat, funciona con <script> normales, sin necesitar herramientas de compilación) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+
+<style>
+  :root{
+    --rojo:#ff0000; --azul:#00bfff; --negro:#0b0b0b; --dorado:#ffd700; --gris:#151821;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Poppins',sans-serif; background:#0a0a0a; color:#fff;
+    min-height:100vh;
+  }
+  header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 24px; background:#101010; border-bottom:2px solid rgba(255,215,0,.2);
+    position:sticky; top:0; z-index:10;
+  }
+  header h1{ font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--azul); margin:0; }
+  header button{
+    background:#222; color:#fff; border:1px solid #444; border-radius:8px;
+    padding:8px 14px; cursor:pointer; font-weight:600;
+  }
+  header button:hover{ border-color:var(--rojo); }
+
+  main{ max-width:1000px; margin:0 auto; padding:24px 16px 80px; }
+
+  /* ---- Login ---- */
+  #login-screen{
+    max-width:360px; margin:120px auto; background:var(--gris); padding:30px;
+    border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.5); text-align:center;
+  }
+  #login-screen h2{ font-family:'Bebas Neue',sans-serif; color:var(--azul); margin-bottom:20px; letter-spacing:1px; }
+  #login-screen input{
+    width:100%; padding:10px 12px; margin-bottom:12px; border-radius:8px;
+    border:1px solid #444; background:#0e0e0e; color:#fff;
+  }
+  #login-screen button{
+    width:100%; padding:11px; border-radius:8px; border:none; background:var(--rojo);
+    color:#fff; font-weight:700; cursor:pointer; letter-spacing:.5px;
+  }
+  #login-error{ color:#ff6b6b; font-size:.85rem; margin-top:10px; min-height:1.2em; }
+
+  /* ---- Panel principal ---- */
+  #panel{ display:none; }
+
+  section.card{
+    background:var(--gris); border-radius:16px; padding:20px; margin-bottom:24px;
+    box-shadow:0 8px 20px rgba(0,0,0,.35);
+  }
+  section.card h2{ font-family:'Bebas Neue',sans-serif; color:var(--dorado); margin:0 0 16px; letter-spacing:.5px; }
+
+  label{ display:block; font-size:.8rem; color:#bbb; margin:12px 0 6px; }
+  input[type=text], input[type=number], select{
+    width:100%; padding:9px 12px; border-radius:8px; border:1px solid #3a3a3a;
+    background:#0e0e0e; color:#fff; font-size:.95rem;
+  }
+  .fila{ display:flex; gap:14px; flex-wrap:wrap; }
+  .fila > div{ flex:1; min-width:150px; }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .chip{
+    padding:7px 13px; border-radius:20px; border:2px solid #3a3a3a; background:#0e0e0e;
+    color:#ccc; cursor:pointer; font-size:.85rem; user-select:none; transition:.15s;
+  }
+  .chip.activa{ background:var(--rojo); border-color:var(--rojo); color:#fff; font-weight:700; }
+
+  .foto-box{
+    display:flex; align-items:center; gap:14px; margin-top:8px; flex-wrap:wrap;
+  }
+  .foto-preview{
+    width:90px; height:90px; border-radius:10px; object-fit:cover; background:#0e0e0e;
+    border:1px solid #3a3a3a;
+  }
+  .subiendo{ color:var(--azul); font-size:.85rem; }
+
+  #btnGuardar{
+    margin-top:18px; width:100%; padding:13px; border:none; border-radius:10px;
+    background:var(--azul); color:#001; font-weight:800; font-size:1rem; cursor:pointer;
+    letter-spacing:.5px;
+  }
+  #btnGuardar:disabled{ opacity:.5; cursor:not-allowed; }
+  #mensajeGuardar{ text-align:center; margin-top:10px; font-size:.9rem; min-height:1.2em; }
+
+  #buscador-admin{ margin-bottom:16px; }
+
+  .producto-card{
+    display:flex; gap:16px; background:#101010; border:1px solid #262626;
+    border-radius:14px; padding:14px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .producto-card img{
+    width:100px; height:100px; object-fit:cover; border-radius:10px; flex-shrink:0;
+    background:#0a0a0a; cursor:pointer;
+  }
+  .producto-card .datos{ flex:1; min-width:220px; }
+  .producto-card .datos .fila-inline{ display:flex; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+  .producto-card input, .producto-card select{ padding:7px 10px; font-size:.9rem; }
+  .producto-card .nombre-input{ flex:2; min-width:160px; }
+  .producto-card .precio-input{ width:90px; }
+  .producto-card .cat-select{ width:140px; }
+  .producto-card .chip{ padding:5px 10px; font-size:.78rem; }
+  .acciones-card{ display:flex; flex-direction:column; gap:8px; justify-content:center; }
+  .btn-eliminar{
+    background:#2a0000; color:#ff8b8b; border:1px solid #5a0000; border-radius:8px;
+    padding:8px 12px; cursor:pointer; font-size:.85rem; font-weight:600;
+  }
+  .btn-eliminar:hover{ background:#4a0000; }
+  .btn-cambiar-foto{
+    background:#0e1a26; color:var(--azul); border:1px solid #1c3a52; border-radius:8px;
+    padding:8px 12px; cursor:pointer; font-size:.8rem;
+  }
+  input[type=file]{ display:none; }
+
+  #vacio{ text-align:center; color:#888; padding:30px; }
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <h2>Could Blast — Admin</h2>
+  <input type="text" id="loginEmail" placeholder="Correo" autocomplete="username">
+  <input type="password" id="loginPass" placeholder="Contraseña" autocomplete="current-password">
+  <button onclick="iniciarSesion()">Entrar</button>
+  <div id="login-error"></div>
+</div>
+
+<div id="panel">
+  <header>
+    <h1>Could Blast · Panel</h1>
+    <button onclick="cerrarSesion()">Cerrar sesión</button>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Agregar producto nuevo</h2>
+
+      <div class="fila">
+        <div>
+          <label>Nombre</label>
+          <input type="text" id="f-nombre" placeholder="Ej. Nike Dunk Low Panda">
+        </div>
+        <div>
+          <label>Precio (Q)</label>
+          <input type="number" id="f-precio" placeholder="Ej. 550">
+        </div>
+        <div>
+          <label>Categoría</label>
+          <select id="f-categoria" onchange="actualizarChipsSegunCategoria()">
+            <option value="nike-bajos">Nike Bajos</option>
+            <option value="nike-altos">Nike Altos</option>
+            <option value="gorras">Gorras</option>
+            <option value="otras">Otras / demás sneakers</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Tallas disponibles</label>
+      <div class="chips" id="f-tallas-numericas">
+        <!-- se llenan por JS -->
+      </div>
+      <div class="chips" id="f-tallas-unitalla" style="display:none">
+        <div class="chip" data-talla="Unitalla" onclick="toggleChip(this)">Unitalla</div>
+      </div>
+
+      <label>Foto del producto</label>
+      <div class="foto-box">
+        <img id="f-preview" class="foto-preview" src="" style="display:none">
+        <button type="button" class="btn-cambiar-foto" onclick="document.getElementById('f-foto').click()">Elegir foto</button>
+        <input type="file" id="f-foto" accept="image/*" onchange="previsualizarFoto(this)">
+        <span id="f-subiendo" class="subiendo" style="display:none">Subiendo foto…</span>
+      </div>
+
+      <button id="btnGuardar" onclick="guardarProducto()">Guardar producto</button>
+      <div id="mensajeGuardar"></div>
+    </section>
+
+    <section class="card">
+      <h2>Catálogo actual</h2>
+      <input type="text" id="buscador-admin" placeholder="Buscar por nombre..." oninput="renderizarLista()">
+      <div id="lista-productos"></div>
+      <div id="vacio" style="display:none">No hay productos que coincidan.</div>
+    </section>
+  </main>
+</div>
+
+<script>
+const TALLAS_NUM = [34,35,36,37,38,39,40,41,42,43,44,45];
+let fotoSubidaUrl = "";
+let todosLosProductos = [];
+
+/* ---------- Chips del formulario "agregar" ---------- */
+function crearChipsNumericas(){
+  const cont = document.getElementById('f-tallas-numericas');
+  cont.innerHTML = TALLAS_NUM.map(t => `<div class="chip" data-talla="${t}" onclick="toggleChip(this)">${t}</div>`).join('');
+}
+crearChipsNumericas();
+
+function toggleChip(el){
+  el.classList.toggle('activa');
+}
+
+function actualizarChipsSegunCategoria(){
+  const cat = document.getElementById('f-categoria').value;
+  document.getElementById('f-tallas-numericas').style.display = cat === 'gorras' ? 'none' : 'flex';
+  document.getElementById('f-tallas-unitalla').style.display = cat === 'gorras' ? 'flex' : 'none';
+}
+
+/* ---------- Subida de foto a Cloudinary ---------- */
+async function subirFotoACloudinary(file){
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  const resp = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+    method: 'POST',
+    body: formData
+  });
+  if(!resp.ok) throw new Error('No se pudo subir la foto. Revisa el upload preset en firebase-config.js');
+  const data = await resp.json();
+  return data.secure_url;
+}
+
+function previsualizarFoto(input){
+  const file = input.files[0];
+  if(!file) return;
+  const preview = document.getElementById('f-preview');
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = 'block';
+}
+
+/* ---------- Guardar producto nuevo ---------- */
+async function guardarProducto(){
+  const nombre = document.getElementById('f-nombre').value.trim();
+  const precio = Number(document.getElementById('f-precio').value);
+  const categoria = document.getElementById('f-categoria').value;
+  const archivo = document.getElementById('f-foto').files[0];
+
+  const tallas = Array.from(document.querySelectorAll(
+    categoria === 'gorras' ? '#f-tallas-unitalla .chip.activa' : '#f-tallas-numericas .chip.activa'
+  )).map(c => categoria === 'gorras' ? c.dataset.talla : Number(c.dataset.talla));
+
+  const msg = document.getElementById('mensajeGuardar');
+  if(!nombre || !precio || !archivo){
+    msg.style.color = '#ff8b8b';
+    msg.textContent = 'Falta nombre, precio o foto.';
+    return;
+  }
+
+  const btn = document.getElementById('btnGuardar');
+  btn.disabled = true;
+  document.getElementById('f-subiendo').style.display = 'inline';
+  msg.textContent = '';
+
+  try{
+    const url = await subirFotoACloudinary(archivo);
+    await db.collection('productos').add({
+      nombre, precio, categoria, tallas,
+      imagen: url,
+      creado: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    msg.style.color = '#7CFC7C';
+    msg.textContent = '✅ Producto guardado.';
+    document.getElementById('f-nombre').value = '';
+    document.getElementById('f-precio').value = '';
+    document.getElementById('f-foto').value = '';
+    document.getElementById('f-preview').style.display = 'none';
+    document.querySelectorAll('.chip.activa').forEach(c => c.classList.remove('activa'));
+  }catch(e){
+    msg.style.color = '#ff8b8b';
+    msg.textContent = '❌ ' + e.message;
+  }finally{
+    btn.disabled = false;
+    document.getElementById('f-subiendo').style.display = 'none';
+  }
+}
+
+/* ---------- Lista de productos existentes ---------- */
+function renderizarLista(){
+  const filtro = document.getElementById('buscador-admin').value.trim().toLowerCase();
+  const cont = document.getElementById('lista-productos');
+  const vacio = document.getElementById('vacio');
+
+  const visibles = todosLosProductos.filter(p => p.nombre.toLowerCase().includes(filtro));
+  vacio.style.display = visibles.length ? 'none' : 'block';
+
+  cont.innerHTML = visibles.map(p => {
+    const esGorra = p.categoria === 'gorras';
+    const opciones = esGorra ? ['Unitalla'] : TALLAS_NUM;
+    const tallasActuales = p.tallas || [];
+
+    const chips = opciones.map(t => {
+      const activa = tallasActuales.includes(esGorra ? t : Number(t));
+      return `<div class="chip ${activa ? 'activa' : ''}" onclick="toggleTallaProducto('${p.id}', ${JSON.stringify(esGorra ? t : Number(t))}, ${activa})">${t}</div>`;
+    }).join('');
+
+    return `
+      <div class="producto-card">
+        <img src="${p.imagen}" alt="${p.nombre}" onclick="document.getElementById('cambiarFoto-${p.id}').click()">
+        <input type="file" id="cambiarFoto-${p.id}" accept="image/*" onchange="cambiarFotoProducto('${p.id}', this)">
+        <div class="datos">
+          <div class="fila-inline">
+            <input class="nombre-input" type="text" value="${p.nombre.replace(/"/g,'&quot;')}" onchange="actualizarCampo('${p.id}','nombre',this.value)">
+            <input class="precio-input" type="number" value="${p.precio}" onchange="actualizarCampo('${p.id}','precio',Number(this.value))">
+            <select class="cat-select" onchange="actualizarCampo('${p.id}','categoria',this.value)">
+              ${['nike-bajos','nike-altos','gorras','otras'].map(c => `<option value="${c}" ${c===p.categoria?'selected':''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div class="chips">${chips}</div>
+        </div>
+        <div class="acciones-card">
+          <button class="btn-cambiar-foto" onclick="document.getElementById('cambiarFoto-${p.id}').click()">Cambiar foto</button>
+          <button class="btn-eliminar" onclick="eliminarProducto('${p.id}','${p.nombre.replace(/'/g,"\\'")}')">Eliminar</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function actualizarCampo(id, campo, valor){
+  db.collection('productos').doc(id).update({ [campo]: valor });
+}
+
+function toggleTallaProducto(id, talla, estabaActiva){
+  const cambio = estabaActiva
+    ? firebase.firestore.FieldValue.arrayRemove(talla)
+    : firebase.firestore.FieldValue.arrayUnion(talla);
+  db.collection('productos').doc(id).update({ tallas: cambio });
+}
+
+async function cambiarFotoProducto(id, input){
+  const file = input.files[0];
+  if(!file) return;
+  try{
+    const url = await subirFotoACloudinary(file);
+    await db.collection('productos').doc(id).update({ imagen: url });
+  }catch(e){
+    alert('No se pudo cambiar la foto: ' + e.message);
+  }
+}
+
+function eliminarProducto(id, nombre){
+  if(!confirm(`¿Eliminar "${nombre}"? Esto no se puede deshacer.`)) return;
+  db.collection('productos').doc(id).delete();
+}
+
+/* ---------- Escuchar cambios en tiempo real ---------- */
+function escucharProductos(){
+  db.collection('productos').orderBy('nombre').onSnapshot(snapshot => {
+    todosLosProductos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderizarLista();
+  }, err => {
+    document.getElementById('lista-productos').innerHTML =
+      `<p style="color:#ff8b8b">Error leyendo productos: ${err.message}</p>`;
+  });
+}
+
+/* ---------- Login / sesión ---------- */
+function iniciarSesion(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  document.getElementById('login-error').textContent = '';
+  auth.signInWithEmailAndPassword(email, pass).catch(err => {
+    document.getElementById('login-error').textContent = 'Correo o contraseña incorrectos.';
+  });
+}
+
+function cerrarSesion(){
+  auth.signOut();
+}
+
+auth.onAuthStateChanged(user => {
+  if(user){
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    escucharProductos();
+  }else{
+    document.getElementById('login-screen').style.display = 'block';
+    document.getElementById('panel').style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
