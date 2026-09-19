@@ -251,9 +251,8 @@ h1.section::after {
 }
 
 /* =====================================================
-   GRID DE CATÁLOGOS
+   GRID DE CATÁLOGO (tenis)
 ===================================================== */
-.catalogo-gorras,
 .catalogo-tenis {
   max-width: 1200px;
   margin: 30px auto 60px;
@@ -261,6 +260,47 @@ h1.section::after {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 22px;
+}
+
+/* =====================================================
+   FILA HORIZONTAL DESLIZABLE (gorras)
+===================================================== */
+.catalogo-gorras {
+  max-width: 1200px;
+  margin: 12px auto 60px;
+  padding: 0 20px 14px;
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rojo) transparent;
+}
+
+.catalogo-gorras::-webkit-scrollbar { height: 6px; }
+.catalogo-gorras::-webkit-scrollbar-thumb { background: var(--rojo); border-radius: 999px; }
+
+.catalogo-gorras .producto {
+  scroll-snap-align: start;
+  flex: 0 0 220px;
+}
+
+.deslizar-hint {
+  display: block;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-size: .68rem;
+  color: var(--gris);
+  margin: -2px 0 4px;
+}
+
+@media (max-width: 500px) {
+  .catalogo-gorras .producto {
+    flex: 0 0 62%;
+  }
 }
 
 /* =====================================================
@@ -419,21 +459,22 @@ footer .frase {
    RESPONSIVE — tablet
 ===================================================== */
 @media (max-width: 768px) {
-  .catalogo-gorras,
   .catalogo-tenis {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 /* =====================================================
-   RESPONSIVE — teléfono (2 por fila, no 1)
+   RESPONSIVE — teléfono (2 por fila, no 1 — solo aplica a tenis;
+   las gorras siempre van en fila horizontal deslizable)
 ===================================================== */
 @media (max-width: 500px) {
-  .catalogo-gorras,
   .catalogo-tenis {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
+
+  .catalogo-gorras { gap: 10px; }
 
   .producto { padding: 12px 10px 14px; }
 
@@ -496,6 +537,7 @@ footer .frase {
 <!-- GORRAS -->
 <span class="eyebrow">Accesorios</span>
 <h1 class="section">Las mejores caps</h1>
+<span class="deslizar-hint">← Desliza para ver más →</span>
 <div class="catalogo-gorras" id="catalogo-gorras"></div>
 
 <!-- TENIS -->
