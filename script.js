@@ -75,8 +75,11 @@ function cargarCatalogoDesdeFirebase() {
   const contGorras = document.getElementById("catalogo-gorras");
   if (!contTenis && !contGorras) return;
 
-  db.collection("productos").orderBy("nombre").onSnapshot(snapshot => {
+  db.collection("productos").onSnapshot(snapshot => {
     const productos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    // El orden lo controlas tú desde el panel de administración (botones ▲▼ y "Al inicio").
+    productos.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0));
 
     const gorras = productos.filter(p => p.categoria === "gorras");
     const tenis = productos.filter(p => p.categoria !== "gorras");
