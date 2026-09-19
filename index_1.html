@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Could Blast - Catálogo de Tenis Urbanos</title>
+<meta name="description" content="Descubre modelos de tenis urbanos en Could Blast. Busca tu talla y encuentra tu estilo.">
+
+<!-- Iconos / Fuentes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+<style>
+/* =====================================================
+   VARIABLES — Could Blast · Premium Urbano
+===================================================== */
+:root {
+  --negro: #070707;
+  --negro-2: #0f0f0f;
+  --hueso: #f3efe6;
+  --rojo: #e2110c;
+  --dorado: #cda446;
+  --gris: #8f8f8f;
+  --linea: rgba(243,239,230,.12);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--negro);
+  color: var(--hueso);
+  overflow-x: hidden;
+}
+
+/* Textura fina de grano — le da un aire editorial, no un archivo, es CSS puro */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =====================================================
+   MARCA / EYEBROW
+===================================================== */
+.eyebrow {
+  display: block;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .35em;
+  font-size: .68rem;
+  color: var(--gris);
+  margin-bottom: 10px;
+}
+
+/* =====================================================
+   BARRA DE ENVÍOS (circulando arriba de todo)
+===================================================== */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  background: var(--rojo);
+  border-bottom: 1px solid rgba(0,0,0,.25);
+  padding: 8px 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 18s linear infinite;
+}
+
+.marquee-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .78rem;
+  color: var(--hueso);
+  white-space: nowrap;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* =====================================================
+   BANNER / HERO
+===================================================== */
+.banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid var(--linea);
+}
+
+.banner img {
+  width: 100%;
+  display: block;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,5,5,0) 0%, rgba(5,5,5,.35) 75%, rgba(5,5,5,.9) 100%);
+  z-index: 1;
+}
+
+.hero-texto {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 20px 22px;
+  text-align: center;
+  z-index: 2;
+}
+
+.texto-fuego span {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .25em;
+  font-size: clamp(11px, 2.2vw, 14px);
+  color: var(--dorado);
+  text-shadow: 0 2px 8px rgba(0,0,0,.8);
+}
+
+/* =====================================================
+   FILTROS
+===================================================== */
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 34px auto 8px;
+  padding: 0 16px;
+}
+
+.filtro-btn {
+  background: transparent;
+  color: var(--gris);
+  border: 1px solid var(--linea);
+  padding: 9px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  transition: all .25s ease;
+}
+
+.filtro-btn:hover,
+.filtro-btn.active {
+  background: var(--hueso);
+  border-color: var(--hueso);
+  color: var(--negro);
+}
+
+/* =====================================================
+   BARRA UTILIDADES
+===================================================== */
+.barra-utilidades {
+  max-width: 1200px;
+  margin: 26px auto 10px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+}
+
+.tallas-mini {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .02em;
+  color: var(--gris);
+  line-height: 1.8;
+}
+
+.tallas-mini strong { color: var(--hueso); }
+
+.buscador-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buscador-titulo {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gris);
+  margin-bottom: 8px;
+}
+
+.buscador-wrap input {
+  width: 240px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--linea);
+  background: var(--negro-2);
+  color: var(--hueso);
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.buscador-wrap input::placeholder { color: #555; }
+
+/* =====================================================
+   TÍTULOS DE SECCIÓN
+===================================================== */
+h1.section {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(30px, 4vw, 46px);
+  letter-spacing: .03em;
+  margin: 64px auto 8px;
+  color: var(--hueso);
+  position: relative;
+}
+
+h1.section::after {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 3px;
+  background: var(--rojo);
+  margin: 14px auto 0;
+}
+
+/* =====================================================
+   GRID DE CATÁLOGOS
+===================================================== */
+.catalogo-gorras,
+.catalogo-tenis {
+  max-width: 1200px;
+  margin: 30px auto 60px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+}
+
+/* =====================================================
+   TARJETA DE PRODUCTO
+===================================================== */
+.producto {
+  position: relative;
+  background: var(--negro-2);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  padding: 18px 16px 20px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .5s ease, transform .5s ease, box-shadow .3s ease, border-color .3s ease;
+  will-change: transform;
+}
+
+.producto.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Spotlight sutil detrás del producto */
+.producto::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 70%;
+  height: 55%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(226,17,12,.16) 0%, rgba(226,17,12,0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.producto img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
+.producto .info { position: relative; z-index: 1; }
+
+.info h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: .02em;
+  color: var(--hueso);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.producto p {
+  color: var(--dorado);
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
+  margin-top: 2px;
+}
+
+.talla-seleccionada {
+  color: var(--gris);
+  font-size: .75rem;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* SELECT */
+select {
+  background: var(--negro);
+  color: var(--hueso);
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  padding: 7px 10px;
+  margin-top: 10px;
+  font-size: .8rem;
+  width: 100%;
+}
+
+select option { background: var(--negro); color: var(--hueso); }
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--rojo);
+}
+
+/* Efecto de profundidad (tilt) SOLO en dispositivos con mouse real.
+   En teléfono no se aplica — en su lugar hay un pequeño "press" al tocar. */
+@media (hover: hover) and (pointer: fine) {
+  .producto {
+    transform-style: preserve-3d;
+  }
+  .producto:hover {
+    border-color: rgba(226,17,12,.4);
+    box-shadow: 0 22px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(226,17,12,.15);
+  }
+}
+
+@media (hover: none) {
+  .producto:active {
+    transform: scale(.97);
+  }
+}
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+.wa-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  background: #1fae52;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  z-index: 1000;
+  box-shadow: 0 10px 26px rgba(0,0,0,.5);
+  transition: transform .3s ease;
+}
+
+.wa-float:hover { transform: scale(1.08); }
+
+/* =====================================================
+   FOOTER
+===================================================== */
+footer {
+  background: var(--negro-2);
+  border-top: 1px solid var(--linea);
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--gris);
+  font-size: .8rem;
+}
+
+footer .copy { margin-bottom: 6px; }
+footer .frase {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: .05em;
+  color: #555;
+}
+
+/* =====================================================
+   RESPONSIVE — tablet
+===================================================== */
+@media (max-width: 768px) {
+  .catalogo-gorras,
+  .catalogo-tenis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE — teléfono (2 por fila, no 1)
+===================================================== */
+@media (max-width: 500px) {
+  .catalogo-gorras,
+  .catalogo-tenis {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .producto { padding: 12px 10px 14px; }
+
+  .info h2 { font-size: .82rem; line-height: 1.25; }
+
+  .producto p { font-size: .72rem; }
+
+  .talla-seleccionada { font-size: .65rem; }
+
+  select { font-size: .72rem; padding: 6px 8px; }
+
+  .wa-float { width: 50px; height: 50px; font-size: 22px; }
+
+  h1.section { margin: 46px auto 6px; }
+}
+</style>
+
+</head>
+
+<body>
+  <!-- ======= BARRA DE ENVÍOS (circulando) ======= -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>🚚 ENVÍOS A TODA GUATEMALA &nbsp;•&nbsp; ENVÍOS A TODA GUATEMALA &nbsp;•&nbsp; ENVÍOS A TODA GUATEMALA &nbsp;•&nbsp;</span>
+      <span aria-hidden="true">🚚 ENVÍOS A TODA GUATEMALA &nbsp;•&nbsp; ENVÍOS A TODA GUATEMALA &nbsp;•&nbsp; ENVÍOS A TODA GUATEMALA &nbsp;•&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ======= BANNER ======= -->
+  <div class="banner">
+    <img src="./imagenes/bannerdeinicio.png" alt="Banner Could Blast" />
+    <div class="hero-texto">
+      <div class="texto-fuego"><span id="texto-rotativo"></span></div>
+    </div>
+  </div>
+
+<!-- FILTROS -->
+<div class="filtros">
+  <button class="filtro-btn" data-filtro="todos">Todos</button>
+  <button class="filtro-btn" data-filtro="nike-bajos">Nike Bajos</button>
+  <button class="filtro-btn" data-filtro="nike-altos">Nike Altos</button>
+  <button class="filtro-btn" data-filtro="gorras">Gorras</button>
+  <button class="filtro-btn" data-filtro="otras">Todos los demás sneakers</button>
+</div>
+
+<!-- TALLAS + BUSCADOR -->
+<div class="barra-utilidades">
+  <div class="tallas-mini">
+    <strong>Guía de tallas</strong><br>
+    36→22.5cm · 37→23.5cm · 38→24cm · 39→24.5cm · 40→25cm · 41→26cm · 42→26.5cm · 43→27.5cm
+  </div>
+
+  <div class="buscador-wrap">
+    <span class="buscador-titulo">Busca tu talla</span>
+    <input type="text" id="buscador" placeholder="Ej. 38">
+    <div id="errorTalla" style="color:#ff6b6b; font-size:0.78rem; margin-top:8px;"></div>
+  </div>
+</div>
+
+<!-- GORRAS -->
+<span class="eyebrow">Accesorios</span>
+<h1 class="section">Las mejores caps</h1>
+<div class="catalogo-gorras" id="catalogo-gorras"></div>
+
+<!-- TENIS -->
+<span class="eyebrow">Catálogo</span>
+<h1 class="section">Los mejores Sneakers</h1>
+<div class="catalogo-tenis" id="catalogo-tenis"></div>
+
+<!-- ======= BOTÓN WHATSAPP FLOTANTE ======= -->
+<div class="wa-float">
+  <a href="https://wa.me/50238866550" target="_blank" rel="noopener" aria-label="WhatsApp Could Blast">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="copy">© 2025 Could Blast – Programado por Could Blast</div>
+    <div class="frase">"EL ÉXITO NUNCA LLEGA SOLO."</div>
+  </div>
+</footer>
+
+<!-- Firebase: aquí vive tu catálogo -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+
+<!-- Efecto de profundidad (tilt) — solo se activa con mouse real, nunca en teléfono -->
+<script>
+(function(){
+  function tieneMouse(){
+    return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  }
+
+  function activarTilt(card){
+    if (card.dataset.tiltListo) return;
+    card.dataset.tiltListo = "1";
+
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const rotX = ((y / r.height) - 0.5) * -8;
+      const rotY = ((x / r.width) - 0.5) * 8;
+      card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  }
+
+  function activarTodas(){
+    if (!tieneMouse()) return;
+    document.querySelectorAll('.producto').forEach(activarTilt);
+  }
+
+  // El catálogo se vuelve a dibujar solo cuando cambian los datos en Firebase,
+  // así que observamos esos contenedores para reactivar el efecto cada vez.
+  ['catalogo-tenis', 'catalogo-gorras'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    new MutationObserver(activarTodas).observe(el, { childList: true });
+  });
+
+  activarTodas();
+})();
+</script>
+
+</body>
+</html>
